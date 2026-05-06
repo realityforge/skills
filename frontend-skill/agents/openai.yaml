@@ -1,0 +1,7 @@
+interface:
+  display_name: "Frontend Skill"
+  short_description: "Design stronger landing pages and UI"
+  default_prompt: "Use $frontend-skill to design or refine this interface with stronger art direction, hierarchy, imagery, and motion."
+
+policy:
+  allow_implicit_invocation: true

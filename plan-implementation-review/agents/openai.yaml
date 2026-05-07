@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Implementation Review"
+  short_description: "Check repo-plan alignment and gaps"
+  default_prompt: "Use $plan-implementation-review to review whether this repository state, including uncommitted changes and recent commits, aligns with the plan and keep the findings concise."

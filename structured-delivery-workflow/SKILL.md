@@ -21,6 +21,7 @@ Use this skill to execute medium-to-large engineering work with clear planning a
 5. Leave evidence (commits, task-board entries, test commands) that others can audit quickly.
 6. Resolve open questions with the user before finalizing the plan.
 7. Require explicit user review before marking a plan as accepted.
+8. Track and resolve post-implementation issues through an approval-first loop.
 
 ## When to Use
 
@@ -187,7 +188,52 @@ Also apply this rule before implementation starts:
 - Any modification to sequencing, scope, risks, or dependencies in the plan must be reflected in planning artifacts in the same iteration.
 - The task board evidence/history SHOULD include a short note whenever such plan updates occur.
 
-### 6) Close Out Cleanly
+### 6) Address Post-Implementation Issues
+
+Use this loop when implementation, trials, review, or downstream usage reveal follow-up issues
+after the initial plan has been implemented.
+
+Issue registration:
+
+- Confirm whether feedback describes a real issue before adding it to the plan.
+- Record real issues in the plan hierarchy. If the repository has no issue-register convention,
+  create one under the active plan tree, for example `50-implementation-issues.md`.
+- Each issue SHOULD include:
+  - stable issue ID
+  - status (`open`, `planned`, `resolved`, or `deferred`)
+  - context and evidence
+  - why it matters
+  - proposed response
+  - tracking task IDs
+- Add or update task-board entries for planned responses.
+- Group tightly coupled issues into one response task when separating them would create
+  artificial or inefficient work.
+
+Approval-first issue response loop:
+
+For each issue or issue group:
+
+1. Present the issue ID, context, evidence, and why it matters.
+2. Propose the implementation response, including likely files or subsystems to change.
+3. State the required-validation command or validation expectation for this project.
+4. Ask for user feedback and explicit approval before editing implementation files.
+5. After approval, implement only the approved scope.
+6. Run targeted checks while iterating.
+7. Run the required validation before marking the task complete.
+8. Summarize the implementation, validation evidence, and any residual risk for user review.
+9. Commit only after the user asks for or approves the commit.
+10. Record task-board evidence and commit metadata.
+11. Move to the next issue only after the current issue is resolved, deferred, or explicitly paused.
+
+Rules:
+
+- Do not silently expand issue scope during implementation.
+- Do not mark an issue `resolved` without validation evidence.
+- If validation differs by project, use the plan's `required_full_gate`, test strategy, or user-provided required-validation command.
+- If a proposed response changes sequencing, scope, risks, or dependencies, update planning artifacts before implementation.
+- Preserve issue history when decisions change; do not erase the original concern.
+
+### 7) Close Out Cleanly
 
 At completion:
 

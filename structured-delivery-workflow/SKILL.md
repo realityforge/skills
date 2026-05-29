@@ -47,6 +47,12 @@ plans/<initiative>/
   40-test-strategy.md           # optional, for complex validation
 ```
 
+Treat `plans/` as non-negotiable working state:
+
+- Do not modify files under `plans/` unless that plan is the current plan being worked on.
+- When starting or resuming work, identify the active plan tree before editing any file under `plans/`.
+- Preserve other plan trees exactly as-is, even when they appear stale, incomplete, or inconsistent.
+
 ## Workflow
 
 Normative language used below:

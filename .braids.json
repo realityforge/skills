@@ -1,0 +1,10 @@
+{
+  "config_version": 1,
+  "mirrors": {
+    "local-ai-model-matcher": {
+      "url": "https://github.com/Maciejdziuba/local-ai-model-matcher.git",
+      "branch": "master",
+      "revision": "777cb0709a209447fca7de512082d4a994a2f2be"
+    }
+  }
+}

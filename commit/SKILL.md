@@ -3,34 +3,25 @@ name: commit
 description: "Read this skill before making git commits"
 ---
 
-Create a git commit for the current changes using Conventional Commits format with a **polished, highly descriptive** message.
-If there are commit hooks - do not skip them, it's your responsability to leave things better than they were.
+Create one Conventional Commit for intended local changes. Commit only; do not push.
 
-## Format
+## Message
 
-`<type>(<scope>): <summary>`
+- Subject: `<type>(<scope>): <summary>`; type required, scope optional, summary imperative, <=72 chars, no period. Types: `feat`, `fix`, `docs`, `refactor`, `chore`, `test`, `perf`.
+- Body: include unless trivial; explain what changed and why.
+- No breaking-change markers/footers, sign-offs, or `Signed-off-by`.
 
-- `type` REQUIRED. Use `feat` for new features, `fix` for bug fixes. Other common types: `docs`, `refactor`, `chore`, `test`, `perf`.
-- `scope` OPTIONAL. Short noun in parentheses for the affected area (e.g., `api`, `parser`, `ui`).
-- `summary` REQUIRED. Short, imperative, <= 72 chars, no trailing period.
+## Inputs
 
-## Notes
+- Treat caller args as guidance.
+- Paths/globs limit staging; freeform text guides subject/body.
+- If changed files are ambiguous, ask before staging.
 
-- Body is **strongly encouraged** — always include one unless the change is trivially obvious (e.g., fixing a typo). The body should explain **what** changed, **why** it changed, the approach taken, and any notable decisions. A reader of `git log` should understand the change without looking at the diff.
-- Do NOT include breaking-change markers or footers.
-- Do NOT add sign-offs (no `Signed-off-by`).
-- Only commit; do NOT push.
-- If it is unclear whether a file should be included, ask the user which files to commit.
-- Treat any caller-provided arguments as additional commit guidance. Common patterns:
-  - Freeform instructions should influence scope, summary, and body.
-  - File paths or globs should limit which files to commit. If files are specified, only stage/commit those unless the user explicitly asks otherwise.
-  - If arguments combine files and instructions, honor both.
+## Workflow
 
-## Steps
-
-1. Infer from the prompt if the user provided specific file paths/globs and/or additional instructions.
-2. Review `git status` and `git diff` to understand the current changes (limit to argument-specified files if provided).
-3. (Optional) Run `git log -n 50 --pretty=format:%s` to see commonly used scopes.
-4. If there are ambiguous extra files, ask the user for clarification before committing.
-5. Stage only the intended files (all changes if no files specified).
-6. Run `git commit -m "<subject>"` (and `-m "<body>"` if needed).
+1. Review `git status` and relevant `git diff`.
+2. If style/scope is unclear, inspect `git log -n 50 --pretty=format:%s`.
+3. Stage only intended files; stage all changes only when no paths/globs were specified.
+4. Inspect `git diff --cached`.
+5. Run normal commit hooks; do not bypass them.
+6. Run `git commit -m "<subject>"` and add `-m "<body>"` when needed.

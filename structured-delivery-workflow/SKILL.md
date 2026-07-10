@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "3.1"
+  version: "3.2"
 ---
 
 # Structured Delivery Workflow
@@ -111,8 +111,8 @@ For persistent plan trees:
 
 - run the built-in iterative `plan-review` loop after drafting the plan and
   before asking the user to review
-- run `iterative-plan-implementation-review` after implementation when active
-  plan artifacts exist
+- run the built-in iterative `plan-implementation-review` loop after
+  implementation when active plan artifacts exist
 - after implementation-review issues are fixed and committed, remove the active
   plan tree in a separate deletion-only cleanup commit when commits are allowed
 

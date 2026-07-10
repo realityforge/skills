@@ -1,78 +1,63 @@
 ---
 name: plan-implementation-review
-description: Use when the user asks to check whether code, repository state, uncommitted changes, or recent commits align with a plan, implementation plan, rollout plan, migration plan, or task breakdown. This skill compares the intended work against the actual repository state and identifies gaps, fumbles, divergence, extra work, and unverified implementation.
+description: Use when checking whether repository state, diffs, or recent commits actually satisfy an accepted plan, task board, rollout plan, or implementation checklist.
 ---
 
 # Plan Implementation Review
 
-Review implementation against the plan aggressively but concisely. The goal is to determine whether the repository actually matches what the plan said would be built.
+Judge repo-to-plan alignment. Be strict, evidence-backed, and concise.
 
-Prefer concrete repo evidence over inference, and prefer finding misalignment over describing what already looks fine.
+## Mode
 
-## Workflow
+Use `delta` mode when the request is a follow-up round, names prior findings, or says only specific fixes changed.
+Use `full` mode otherwise.
 
-1. Read the full plan first and extract the concrete promised work.
-2. Inspect the current repository state and the files most relevant to those promised changes.
-3. If the repo is in git, inspect uncommitted changes first.
-4. Inspect recent commits when they materially affect current alignment or help explain divergence.
-5. Compare plan promises against actual implementation, tests, and repo evidence.
-6. Produce flat findings ordered by alignment risk and implementation safety.
-7. For every finding, include the mismatch and the missing fix, check, or implementation step needed.
-8. Keep the review dense. No long intro, no padded summary, no generic praise.
+- Full mode: check the plan promises against current repo state.
+- Delta mode: verify the named prior findings, changed files, and any new drift introduced by the fix. Do not re-review the whole plan unless the diff changed broadly.
 
-If the user gives no plan text, ask for the plan or inspect the referenced plan document/path before reviewing alignment.
+If no plan text/path is provided, ask for it or inspect the referenced plan path before reviewing.
 
-If git history is unavailable, fall back to current repo/file state and say that commit-based evidence was not available.
+## Evidence Order
 
-## Coverage
+1. Identify review scope: plan paths, repo root, diff/commit range, and whether this is full or delta.
+2. Inspect `git status` and changed-file shape first.
+3. Read only the plan sections needed to extract concrete promises: behavior, APIs, files, tests, validation, rollout, constraints.
+4. Map promises to changed files, tests, and recorded evidence.
+5. Read implementation files only where they prove or disprove a promise.
+6. Inspect recent commits only when the user names them, the working tree is clean, or history is needed to explain alignment.
+7. Treat task-board entries and summaries as claims. Verify the underlying code, tests, or command evidence before relying on them.
 
-Check for these forms of misalignment:
+## What Counts As A Finding
 
-- planned work that is absent
-- planned work that is only partially implemented
-- implementation that contradicts the plan
-- extra work not justified by the plan
-- incorrect sequencing or incomplete task closure
-- missing tests, validation, rollout steps, or operational checks promised by the plan
-- code that appears implemented but is stubbed, disconnected, dead, or unverified
-- local diffs or recent commits that materially weaken alignment
-- plan items that seem complete in code but do not match the intended behavior or interface
+Report mismatches that matter:
 
-Treat missing or partial implementation as findings by default, not only explicit contradictions.
+- promised work missing or partial
+- implementation contradicts the plan
+- unplanned scope that changes behavior, API, architecture, or risk
+- tests or validation promised but absent, weak, stale, or not wired into gates
+- evidence claims that overstate what was checked
+- code that exists but is disconnected, dead, stubbed, or only superficially tested
+- prior-review fixes that do not actually close the prior finding
 
-## Output Contract
+Do not report harmless wording drift, already-accepted plan changes, or minor style issues unless they affect alignment or safety.
+
+## Efficiency Rules
+
+Prefer decisive evidence over exhaustive reading.
+For large reviews, stop after the highest-risk actionable findings unless the user asked for exhaustive coverage.
+For clean delta rounds, output only the checked fixes, any residual risk, and `Findings: none`.
+Do not rerun heavy validation in a read-only review unless current evidence is missing or suspicious. Cheap non-mutating checks are fine.
+
+## Output
 
 Start with `Findings`.
 
-Each finding should be short and complete:
+Use compact bullets:
 
-- title: short label
-- problem: why the mismatch matters
-- evidence: what the repo, diff, test surface, or commit history does or does not show
-- fix: what implementation step, validation step, or decision is needed to restore alignment
+- `[P1] Short title. Evidence: file/line or command result. Why it matters. Fix: concrete next step.`
 
-Prefer findings like:
+If there are no findings:
 
-- "Planned validation step has no repo evidence"
-- "Implementation covers only part of the promised behavior"
-- "Recent commit changed interface beyond plan scope"
-- "Uncommitted diff bypasses the rollout step described in the plan"
-- "Task marked complete but failure-path tests are absent"
+`Findings: none. Checked: <short evidence list>. Residual risk: <none or specific unverified gate>.`
 
-Then include `Scorecard` with terse ratings for:
-
-- plan alignment
-- implementation completeness
-- implementation safety
-
-Use either `1-5` or `low/medium/high`, but stay brief and consistent within a review.
-
-## Review Stance
-
-- Default to strict alignment review, not benefit-of-the-doubt interpretation.
-- Do not restate the whole plan. Focus on mismatch, absence, extra scope, and weak evidence.
-- If a mismatch is only likely rather than proven, say what evidence is missing and what check would resolve it.
-- If recent commits materially explain the current state, mention that linkage directly.
-- If the implementation appears ahead of the plan, treat that as potential scope drift unless the plan or context justifies it.
-
-When the user asks whether the repo "matches the plan" or asks for "alignment," this skill should bias toward evidence-backed findings with compressed wording.
+Include a scorecard only when the user asks, the review is full mode, or the result will gate merge/release.

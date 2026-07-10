@@ -1,27 +1,13 @@
 ---
 name: commit
-description: "Read this skill before making git commits"
+description: "Use before creating git commits"
 ---
 
-Create one Conventional Commit for intended local changes. Commit only; do not push.
+Create intentional local commits for intended changes. This skill does not authorize pushing; push only when explicitly requested.
 
-## Message
-
-- Subject: `<type>(<scope>): <summary>`; type required, scope optional, summary imperative, <=72 chars, no period. Types: `feat`, `fix`, `docs`, `refactor`, `chore`, `test`, `perf`.
-- Body: include unless trivial; explain what changed and why.
-- No breaking-change markers/footers, sign-offs, or `Signed-off-by`.
-
-## Inputs
-
-- Treat caller args as guidance.
-- Paths/globs limit staging; freeform text guides subject/body.
-- If changed files are ambiguous, ask before staging.
-
-## Workflow
-
-1. Review `git status` and relevant `git diff`.
-2. If style/scope is unclear, inspect `git log -n 50 --pretty=format:%s`.
-3. Stage only intended files; stage all changes only when no paths/globs were specified.
-4. Inspect `git diff --cached`.
-5. Run normal commit hooks; do not bypass them.
-6. Run `git commit -m "<subject>"` and add `-m "<body>"` when needed.
+- Treat args as intent: paths/globs limit staging, free text guides the message.
+- Inspect status and relevant diffs. Stage only intended changes, inspect the staged diff before each commit, and ask only when file ownership is ambiguous.
+- Default to one commit; split when requested or when changes are clearly independent.
+- Match user guidance and repo history. Check recent log only if style is unclear. If no stronger style exists, use Conventional Commit: `<type>(<scope>): <summary>`.
+- Keep subjects imperative, <=72 chars, and without a period. Add a body only when it explains useful what/why context.
+- Run normal hooks. Do not bypass hooks or add sign-offs, footers, or breaking-change markers unless explicitly required.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "2.5"
+  version: "2.6"
 ---
 
 # Structured Delivery Workflow
@@ -92,6 +92,32 @@ Use the reference templates only when creating the corresponding files:
     findings with evidence, and revalidate edited artifacts.
 11. If the user requested review, pause after the review loop and ask for review
     before implementation.
+
+## Existing Plan Implementation
+
+When implementing from an already accepted persistent plan, use
+`20-task-board.yaml` as the index into the plan before loading every artifact.
+
+Read first:
+
+- current plan status, `current_focus`, active tasks, and blocked tasks
+- the target task's acceptance criteria, dependencies, touched files or
+  patterns, and validation expectations
+- linked or directly relevant sections of `00-requirements.md`,
+  `10-implementation-plan.md`, and optional artifacts
+
+Read all plan artifacts only when:
+
+- performing plan review or implementation alignment review
+- active task scope, sequencing, dependencies, or validation gates are unclear
+- task-board state conflicts with requirements, implementation plan, or repo
+  state
+- the task board does not point to enough requirement or validation detail
+- cross-cutting migration, safety, parity, or architecture constraints could be
+  missed by reading only task-local context
+
+If task-board indexing is weak, fix the active planning state or read the
+missing plan context before editing implementation files.
 
 ## Open Questions
 

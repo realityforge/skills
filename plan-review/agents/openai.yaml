@@ -1,4 +1,0 @@
-interface:
-  display_name: "Plan Review"
-  short_description: "Stress-test plans for gaps and safety"
-  default_prompt: "Use $plan-review to review this plan for gaps, ambiguities, unsafe sequencing, and missing decisions, and keep the review concise."

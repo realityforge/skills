@@ -1,296 +1,276 @@
 ---
 name: structured-delivery-workflow
-description: Run a transparent, repeatable engineering workflow with requirement analysis, implementation planning, fine-grained task tracking, evidence-backed validation, and clean step-by-step commits. Use when work spans multiple files, has process risk, or needs strong project visibility.
+description: Run a context-efficient engineering workflow with right-sized planning, task tracking, validation evidence, and optional review/commit traceability. Use when work spans multiple files, has process risk, needs a reviewable plan, or must preserve progress across threads.
 license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "1.3"
+  version: "2.2"
 ---
 
 # Structured Delivery Workflow
 
-Use this skill to execute medium-to-large engineering work with clear planning artifacts, granular execution tracking, and auditable outcomes.
+Use this skill to keep engineering work explicit without turning process state into the work.
+Start with the smallest durable state that preserves decisions, sequencing, and validation
+evidence. Escalate only when the request or risk justifies the extra artifacts.
 
-## Core Objectives
+## Core Rules
 
-1. Establish clear requirements before implementation.
-2. Turn requirements into a concrete, dependency-aware plan.
-3. Track execution with fine-grained tasks and live status.
-4. Validate with targeted checks and full quality gates.
-5. Leave evidence (commits, task-board entries, test commands) that others can audit quickly.
-6. Resolve open questions with the user before finalizing the plan.
-7. Require explicit user review before marking a plan as accepted.
-8. Track and resolve post-implementation issues through an approval-first loop.
+- Inspect local instructions, repository state, and relevant code before planning or editing.
+- Prefer existing repository planning conventions. Do not invent a new layout when one exists.
+- Ask the user only for decisions that cannot be answered from evidence and materially affect scope, behavior, risk, or review.
+- Keep one active implementation focus at a time.
+- Record validation evidence before claiming completion.
+- Do not modify unrelated `plans/` trees. Identify the active plan before editing any file under `plans/`.
+- Do not create persistent artifacts just to satisfy process. Create them when they will be reviewed, resumed, delegated, audited, or used during implementation.
 
-## When to Use
+## Workflow Tiers
 
-Use this workflow when any of the following are true:
+Choose the lightest tier that fits the request. If unsure, start lighter and escalate when evidence shows the work needs more durable state.
 
-- The work spans 3+ meaningful implementation steps.
-- The change impacts architecture, behavior parity, or migration safety.
-- Multiple commands/files/tests must stay coordinated.
-- The user asks for traceability, progress visibility, or process clarity.
+### Tier 0: Thread-Only Delivery
 
-## Planning Artifact Strategy
+Use for bounded implementation work where the user did not ask for plan artifacts and the work can finish in the current thread.
 
-If the repository already has a planning convention, follow it.
+State to keep in conversation:
 
-If not, create a planning tree (example):
+- scope in one or two sentences
+- short task checklist, if useful
+- targeted and final validation commands
+- final summary with files changed and verification results
+
+Do not create `plans/` files for Tier 0.
+
+### Tier 1: Compact Plan Artifact
+
+Default when the user asks to "create a plan", "emit planning artifacts", "pause for review",
+or when the work may be resumed by another agent but does not need full audit bookkeeping.
+
+If the repository has no stronger convention, create one file:
+
+```
+plans/<initiative>/plan.md
+```
+
+Keep it compact:
+
+- goal and scope boundaries
+- locked decisions and assumptions
+- open questions, only if any exist
+- ordered implementation slices
+- validation gate
+- review status (`draft`, `ready_for_review`, `accepted`, or `superseded`)
+
+Use this tier for most reviewable plans. Link to the file in chat; do not paste the whole artifact unless the user asks.
+
+### Tier 2: Full Plan Tree
+
+Use only when at least one is true:
+
+- the user explicitly asks for full requirements, task board, traceability, or audit evidence
+- work is multi-phase or expected to span multiple threads/days
+- another agent will implement from the plan and needs machine-readable task state
+- migration, data safety, architecture, compliance, or parity risk is high
+- repository convention already requires the full tree
+
+Default full tree:
 
 ```
 plans/<initiative>/
   00-requirements.md
   10-implementation-plan.md
   20-task-board.yaml
-  30-compatibility-matrix.md   # optional, for parity/migration work
-  40-test-strategy.md           # optional, for complex validation
+  30-compatibility-matrix.md   # only for parity/migration work
+  40-test-strategy.md          # only for complex validation
+  50-implementation-issues.md  # only after real follow-up issues exist
 ```
 
-Treat `plans/` as non-negotiable working state:
-
-- Do not modify files under `plans/` unless that plan is the current plan being worked on.
-- When starting or resuming work, identify the active plan tree before editing any file under `plans/`.
-- Preserve other plan trees exactly as-is, even when they appear stale, incomplete, or inconsistent.
-
-## Workflow
-
-Normative language used below:
-
-- `MUST` = required, no exceptions unless user explicitly overrides.
-- `MUST NOT` = prohibited.
-- `SHOULD` = default expectation; deviate only with documented rationale.
-
-### 1) Analyze Requirements
-
-Create/update `00-requirements.md`.
-
-It MUST include:
-
-- Mission and scope boundaries
-- Locked decisions and non-negotiables
-- Explicit command surface and behavior expectations
-- Quality/test/coverage gates
-- Known intentional divergences (if any)
-- Open questions and decisions needed from the user (`Open Questions Register`)
-
-For large features, add dedicated requirement deep dives in separate docs.
-
-Use separate requirement docs when one feature has at least one of:
-
-- 6+ acceptance criteria
-- 3+ external integrations or subsystems
-- risky migrations/data-impact behavior
-- significant parity logic vs existing baseline
-
-Name them predictably (examples):
-
-- `01-feature-auth-migration.md`
-- `02-feature-package-reproducibility.md`
-
-Template: `references/requirements-deep-dive-template.md`
-
-Open question handling requirements:
-
-- Unresolved questions MUST be tracked with stable IDs (for example `Q-01`, `Q-02`).
-- The implementation plan MUST NOT be finalized while any question is still `open`.
-- The assistant MUST ask the user about one open question at a time.
-- For each question prompt, the assistant MUST include enough context to decide confidently:
-  - why the decision matters,
-  - available options,
-  - tradeoffs/risks for each option,
-  - recommended default and why.
-- After each user decision, planning artifacts MUST be updated in the same iteration.
-- The question entry MUST move from `open` to `resolved` and record the selected option.
-
-Required `Open Questions Register` fields per question:
-
-- `id` (stable, e.g. `Q-01`)
-- `status` (`open` or `resolved`)
-- `question`
-- `context`
-- `options`
-- `tradeoffs`
-- `recommended_default`
-- `user_decision` (required when resolved)
-- `artifacts_updated` (which planning docs changed)
-
-### 2) Build Implementation Plan
-
-Create/update `10-implementation-plan.md` with:
-
-- ordered phase sequence
-- delivery approach
-- high-risk areas and mitigations
-- required full-gate command
-- explicit decision outcomes for previously open questions
-- a `Decision Log` that maps each resolved `Q-*` to concrete plan changes
-
-Break work into fine-grained tasks. Prefer tasks small enough to complete and validate in one focused iteration.
-
-Plan finalization rule:
-
-- The plan MUST NOT be marked final until all tracked open questions are resolved and reflected in `10-implementation-plan.md`.
-- Any plan change at any stage MUST be recorded in planning docs (`00-requirements.md`, `10-implementation-plan.md`, and `20-task-board.yaml` where relevant).
-- If any decision changes later, the prior decision and the new decision SHOULD both remain visible in the decision history.
-
-Task granularity guidance:
-
-- Good: one behavior slice + tests + docs alignment
-- Too broad: entire subsystem rewrite in one task
-- Too narrow: trivial one-line edits as standalone tasks
-
-Template: `references/implementation-plan-template.md`
-
-### 3) Maintain Task Board
-
-Create/update `20-task-board.yaml` with machine-readable task state.
-
-Each task should include:
-
-- `id`, `title`, `status`, `priority`, `depends_on`
-- acceptance criteria
-- files touched (as patterns or explicit paths)
-- evidence entries (`command` + `result`)
-- commit metadata (`hash` + `message`)
-
-Rules:
-
-- Keep only one active task in progress at a time.
-- Mark tasks complete immediately after gates pass.
-- Append history entries as each task closes.
-- For completed tasks, `commit.hash` must be either a real commit SHA or `not_required` (never `pending`).
-- Use `not_required` only when no commit is expected for that task.
-- When one commit closes multiple tasks, reuse the same SHA in each task.
-- If plan approval is tracked as a dedicated task, it MUST remain incomplete until user review is requested and feedback is incorporated.
-- If there are unresolved `Q-*` items, any planning-completion task MUST remain `pending`.
-
-Template: `references/task-board-template.yaml`
-
-### 4) Execute Per-Task Delivery Loop
-
-For each task, do this sequence:
-
-1. Set task status to `in_progress`.
-2. Implement minimal diff for the task scope.
-3. Run targeted checks while iterating.
-4. Run full required gates before completion.
-5. Update task evidence and prepare commit message.
-6. Commit with a message that describes behavior/process impact.
-7. Record commit metadata (`hash` + `message`) or `not_required`, then mark task `completed`.
-8. Move to next task.
-
-### 5) Keep Artifacts and Code Aligned
-
-Whenever behavior changes:
-
-- update requirements/plan/task board as needed
-- update compatibility notes if parity/divergence is relevant
-- ensure docs reflect final behavior, not planned behavior
-- record decision changes immediately whenever plan assumptions or scope shift
-
-Also apply this rule before implementation starts:
-
-- Any modification to sequencing, scope, risks, or dependencies in the plan must be reflected in planning artifacts in the same iteration.
-- The task board evidence/history SHOULD include a short note whenever such plan updates occur.
-
-### 6) Address Post-Implementation Issues
-
-Use this loop when implementation, trials, review, or downstream usage reveal follow-up issues
-after the initial plan has been implemented.
-
-Issue registration:
-
-- Confirm whether feedback describes a real issue before adding it to the plan.
-- Record real issues in the plan hierarchy. If the repository has no issue-register convention,
-  create one under the active plan tree, for example `50-implementation-issues.md`.
-- Each issue SHOULD include:
-  - stable issue ID
-  - status (`open`, `planned`, `resolved`, or `deferred`)
-  - context and evidence
-  - why it matters
-  - proposed response
-  - tracking task IDs
-- Add or update task-board entries for planned responses.
-- Group tightly coupled issues into one response task when separating them would create
-  artificial or inefficient work.
-
-Approval-first issue response loop:
-
-For each issue or issue group:
-
-1. Present the issue ID, context, evidence, and why it matters.
-2. Propose the implementation response, including likely files or subsystems to change.
-3. State the required-validation command or validation expectation for this project.
-4. Ask for user feedback and explicit approval before editing implementation files.
-5. After approval, implement only the approved scope.
-6. Run targeted checks while iterating.
-7. Run the required validation before marking the task complete.
-8. Summarize the implementation, validation evidence, and any residual risk for user review.
-9. Commit only after the user asks for or approves the commit.
-10. Record task-board evidence and commit metadata.
-11. Move to the next issue only after the current issue is resolved, deferred, or explicitly paused.
-
-Rules:
-
-- Do not silently expand issue scope during implementation.
-- Do not mark an issue `resolved` without validation evidence.
-- If validation differs by project, use the plan's `required_full_gate`, test strategy, or user-provided required-validation command.
-- If a proposed response changes sequencing, scope, risks, or dependencies, update planning artifacts before implementation.
-- Preserve issue history when decisions change; do not erase the original concern.
-
-### 7) Close Out Cleanly
-
-At completion:
-
-- verify no pending tasks remain for the scope
-- verify no completed task has `commit.hash: pending`
-- verify working tree is clean (unless user asked to defer commit)
-- provide concise completion summary with commit hashes and gate command results
-
-Plan acceptance gate:
-
-- Before marking a plan as `accepted`, the assistant MUST explicitly ask the user to review the latest plan and request updates as needed.
-- This approval MUST be captured either:
-  - as a dedicated task (for example `PLAN-APPROVAL`) in `20-task-board.yaml`, or
-  - as part of the final planning/requirements task.
-- The plan MUST NOT be marked `accepted` until:
-  - user review has been requested,
-  - user feedback (if any) has been applied,
-  - resulting plan updates are reflected in planning artifacts,
-  - the review outcome is recorded.
-
-## Quality and Evidence Standards
-
-- Prefer targeted tests during iteration; reserve full gates for task completion.
-- Full-gate command should be explicit and reusable.
-- Never claim completion without command evidence.
-- Keep commit boundaries aligned with task boundaries.
-
-## Output Style Guidelines
-
-- Keep planning docs concise but specific.
-- Prefer checklists and criteria over long prose.
-- Keep phase/task IDs stable across revisions.
-- Avoid hidden process state; record key decisions in artifacts.
-- Keep decision logs and question IDs traceable from first draft through accepted plan.
-
-## Compliance Checklist
-
-Before moving the plan to `final` or `accepted`, verify all items below are true:
-
-- [ ] `00-requirements.md` contains an `Open Questions Register` with stable `Q-*` IDs.
-- [ ] No question is still `open`.
-- [ ] Each resolved question records `user_decision` and `artifacts_updated`.
-- [ ] `10-implementation-plan.md` includes a `Decision Log` mapping each resolved `Q-*` to plan changes.
-- [ ] Any plan change made during execution is reflected in planning artifacts in the same iteration.
-- [ ] User review of the latest plan has been explicitly requested.
-- [ ] User feedback (if provided) has been incorporated and documented.
-- [ ] Approval outcome is recorded in planning artifacts (dedicated `PLAN-APPROVAL` task or integrated planning task).
-- [ ] Plan status is set to `accepted` only after all checklist items above pass.
-
-## References
+Use the reference templates only when creating the corresponding files:
 
 - Requirements deep dive template: `references/requirements-deep-dive-template.md`
 - Implementation plan template: `references/implementation-plan-template.md`
 - Task board template: `references/task-board-template.yaml`
+
+## Planning Procedure
+
+1. Read local instructions and active planning conventions.
+2. Check worktree state before editing.
+3. Select the workflow tier and say which tier you are using.
+4. Gather only enough code/context to make the plan concrete.
+5. Resolve evidence-answerable questions yourself.
+6. Ask one user question at a time only for true blockers.
+7. Write or update the selected planning state.
+8. Validate planning artifacts when they are structured files.
+9. For Tier 1 and Tier 2, run `iterative-plan-review` after the plan is drafted
+   and local context has been gathered, but before asking the user to review it.
+10. Apply valid or partially valid review findings to the plan, reject invalid
+    findings with evidence, and revalidate edited artifacts.
+11. If the user requested review, pause after the review loop and ask for review
+    before implementation.
+
+## Open Questions
+
+Track open questions only when real uncertainty remains after repository inspection.
+
+For Tier 1, a compact bullet list is enough:
+
+```markdown
+## Open Questions
+
+- Q-01 (`open`): <question>
+  - why it matters: <short reason>
+  - recommended default: <choice and reason>
+```
+
+For Tier 2, use stable `Q-*` IDs and record:
+
+- status (`open` or `resolved`)
+- question
+- context
+- options and tradeoffs
+- recommended default
+- user decision when resolved
+- artifacts updated
+
+Do not finalize a reviewable plan while a blocking question is still open. Non-blocking assumptions may remain if they are labeled and have a recommended default.
+
+## Implementation Loop
+
+For each implementation slice:
+
+1. Confirm current scope and relevant files.
+2. Make the smallest coherent change.
+3. Run targeted checks while iterating.
+4. Run the required validation gate before marking the slice done.
+5. Update persistent planning state only if the selected tier uses it or the plan changed.
+6. Commit only when the user asked for commits or repository instructions require them.
+
+Task sizing:
+
+- Good: one behavior slice with its tests/docs/process updates.
+- Too broad: a whole subsystem rewrite.
+- Too narrow: isolated trivial edits that cannot be validated independently.
+
+## Task Tracking
+
+Tier 0:
+
+- Use conversation checklist or `update_plan` when useful.
+- No persistent task board.
+
+Tier 1:
+
+- Keep tasks as a checklist inside `plan.md`.
+- Record completion evidence beside the task only when useful for review.
+
+Tier 2:
+
+- Use `20-task-board.yaml`.
+- Include `id`, `title`, `status`, `priority`, `depends_on`, acceptance criteria, touched files or patterns, and validation evidence.
+- Keep one task `in_progress` at a time.
+- Mark tasks complete immediately after required checks pass.
+- Record commit metadata only when a commit was created or explicitly expected.
+- Use `not_required` only when the task is complete and no commit is expected.
+
+## Review and Approval
+
+Before asking the user to review a Tier 1 or Tier 2 plan, invoke
+`iterative-plan-review` with focused inputs:
+
+- plan artifact paths
+- repository or workspace root
+- maximum review rounds, defaulting to that skill's default unless the user set one
+- known context files the reviewer needs
+
+Do not run this review hook for Tier 0.
+
+Require explicit user review before marking a plan `accepted` only when:
+
+- the user asked to pause for review
+- the plan will guide another thread/agent
+- Tier 2 is being used
+- implementation must not begin without user approval
+
+For Tier 1, capture approval in `plan.md`.
+For Tier 2, capture approval either in `20-task-board.yaml` or the planning document.
+
+If the user says to proceed, treat that as approval for the current scope and record it if persistent planning state exists.
+
+## Plan Changes
+
+When scope, sequencing, risk, or validation expectations change:
+
+- update the active planning state in the same iteration if one exists
+- keep the old decision visible only when it matters for audit or future review
+- avoid long decision logs for routine implementation discoveries
+
+## Post-Implementation Issues
+
+Do not open an issue register for every follow-up.
+
+Use a persistent issue register only when:
+
+- Tier 2 is active
+- the issue changes accepted scope or sequencing
+- the issue needs user approval before implementation
+- multiple related follow-ups must be tracked across turns
+
+Otherwise, fix the issue within the current scope, validate it, and summarize the evidence.
+
+For tracked issues, include:
+
+- stable issue ID
+- status (`open`, `planned`, `resolved`, or `deferred`)
+- context and evidence
+- proposed response
+- validation expectation
+- linked task IDs, if any
+
+Ask for explicit approval before editing implementation files only when the response changes accepted scope, has meaningful product/design tradeoffs, or the user requested approval-first handling.
+
+## Implementation Alignment Review
+
+After implementation is complete and before final success reporting, invoke
+`iterative-plan-implementation-review` when there is an active plan artifact to
+compare against the implementation.
+
+This normally applies to Tier 1 and Tier 2. For Tier 0, run it only when the
+work was explicitly driven by an existing plan artifact; otherwise rely on the
+normal closeout validation because there is no plan artifact to review against.
+
+Invoke `iterative-plan-implementation-review` with focused inputs:
+
+- plan artifact paths
+- repository or workspace root
+- maximum review rounds, defaulting to that skill's default unless the user set one
+- current implementation scope, such as uncommitted changes, recent commits, or specific files
+- required validation gates from the plan, when available
+
+Apply valid or partially valid findings, reject invalid findings with evidence,
+run the required validation for fixes, and update plan/task-board/evidence
+artifacts when findings affect task status, validation evidence, or scope.
+
+## Closeout
+
+Before final response:
+
+- run the strongest practical validation for the changed scope
+- inspect the diff or changed files
+- verify structured planning files parse when applicable
+- run the implementation alignment review when an active plan artifact exists
+- report validation commands and outcomes
+- report uncommitted work or skipped verification, if any
+
+For Tier 2 closeout, also verify:
+
+- no in-scope task remains pending unexpectedly
+- completed tasks do not have stale `commit.hash: pending`
+- review/approval state matches what actually happened
+
+## Output Style
+
+- Keep chat updates short and evidence-based.
+- Prefer links to planning files over pasted artifacts.
+- Do not repeat template text in chat unless asked.
+- Do not load reference templates until the selected tier needs them.
+- Summarize decisions and validation results; avoid narrating every bookkeeping step.

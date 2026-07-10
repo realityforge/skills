@@ -1,6 +1,6 @@
 # Task Tracking
 
-Use this reference when updating implementation state or task boards.
+Use this instruction when updating implementation state or task boards.
 
 ## Lightweight Implementation
 

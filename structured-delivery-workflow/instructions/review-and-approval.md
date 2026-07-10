@@ -1,6 +1,6 @@
 # Review And Approval
 
-Use this reference before asking the user to review a persistent plan or before
+Use this instruction before asking the user to review a persistent plan or before
 marking a plan accepted.
 
 ## Plan Review Loop

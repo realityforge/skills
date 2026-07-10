@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "3.3"
+  version: "3.4"
 ---
 
 # Structured Delivery Workflow
@@ -30,13 +30,14 @@ justifies the extra artifacts.
 - Do not create persistent artifacts just to satisfy process. Create them when
   they will be reviewed, resumed, delegated, audited, or used during
   implementation.
-- Do not bulk-load this skill's reference files. Read the stage reference only
-  when the current stage requires it.
+- Do not bulk-load this skill's instruction or template files. Read the stage
+  instruction only when the current stage requires it. Read templates only when
+  creating the corresponding artifacts.
 
 ## Modes
 
 Choose the lightest mode that fits the request. If mode choice is unclear, read
-`references/mode-selection.md`.
+`instructions/mode-selection.md`.
 
 ### Lightweight Implementation
 
@@ -77,23 +78,23 @@ Create optional files only when they add useful durable state:
 
 Use templates only when creating corresponding files:
 
-- `references/requirements-deep-dive-template.md`
-- `references/implementation-plan-template.md`
-- `references/task-board-template.yaml`
+- `templates/requirements-deep-dive.md`
+- `templates/implementation-plan.md`
+- `templates/task-board.yaml`
 
 ## Stage Router
 
-- Unclear mode choice or escalation: read `references/mode-selection.md`.
-- Creating or revising a persistent plan: read `references/planning.md`.
+- Unclear mode choice or escalation: read `instructions/mode-selection.md`.
+- Creating or revising a persistent plan: read `instructions/planning.md`.
 - Implementing from an accepted persistent plan: read
-  `references/existing-plan-implementation.md`.
-- Updating persistent task state: read `references/task-tracking.md`.
+  `instructions/existing-plan-implementation.md`.
+- Updating persistent task state: read `instructions/task-tracking.md`.
 - Asking for user review or accepting a plan: read
-  `references/review-and-approval.md`.
+  `instructions/review-and-approval.md`.
 - Handling post-implementation issues or checking implementation alignment:
-  read `references/implementation-review.md`.
-- Removing completed plan artifacts: read `references/plan-cleanup.md`.
-- Preparing the final response: read `references/closeout.md`.
+  read `instructions/implementation-review.md`.
+- Removing completed plan artifacts: read `instructions/plan-cleanup.md`.
+- Preparing the final response: read `instructions/closeout.md`.
 
 ## Required Flow
 
@@ -121,6 +122,6 @@ For persistent plan trees:
 - Keep chat updates short and evidence-based.
 - Prefer links to planning files over pasted artifacts.
 - Do not repeat template text in chat unless asked.
-- Do not load reference templates until the selected mode needs them.
+- Do not load templates until the selected mode needs them.
 - Summarize decisions and validation results; avoid narrating every
   bookkeeping step.

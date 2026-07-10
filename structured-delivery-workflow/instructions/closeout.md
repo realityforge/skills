@@ -1,6 +1,6 @@
 # Closeout
 
-Use this reference before the final response.
+Use this instruction before the final response.
 
 ## All Work
 
@@ -27,6 +27,6 @@ Also verify:
 - Keep chat updates short and evidence-based.
 - Prefer links to planning files over pasted artifacts.
 - Do not repeat template text in chat unless asked.
-- Do not load reference templates until the selected mode needs them.
+- Do not load templates until the selected mode needs them.
 - Summarize decisions and validation results; avoid narrating every
   bookkeeping step.

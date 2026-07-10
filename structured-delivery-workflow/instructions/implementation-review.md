@@ -1,6 +1,6 @@
 # Implementation Review
 
-Use this reference after implementation is complete and before final success
+Use this instruction after implementation is complete and before final success
 reporting when active plan artifacts exist.
 
 ## Post-Implementation Issues

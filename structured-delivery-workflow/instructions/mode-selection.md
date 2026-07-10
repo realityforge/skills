@@ -52,8 +52,8 @@ Create optional files only when they add useful durable state:
 - `01-*-deep-dive.md` for focused decisions that would overload requirements
 - `50-implementation-issues.md` only after real follow-up issues exist
 
-Use the reference templates only when creating the corresponding files:
+Use templates only when creating the corresponding files:
 
-- Requirements deep dive template: `requirements-deep-dive-template.md`
-- Implementation plan template: `implementation-plan-template.md`
-- Task board template: `task-board-template.yaml`
+- Requirements deep dive template: `templates/requirements-deep-dive.md`
+- Implementation plan template: `templates/implementation-plan.md`
+- Task board template: `templates/task-board.yaml`

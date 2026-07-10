@@ -1,6 +1,6 @@
 # Plan Artifact Cleanup
 
-Use this reference when persistent plan tree work is complete and committed.
+Use this instruction when persistent plan tree work is complete and committed.
 
 Remove the active persistent plan artifacts after:
 

@@ -1,6 +1,6 @@
 # Planning
 
-Use this reference when creating or revising persistent planning artifacts.
+Use this instruction when creating or revising persistent planning artifacts.
 
 ## Procedure
 

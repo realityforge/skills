@@ -1,6 +1,6 @@
 # Existing Plan Implementation
 
-Use this reference when implementing from an already accepted persistent plan.
+Use this instruction when implementing from an already accepted persistent plan.
 
 ## Context Loading
 

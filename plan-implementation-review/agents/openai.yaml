@@ -1,4 +1,0 @@
-interface:
-  display_name: "Plan Implementation Review"
-  short_description: "Check repo-plan alignment and gaps"
-  default_prompt: "Use $plan-implementation-review to check repo-plan alignment. Use delta mode for follow-up rounds; otherwise run a focused full review with concise findings."

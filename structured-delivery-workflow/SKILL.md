@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "2.2"
+  version: "2.3"
 ---
 
 # Structured Delivery Workflow
@@ -24,11 +24,12 @@ evidence. Escalate only when the request or risk justifies the extra artifacts.
 - Do not modify unrelated `plans/` trees. Identify the active plan before editing any file under `plans/`.
 - Do not create persistent artifacts just to satisfy process. Create them when they will be reviewed, resumed, delegated, audited, or used during implementation.
 
-## Workflow Tiers
+## Workflow Modes
 
-Choose the lightest tier that fits the request. If unsure, start lighter and escalate when evidence shows the work needs more durable state.
+Choose the lightest mode that fits the request. If unsure, start lighter and
+escalate when evidence shows the work needs durable planning state.
 
-### Tier 0: Thread-Only Delivery
+### Tier 0: Lightweight Implementation
 
 Use for bounded implementation work where the user did not ask for plan artifacts and the work can finish in the current thread.
 
@@ -41,32 +42,11 @@ State to keep in conversation:
 
 Do not create `plans/` files for Tier 0.
 
-### Tier 1: Compact Plan Artifact
+### Full Plan Tree
 
-Default when the user asks to "create a plan", "emit planning artifacts", "pause for review",
-or when the work may be resumed by another agent but does not need full audit bookkeeping.
+Use when at least one is true:
 
-If the repository has no stronger convention, create one file:
-
-```
-plans/<initiative>/plan.md
-```
-
-Keep it compact:
-
-- goal and scope boundaries
-- locked decisions and assumptions
-- open questions, only if any exist
-- ordered implementation slices
-- validation gate
-- review status (`draft`, `ready_for_review`, `accepted`, or `superseded`)
-
-Use this tier for most reviewable plans. Link to the file in chat; do not paste the whole artifact unless the user asks.
-
-### Tier 2: Full Plan Tree
-
-Use only when at least one is true:
-
+- the user asks to create a plan, emit planning artifacts, or pause for review
 - the user explicitly asks for full requirements, task board, traceability, or audit evidence
 - work is multi-phase or expected to span multiple threads/days
 - another agent will implement from the plan and needs machine-readable task state
@@ -95,13 +75,13 @@ Use the reference templates only when creating the corresponding files:
 
 1. Read local instructions and active planning conventions.
 2. Check worktree state before editing.
-3. Select the workflow tier and say which tier you are using.
+3. Select the workflow mode and say which mode you are using.
 4. Gather only enough code/context to make the plan concrete.
 5. Resolve evidence-answerable questions yourself.
 6. Ask one user question at a time only for true blockers.
 7. Write or update the selected planning state.
 8. Validate planning artifacts when they are structured files.
-9. For Tier 1 and Tier 2, run `iterative-plan-review` after the plan is drafted
+9. For full plan trees, run `iterative-plan-review` after the plan is drafted
    and local context has been gathered, but before asking the user to review it.
 10. Apply valid or partially valid review findings to the plan, reject invalid
     findings with evidence, and revalidate edited artifacts.
@@ -112,17 +92,7 @@ Use the reference templates only when creating the corresponding files:
 
 Track open questions only when real uncertainty remains after repository inspection.
 
-For Tier 1, a compact bullet list is enough:
-
-```markdown
-## Open Questions
-
-- Q-01 (`open`): <question>
-  - why it matters: <short reason>
-  - recommended default: <choice and reason>
-```
-
-For Tier 2, use stable `Q-*` IDs and record:
+For full plan trees, use stable `Q-*` IDs and record:
 
 - status (`open` or `resolved`)
 - question
@@ -142,7 +112,7 @@ For each implementation slice:
 2. Make the smallest coherent change.
 3. Run targeted checks while iterating.
 4. Run the required validation gate before marking the slice done.
-5. Update persistent planning state only if the selected tier uses it or the plan changed.
+5. Update persistent planning state only if the selected mode uses it or the plan changed.
 6. Commit only when the user asked for commits or repository instructions require them.
 
 Task sizing:
@@ -158,12 +128,7 @@ Tier 0:
 - Use conversation checklist or `update_plan` when useful.
 - No persistent task board.
 
-Tier 1:
-
-- Keep tasks as a checklist inside `plan.md`.
-- Record completion evidence beside the task only when useful for review.
-
-Tier 2:
+Full plan tree:
 
 - Use `20-task-board.yaml`.
 - Include `id`, `title`, `status`, `priority`, `depends_on`, acceptance criteria, touched files or patterns, and validation evidence.
@@ -174,7 +139,7 @@ Tier 2:
 
 ## Review and Approval
 
-Before asking the user to review a Tier 1 or Tier 2 plan, invoke
+Before asking the user to review a full plan tree, invoke
 `iterative-plan-review` with focused inputs:
 
 - plan artifact paths
@@ -188,11 +153,10 @@ Require explicit user review before marking a plan `accepted` only when:
 
 - the user asked to pause for review
 - the plan will guide another thread/agent
-- Tier 2 is being used
+- a full plan tree is being used
 - implementation must not begin without user approval
 
-For Tier 1, capture approval in `plan.md`.
-For Tier 2, capture approval either in `20-task-board.yaml` or the planning document.
+Capture approval either in `20-task-board.yaml` or the planning document.
 
 If the user says to proceed, treat that as approval for the current scope and record it if persistent planning state exists.
 
@@ -210,7 +174,7 @@ Do not open an issue register for every follow-up.
 
 Use a persistent issue register only when:
 
-- Tier 2 is active
+- a full plan tree is active
 - the issue changes accepted scope or sequencing
 - the issue needs user approval before implementation
 - multiple related follow-ups must be tracked across turns
@@ -234,7 +198,7 @@ After implementation is complete and before final success reporting, invoke
 `iterative-plan-implementation-review` when there is an active plan artifact to
 compare against the implementation.
 
-This normally applies to Tier 1 and Tier 2. For Tier 0, run it only when the
+This normally applies to full plan tree work. For Tier 0, run it only when the
 work was explicitly driven by an existing plan artifact; otherwise rely on the
 normal closeout validation because there is no plan artifact to review against.
 
@@ -261,7 +225,7 @@ Before final response:
 - report validation commands and outcomes
 - report uncommitted work or skipped verification, if any
 
-For Tier 2 closeout, also verify:
+For full plan tree closeout, also verify:
 
 - no in-scope task remains pending unexpectedly
 - completed tasks do not have stale `commit.hash: pending`
@@ -272,5 +236,5 @@ For Tier 2 closeout, also verify:
 - Keep chat updates short and evidence-based.
 - Prefer links to planning files over pasted artifacts.
 - Do not repeat template text in chat unless asked.
-- Do not load reference templates until the selected tier needs them.
+- Do not load reference templates until the selected mode needs them.
 - Summarize decisions and validation results; avoid narrating every bookkeeping step.

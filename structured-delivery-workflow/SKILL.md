@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "3.2"
+  version: "3.3"
 ---
 
 # Structured Delivery Workflow
@@ -109,7 +109,7 @@ Use templates only when creating corresponding files:
 
 For persistent plan trees:
 
-- run the built-in iterative `plan-review` loop after drafting the plan and
+- run the built-in iterative plan review loop after drafting the plan and
   before asking the user to review
 - run the built-in iterative `plan-implementation-review` loop after
   implementation when active plan artifacts exist

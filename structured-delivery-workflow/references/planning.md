@@ -11,7 +11,7 @@ Use this reference when creating or revising persistent planning artifacts.
 5. Ask one user question at a time only for true blockers.
 6. Write or update the selected planning state.
 7. Validate planning artifacts when they are structured files.
-8. Run the built-in iterative `plan-review` loop after the plan is drafted and
+8. Run the built-in iterative plan review loop after the plan is drafted and
    local context has been gathered, but before asking the user to review it.
 9. Apply valid or partially valid review findings to the plan, reject invalid
    findings with evidence, and revalidate edited artifacts.

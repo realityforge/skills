@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "2.3"
+  version: "2.5"
 ---
 
 # Structured Delivery Workflow
@@ -29,7 +29,7 @@ evidence. Escalate only when the request or risk justifies the extra artifacts.
 Choose the lightest mode that fits the request. If unsure, start lighter and
 escalate when evidence shows the work needs durable planning state.
 
-### Tier 0: Lightweight Implementation
+### Lightweight Implementation
 
 Use for bounded implementation work where the user did not ask for plan artifacts and the work can finish in the current thread.
 
@@ -40,30 +40,35 @@ State to keep in conversation:
 - targeted and final validation commands
 - final summary with files changed and verification results
 
-Do not create `plans/` files for Tier 0.
+Do not create `plans/` files for lightweight implementation.
 
-### Full Plan Tree
+### Persistent Plan Tree
 
 Use when at least one is true:
 
 - the user asks to create a plan, emit planning artifacts, or pause for review
-- the user explicitly asks for full requirements, task board, traceability, or audit evidence
+- the user explicitly asks for persistent requirements, task board, traceability, or audit evidence
 - work is multi-phase or expected to span multiple threads/days
 - another agent will implement from the plan and needs machine-readable task state
 - migration, data safety, architecture, compliance, or parity risk is high
-- repository convention already requires the full tree
+- repository convention already requires a persistent plan tree
 
-Default full tree:
+Default persistent plan tree:
 
 ```
 plans/<initiative>/
   00-requirements.md
   10-implementation-plan.md
   20-task-board.yaml
-  30-compatibility-matrix.md   # only for parity/migration work
-  40-test-strategy.md          # only for complex validation
-  50-implementation-issues.md  # only after real follow-up issues exist
 ```
+
+Create optional files only when they add useful durable state:
+
+- `40-test-strategy.md` for complex or multi-environment validation
+- `30-compatibility-matrix.md` for parity or migration work
+- `30-output-contract.md` for CLI/API output contracts
+- `01-*-deep-dive.md` for focused decisions that would overload requirements
+- `50-implementation-issues.md` only after real follow-up issues exist
 
 Use the reference templates only when creating the corresponding files:
 
@@ -81,7 +86,7 @@ Use the reference templates only when creating the corresponding files:
 6. Ask one user question at a time only for true blockers.
 7. Write or update the selected planning state.
 8. Validate planning artifacts when they are structured files.
-9. For full plan trees, run `iterative-plan-review` after the plan is drafted
+9. For persistent plan trees, run `iterative-plan-review` after the plan is drafted
    and local context has been gathered, but before asking the user to review it.
 10. Apply valid or partially valid review findings to the plan, reject invalid
     findings with evidence, and revalidate edited artifacts.
@@ -92,7 +97,7 @@ Use the reference templates only when creating the corresponding files:
 
 Track open questions only when real uncertainty remains after repository inspection.
 
-For full plan trees, use stable `Q-*` IDs and record:
+For persistent plan trees, use stable `Q-*` IDs and record:
 
 - status (`open` or `resolved`)
 - question
@@ -123,23 +128,27 @@ Task sizing:
 
 ## Task Tracking
 
-Tier 0:
+Lightweight implementation:
 
 - Use conversation checklist or `update_plan` when useful.
 - No persistent task board.
 
-Full plan tree:
+Persistent plan tree:
 
 - Use `20-task-board.yaml`.
 - Include `id`, `title`, `status`, `priority`, `depends_on`, acceptance criteria, touched files or patterns, and validation evidence.
 - Keep one task `in_progress` at a time.
 - Mark tasks complete immediately after required checks pass.
-- Record commit metadata only when a commit was created or explicitly expected.
-- Use `not_required` only when the task is complete and no commit is expected.
+- Add commit metadata only when the user requested commit traceability or the
+  repository convention requires it.
+- Record real hashes only after commits exist; do not leave stale
+  `commit.hash: pending` values.
+- Use `not_required` only when commit metadata is required for the task and no
+  commit is expected.
 
 ## Review and Approval
 
-Before asking the user to review a full plan tree, invoke
+Before asking the user to review a persistent plan tree, invoke
 `iterative-plan-review` with focused inputs:
 
 - plan artifact paths
@@ -147,18 +156,25 @@ Before asking the user to review a full plan tree, invoke
 - maximum review rounds, defaulting to that skill's default unless the user set one
 - known context files the reviewer needs
 
-Do not run this review hook for Tier 0.
+Pass paths, repository root, and concise scope/context. Do not paste full plan
+contents unless the files are unavailable to the reviewer.
+
+Do not run this review hook for lightweight implementation.
 
 Require explicit user review before marking a plan `accepted` only when:
 
 - the user asked to pause for review
 - the plan will guide another thread/agent
-- a full plan tree is being used
+- a persistent plan tree is being used
 - implementation must not begin without user approval
 
 Capture approval either in `20-task-board.yaml` or the planning document.
 
-If the user says to proceed, treat that as approval for the current scope and record it if persistent planning state exists.
+If the user says to proceed, treat that as approval for the current scope and
+record it if persistent planning state exists.
+If the user requested a plan review and also instructed you to implement after
+the review passes, treat that as conditional approval once the review loop has
+no remaining actionable findings.
 
 ## Plan Changes
 
@@ -174,7 +190,7 @@ Do not open an issue register for every follow-up.
 
 Use a persistent issue register only when:
 
-- a full plan tree is active
+- a persistent plan tree is active
 - the issue changes accepted scope or sequencing
 - the issue needs user approval before implementation
 - multiple related follow-ups must be tracked across turns
@@ -198,9 +214,10 @@ After implementation is complete and before final success reporting, invoke
 `iterative-plan-implementation-review` when there is an active plan artifact to
 compare against the implementation.
 
-This normally applies to full plan tree work. For Tier 0, run it only when the
-work was explicitly driven by an existing plan artifact; otherwise rely on the
-normal closeout validation because there is no plan artifact to review against.
+This normally applies to persistent plan tree work. For lightweight
+implementation, run it only when the work was explicitly driven by an existing
+plan artifact; otherwise rely on the normal closeout validation because there
+is no plan artifact to review against.
 
 Invoke `iterative-plan-implementation-review` with focused inputs:
 
@@ -214,22 +231,57 @@ Apply valid or partially valid findings, reject invalid findings with evidence,
 run the required validation for fixes, and update plan/task-board/evidence
 artifacts when findings affect task status, validation evidence, or scope.
 
+## Plan Artifact Cleanup
+
+For persistent plan tree work, remove the active persistent plan artifacts after:
+
+- implementation is complete
+- implementation alignment review has no remaining actionable findings
+- valid implementation-review findings have been fixed and validated
+- implementation, evidence, and review-fix changes have been committed
+
+The cleanup must be a separate commit that contains only removal of the active
+plan artifacts. Do not combine plan-artifact deletion with implementation,
+review-fix, evidence, or unrelated cleanup changes.
+
+Ordering:
+
+1. Update and validate required plan/task/evidence state before cleanup.
+2. Commit implementation, evidence, and review-fix changes first.
+3. Delete only the active plan tree for the completed scope.
+4. Create a deletion-only cleanup commit.
+5. Verify the cleanup commit contains only active plan artifact removal.
+
+Rules:
+
+- Delete only the active plan tree for the completed scope.
+- Do not remove unrelated plan trees, even if they appear stale.
+- Use the repository's normal commit workflow and hooks.
+- If the user explicitly prohibited commits, leave the plan cleanup pending and
+  report that the final cleanup commit was not created.
+- If implementation was intentionally left uncommitted, do not remove the plan
+  artifacts yet; report that cleanup is blocked until implementation is
+  committed or the user explicitly changes the workflow.
+
 ## Closeout
 
 Before final response:
 
 - run the strongest practical validation for the changed scope
 - inspect the diff or changed files
-- verify structured planning files parse when applicable
+- verify structured planning files parse before cleanup when applicable
 - run the implementation alignment review when an active plan artifact exists
+- create the separate plan-artifact cleanup commit when required
 - report validation commands and outcomes
 - report uncommitted work or skipped verification, if any
 
-For full plan tree closeout, also verify:
+For persistent plan tree closeout, also verify:
 
 - no in-scope task remains pending unexpectedly
 - completed tasks do not have stale `commit.hash: pending`
 - review/approval state matches what actually happened
+- the active plan tree was removed in a separate cleanup commit, or the blocker
+  is reported explicitly
 
 ## Output Style
 

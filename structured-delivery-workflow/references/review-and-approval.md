@@ -3,21 +3,47 @@
 Use this reference before asking the user to review a persistent plan or before
 marking a plan accepted.
 
-## Plan Review Hook
+## Plan Review Loop
 
-Before asking the user to review a persistent plan tree, invoke
-`iterative-plan-review` with focused inputs:
+Before asking the user to review a persistent plan tree, run a subagent
+`plan-review`/fix loop. Default max rounds: `5`, unless the user says
+otherwise. Infer the active plan path; ask only when it cannot be inferred.
+
+Do not run this review loop for lightweight implementation.
+
+For each round:
+
+1. Spawn or reuse one clean read-only subagent with `plan-review`.
+2. Pass only plan artifact paths, repository root, and focused context paths.
+   Do not fork full conversation context unless necessary.
+3. Ask for `Findings` and `Scorecard`; `Findings: none` means stop.
+4. Assess findings against repository, plan, and user evidence. Accept unless
+   contradicted; narrow over-broad fixes.
+5. Patch accepted or partially accepted plan issues. Do not patch rejected
+   findings.
+6. Validate edited structured artifacts where practical.
+7. Re-review only after material plan edits and only until no actionable
+   findings remain or max rounds is reached.
+
+Use focused inputs:
 
 - plan artifact paths
 - repository or workspace root
-- maximum review rounds, defaulting to that skill's default unless the user set
-  one
+- maximum review rounds, defaulting to `5` unless the user set one
 - known context files the reviewer needs
 
 Pass paths, repository root, and concise scope/context. Do not paste full plan
 contents unless the files are unavailable to the reviewer.
 
-Do not run this review hook for lightweight implementation.
+Keep plan updates scoped to the reviewed plan tree unless the user approves
+broader changes. Preserve stable task IDs and question IDs. If plan status is
+`accepted`, do not mark it back to draft unless the change reopens decisions or
+scope.
+
+User-facing output should be one terse digest per round. Detail only rejected
+findings, unresolved user decisions, blockers, and validation failures. Final
+report should include rounds run, final status, material fixes, validations,
+and remaining issues, if any.
 
 ## User Approval
 

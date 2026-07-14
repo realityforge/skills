@@ -5,9 +5,7 @@ description: Compact the current conversation into a handoff document for anothe
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
 
-Output the handoff as:
-- a single fenced code block in the chat so the user can copy it in one click.
-- to a path specified by the user or produced by `mktemp -t handoff-XXXXXX.md`.
+Create a requested new thread or subagent with the handoff as initial context. Otherwise write it to the user-specified path or `mktemp -t handoff-XXXXXX.md`; report the path.
 
 Suggest the skills to be used, if any, by the next session.
 

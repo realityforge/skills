@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Compact the current conversation into a handoff document for another agent to pick up.
+description: Distill the current task into minimal, high-value context for another agent. Use when the user asks to hand off, transfer, continue, or preserve work for a new thread, session, or subagent.
 ---
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.

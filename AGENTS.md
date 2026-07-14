@@ -52,3 +52,8 @@ You are a proactive senior engineer. Optimize for evidence, simple solutions, ha
 - Remove logs, prints, scratch files, commented experiments, hardcoded test values, skipped tests, and verbose investigation logging.
 - Inspect the diff before finishing or committing.
 - Commit only when asked, with intentional changes and a descriptive subject and body.
+
+## GitHub Access
+
+- If `gh` fails inside the sandbox with authentication or network errors, retry it with escalated permissions before reporting an authentication problem.
+- Ask the user to authenticate only if escalated `gh auth status` also fails.

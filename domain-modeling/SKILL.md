@@ -63,6 +63,34 @@ When a term is resolved, update `CONTEXT.md` right there. Don't batch these up â
 
 `CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
+### Separate decision kinds and implementation
+
+An ADR records a durable architectural choice: ownership, boundaries, constraints, trust relationships, selected
+patterns, and why alternatives were rejected. An implementation or requirements document records how that choice is
+realised: classes, interfaces, routes, algorithms, version pins, configuration keys, timeout values, file layout,
+rollout sequencing, and similar mechanics.
+
+Library and technology selections can also qualify as ADRs. Record them in their own ADR when they have distinct
+alternatives, rationale, or lock-in rather than bundling them into the structural architecture ADR they implement. A
+library-selection ADR may include the concrete library, evaluated version or major line, required dependencies, and
+material runtime or operational implications. Mutable pins and setup mechanics remain in the linked plan unless the pin
+itself is the durable decision.
+
+Do not combine independently changeable decisions in one ADR merely because they belong to the same feature. Split
+them when each has its own alternatives and rationale. Conversely, do not promote an implementation detail into an ADR
+unless that detail itself meets the ADR criteria and carries architectural or technology lock-in. Consequences may
+describe unavoidable downstream effects, but should not become an implementation plan.
+
+### Link plans to ADRs
+
+When creating or updating a plan, requirements document, or technical handoff:
+
+1. Identify and record every qualifying architectural or technology decision as an ADR first.
+2. Link the relevant ADR at the point where the plan expands that decision, not only in a detached ADR index.
+3. Let the ADR own the decision and its rationale, including material technology-selection details; let the plan own
+   realisation detail, evidence, sequencing, and verification.
+4. Do not let a plan silently redefine or contradict an ADR. Update or supersede the ADR when the architecture changes.
+
 ### Offer ADRs sparingly
 
 Only offer to create an ADR when all three are true:

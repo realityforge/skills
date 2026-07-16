@@ -14,6 +14,24 @@ Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 
 That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
 
+## Separate decisions, not implementation plans
+
+Keep the ADR at the architectural level: ownership, boundaries, constraints, trust relationships, selected patterns,
+and rationale. Put routes, class/interface designs, algorithms, version pins, configuration keys, timeout values,
+rollout steps, and other realisation details in the linked plan or requirements document unless one of those details is
+itself the hard-to-reverse architectural decision.
+
+Library and technology selections may have their own ADRs when they meet the ADR criteria. Keep these separate from the
+structural architecture ADR they implement. A selection ADR may record the concrete technology, evaluated version or
+major line, required dependencies, and material runtime or operational consequences; mutable setup and rollout details
+remain in the linked plan.
+
+Split independently changeable decisions when they have different alternatives or reasons. A `Consequences` section
+may identify unavoidable implementation obligations, but must not become the implementation plan.
+
+When a plan expands an ADR, it should link the ADR at that point and retain the implementation detail locally. The ADR
+owns the decision and why; the plan owns how, sequencing, evidence, and verification.
+
 ## Optional sections
 
 Only include these when they add genuine value. Most ADRs won't need them.

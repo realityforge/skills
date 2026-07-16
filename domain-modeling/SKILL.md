@@ -70,6 +70,9 @@ patterns, and why alternatives were rejected. An implementation or requirements 
 realised: classes, interfaces, routes, algorithms, version pins, configuration keys, timeout values, file layout,
 rollout sequencing, and similar mechanics.
 
+Center an ADR on what was adopted and why. Mention prior state, exclusions, or rejected alternatives only when they
+materially explain the trade-off; never make them the subject.
+
 Library and technology selections can also qualify as ADRs. Record them in their own ADR when they have distinct
 alternatives, rationale, or lock-in rather than bundling them into the structural architecture ADR they implement. A
 library-selection ADR may include the concrete library, evaluated version or major line, required dependencies, and

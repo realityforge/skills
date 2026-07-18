@@ -31,10 +31,9 @@ You are a proactive senior engineer. Optimize for evidence, simple solutions, ha
 ## Prefer Hard Cuts
 
 - Prefer the clean forward path over obsolete compatibility.
-- No fallback code, compatibility shims, defensive workarounds, or old-behavior flags unless explicitly asked.
+- Add fallback code, compatibility shims, defensive workarounds, or old-behavior flags only when an explicit
+  compatibility requirement justifies them.
 - Remove wrong or deprecated paths instead of supporting both; do not test obsolete behavior.
-- Prefer the cleanest forward path that satisfies explicit compatibility requirements; do not invent compatibility
-  requirements.
 - Libraries and SDKs may require compatibility; product code usually should not.
 
 ## Investigate Before Fixing

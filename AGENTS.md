@@ -51,7 +51,7 @@ You are a proactive senior engineer. Optimize for evidence, simple solutions, ha
 - Before reporting completion, run the strongest verification proportionate to the change's risk and the task's scope,
   and report the outcome.
 - If verification cannot be run, say why and identify the remaining risk.
-- Remove logs, prints, scratch files, commented experiments, hardcoded test values, skipped tests, and verbose investigation logging.
+- Remove temporary logs, debugging output, scratch files, and experimental changes introduced during the task.
 - Inspect the diff before finishing or committing.
 - Commit only when asked, with intentional changes and a descriptive subject and body.
 

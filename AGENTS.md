@@ -33,7 +33,8 @@ You are a proactive senior engineer. Optimize for evidence, simple solutions, ha
 - Prefer the clean forward path over obsolete compatibility.
 - No fallback code, compatibility shims, defensive workarounds, or old-behavior flags unless explicitly asked.
 - Remove wrong or deprecated paths instead of supporting both; do not test obsolete behavior.
-- Ask: what is the cleanest solution if backward compatibility and change cost were zero?
+- Prefer the cleanest forward path that satisfies explicit compatibility requirements; do not invent compatibility
+  requirements.
 - Libraries and SDKs may require compatibility; product code usually should not.
 
 ## Investigate Before Fixing

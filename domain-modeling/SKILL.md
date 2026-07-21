@@ -7,21 +7,20 @@ description: Build and sharpen a project's domain model. Use when resolving doma
 
 Actively sharpen the project's language, decisions, and deferred questions as they emerge during design and implementation. Ground changes in the existing model, relevant design documents, ADRs, and code.
 
-## Establish context
+## Locate domain language
 
-- Read `CONTEXT-MAP.md` when present and work in the relevant context. Keep system-wide artifacts at the repository root.
-- Otherwise use the root `CONTEXT.md` and `docs/` directories.
+- Use `docs/glossary/` as the sole home for domain language. When it exists, read `README.md` and the relevant topic files before changing terminology.
 - Use the project's documented domain and design terminology. Surface conflicts between those sources, the user's statements, and the code before writing.
 
 ## Sharpen language
 
-When resolving or adding a term, read [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) before editing.
+When resolving or adding a term, read [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md) before editing.
 
 - Challenge terminology that conflicts with the glossary.
 - Replace vague or overloaded language with a proposed canonical term.
 - Probe relationships with concrete edge-case scenarios.
 - Check stated behavior against the code and surface contradictions.
-- Update `CONTEXT.md` as soon as a term is resolved.
+- Update the owning glossary topic as soon as a term is resolved.
 
 ## Record decisions
 

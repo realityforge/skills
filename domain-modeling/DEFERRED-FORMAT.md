@@ -16,7 +16,7 @@ Route other matters to their canonical artifact:
 
 | Matter | Artifact |
 | --- | --- |
-| Shared term | `CONTEXT.md` |
+| Shared term | `docs/glossary/` |
 | Adopted architectural choice | ADR when it meets the ADR threshold |
 | Understood work awaiting execution | Plan or task |
 | Defect | Bug |
@@ -27,13 +27,11 @@ The user owns deferral. Record an explicit user deferral immediately; when the a
 
 ## Placement and naming
 
-In a single-context repository, use:
+Use:
 
 ```text
 docs/deferred/neutral-subject.md
 ```
-
-When `CONTEXT-MAP.md` defines multiple contexts, place a context-specific issue in that context's `docs/deferred/` directory beside its ADR directory. Keep system-wide issues in the root `docs/deferred/`.
 
 Create the directory lazily. Use a short kebab-case subject that remains neutral about the answer:
 

@@ -24,6 +24,7 @@ _Avoid_: Client, buyer, account
 
 ## Rules
 
+- **Keep it a glossary.** Define domain terms and their meaning here. Put requirements, specifications, and architectural or implementation decisions in their own artifacts.
 - **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others under `_Avoid_`.
 - **Keep definitions tight.** One or two sentences max. Define what it IS, not what it does.
 - **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.

@@ -1,6 +1,6 @@
 # ADR Format
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+ADRs live in the selected context's `docs/adr/` directory and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc. In a multi-context repository, keep system-wide ADRs in the root `docs/adr/`.
 
 Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 

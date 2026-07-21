@@ -1,2 +1,6 @@
 .system
 codex-primary-runtime
+
+# Idea project configs
+idea/
+skills.iml

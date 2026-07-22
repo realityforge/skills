@@ -68,6 +68,15 @@ plans/<initiative>/
   20-task-board.yaml
 ```
 
+These artifacts are three ordered planning stages, not one combined plan:
+
+1. `00-requirements.md` establishes what must be true.
+2. `10-implementation-plan.md` defines how the requirements will be satisfied.
+3. `20-task-board.yaml` breaks the design into executable, verifiable work.
+
+Complete each stage's gate in `instructions/planning.md` before progressing to
+the next. When an earlier stage changes, reconcile every affected later stage.
+
 Create optional files only when they add useful durable state:
 
 - `40-test-strategy.md` for complex or multi-environment validation

@@ -12,18 +12,21 @@ next stage begins:
 2. implementation design against the reviewed requirements baseline
 3. detailed task breakdown against the reviewed implementation design
 
-Default max rounds: `5` across the full planning sequence, unless the user gives
-another limit. Each stage's initial review consumes one round. Infer the active
-plan path; ask only when it cannot be inferred.
+Default max rounds: `5` for each stage. A user-supplied limit applies to each
+stage unless the user scopes it to a specific stage. Each initial review and
+re-review consumes one round from the current stage; unused rounds do not
+transfer. If an upstream change reopens a passed stage, resume that stage's
+existing round count. Infer the active plan path; ask only when it cannot be
+inferred.
 
 For each stage:
 
 1. Spawn one clean read-only review subagent; reuse it only for additional
    rounds of the same stage.
 2. Pass the current stage artifact, its reviewed upstream artifacts, repository
-   root, focused evidence paths, remaining round limit, and the matching rubric
-   below. Do not pass downstream artifacts or full conversation context unless
-   needed.
+   root, focused evidence paths, the current stage's remaining round limit, and
+   the matching rubric below. Do not pass downstream artifacts or full
+   conversation context unless needed.
 3. Ask for `Findings` and a compact `Scorecard`; `Findings: none` means the
    stage review passes.
 4. Assess each finding against repository, plan, and user evidence. Accept
@@ -33,19 +36,24 @@ For each stage:
 6. Reconcile downstream artifacts already present and validate edited
    structured files where practical.
 7. Re-review after material stage edits until no actionable findings remain or
-   the planning-sequence round limit is reached.
+   the current stage's round limit is reached.
 
 If a finding invalidates an upstream stage, return to that stage, apply its
-rubric, and rerun every affected downstream review before progressing.
+rubric, and rerun every affected downstream review before progressing. Charge
+each review to the stage whose rubric it applies.
 
 A stage passes when its review has no actionable findings. A stage pass permits
 progress to the next planning stage; it does not by itself mark the complete
 plan as accepted.
 
-A stalled or unusable reviewer attempt consumes one review round. Replace it
-once with a narrower prompt and focused evidence paths. If no usable review
-completes within the round limit, the stage has not passed; report the missing
-review evidence instead of claiming success.
+A stalled or unusable reviewer attempt consumes one round from the current
+stage. Replace it once with a narrower prompt and focused evidence paths. If no
+usable review completes within that stage's limit, the stage has not passed;
+report the missing review evidence instead of claiming success.
+
+If a stage reaches its limit with actionable findings or required re-review
+remaining, report the unresolved evidence and ask whether to extend that
+stage's limit. Later stages retain their full budgets.
 
 Use focused inputs:
 
@@ -55,8 +63,7 @@ Use focused inputs:
   requirements
 - repository or workspace root
 - known evidence and context paths needed for the matching rubric
-- maximum review rounds for the planning sequence, defaulting to `5` unless the
-  user set one
+- current-stage round count and limit
 
 Pass paths and concise context. Paste artifact contents only when files are
 unavailable to the reviewer. Keep updates scoped to the active plan tree unless

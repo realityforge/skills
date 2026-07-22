@@ -54,8 +54,13 @@ Read `instructions/mode-selection.md` when the choice is unclear. Read
   `instructions/existing-plan-implementation.md`.
 - Updating persistent task state: read `instructions/task-tracking.md`.
 - Reviewing a persistent planning stage, asking for user review, or accepting a
-  plan: read
-  `instructions/review-and-approval.md`.
+  plan: read `instructions/review-and-approval.md`.
+- Review requirements gate before progressing: read
+  `instructions/review-requirements.md`.
+- Reviewing implementation design: read
+  `instructions/review-implementation-design.md`.
+- Reviewing task breakdown before execution: read
+  `instructions/review-task-breakdown.md`.
 - Handling post-implementation issues or reviewing implementation outcomes:
   read `instructions/implementation-review.md`.
 - A domain term, qualifying adopted decision, or user-deferred question settles,
@@ -66,22 +71,27 @@ Read `instructions/mode-selection.md` when the choice is unclear. Read
 
 ## Required Flow
 
-1. Read local instructions and check worktree state.
+1. Read stage-specific local instructions and check worktree state.
 2. Select lightweight implementation or persistent plan tree.
-3. Gather only enough local context for the current stage.
-4. Resolve evidence-answerable questions yourself.
-5. Ask one user question at a time only for true blockers.
-6. Follow the stage instruction for the current step.
-7. Validate structured artifacts when edited.
-8. Run required validation before marking work complete.
-9. Inspect the diff or changed files before reporting completion.
+3. For lightweight mode, gather only enough local context for the current stage
+   and keep state in-thread.
+4. For persistent plan trees, gather local context needed for stage artifacts and
+   the active plan node.
+5. Resolve evidence-answerable questions yourself.
+6. Ask one user question at a time only for true blockers.
+7. Follow the stage instruction for the current step.
+8. Validate structured artifacts when edited.
+9. Run required validation before marking work complete.
+10. Inspect the diff or changed files before reporting completion.
 
 For persistent plan trees:
 
-- run the built-in iterative stage review after completing each requirements,
-  implementation-design, and task-breakdown gate and before progressing
+- run the built-in iterative stage review after completing each
+  requirements, implementation-design, and task-breakdown gate by reading the
+  matching `instructions/review-*.md` file, and only progress after acceptance.
 - run the built-in requirements-first implementation review loop after
-  implementation when active plan artifacts exist
+  implementation when active plan artifacts exist, using
+  `instructions/implementation-review.md`.
 - promote durable requirements, decisions, terminology, and deferred questions
   and prepare the closeout record before plan cleanup
 - after implementation-review issues are fixed and knowledge is promoted,

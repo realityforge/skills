@@ -53,12 +53,6 @@ Otherwise read `instructions/planning.md` to create or revise plan artifacts.
 - Updating persistent task state: read `instructions/task-tracking.md`.
 - Reviewing a persistent planning stage, asking for user review, or accepting a
   plan: read `instructions/review-and-approval.md`.
-- Review requirements gate before progressing: read
-  `instructions/review-requirements.md`.
-- Reviewing implementation design: read
-  `instructions/review-implementation-design.md`.
-- Reviewing task breakdown before execution: read
-  `instructions/review-task-breakdown.md`.
 - Handling post-implementation issues or reviewing implementation outcomes:
   read `instructions/implementation-review.md`.
 - A domain term, qualifying adopted decision, or user-deferred question settles,

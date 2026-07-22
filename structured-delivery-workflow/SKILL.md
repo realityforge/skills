@@ -28,9 +28,8 @@ justifies the extra artifacts.
 - Record validation evidence before claiming completion.
 - Do not modify unrelated `plans/` trees. Identify the active plan before
   editing any file under `plans/`.
-- Do not create persistent artifacts just to satisfy process. Create them when
-  they will be reviewed, resumed, delegated, audited, or used during
-  implementation.
+- Create optional persistent artifacts only when they are needed for review,
+  delegation, auditing, migration, parity, or implementation safety.
 - Do not bulk-load this skill's instruction or template files. Read the stage
   instruction only when the current stage requires it. Read templates only when
   creating the corresponding artifacts.
@@ -42,7 +41,9 @@ Use the persistent plan tree path only:
 - **Persistent plan tree** preserves reviewed requirements, implementation
   design, and task state across risk, delegation, or multiple threads.
 
-Read `instructions/planning.md` as the first planning instruction.
+Read `instructions/existing-plan-implementation.md` as the first planning
+instruction when implementing from an accepted persistent plan.
+Otherwise read `instructions/planning.md` to create or revise plan artifacts.
 
 ## Stage Router
 

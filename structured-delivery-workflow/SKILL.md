@@ -24,8 +24,7 @@ delivery.
 
 ## Entry
 
-Use the persistent plan tree path only. Read
-`instructions/existing-plan-implementation.md` first when implementing from an
+Read `instructions/existing-plan-implementation.md` when implementing from an
 accepted plan. Otherwise read `instructions/planning.md` to create or revise
 the plan.
 

@@ -1,6 +1,7 @@
 ---
 name: structured-delivery-workflow
 description: Structure high-risk or multi-phase engineering delivery through separate requirements, design, task, review, and knowledge-promotion gates. Use when work needs a reviewable plan, spans threads or agents, carries migration, data, architecture, compliance, or parity risk, or requires durable traceability.
+disable-model-invocation: true
 license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
@@ -36,19 +37,15 @@ justifies the extra artifacts.
 
 ## Modes
 
-Choose the lightest mode that fits the request:
+Use the persistent plan tree path only:
 
-- **Lightweight implementation** keeps bounded, current-thread state in
-  conversation and creates no persistent plan artifacts.
 - **Persistent plan tree** preserves reviewed requirements, implementation
   design, and task state across risk, delegation, or multiple threads.
 
-Read `instructions/mode-selection.md` when the choice is unclear. Read
-`instructions/planning.md` when persistent artifacts are needed.
+Read `instructions/planning.md` as the first planning instruction.
 
 ## Stage Router
 
-- Unclear mode choice or escalation: read `instructions/mode-selection.md`.
 - Creating or revising a persistent plan: read `instructions/planning.md`.
 - Implementing from an accepted persistent plan: read
   `instructions/existing-plan-implementation.md`.
@@ -72,19 +69,16 @@ Read `instructions/mode-selection.md` when the choice is unclear. Read
 ## Required Flow
 
 1. Read stage-specific local instructions and check worktree state.
-2. Select lightweight implementation or persistent plan tree.
-3. For lightweight mode, gather only enough local context for the current stage
-   and keep state in-thread.
-4. For persistent plan trees, gather local context needed for stage artifacts and
-   the active plan node.
-5. Resolve evidence-answerable questions yourself.
-6. Ask one user question at a time only for true blockers.
-7. Follow the stage instruction for the current step.
-8. Validate structured artifacts when edited.
-9. Run required validation before marking work complete.
-10. Inspect the diff or changed files before reporting completion.
+2. Locate or initialize the active persistent plan tree and plan node.
+3. Gather local context needed for stage artifacts and the active plan node.
+4. Resolve evidence-answerable questions yourself.
+5. Ask one user question at a time only for true blockers.
+6. Follow the stage instruction for the current step.
+7. Validate structured artifacts when edited.
+8. Run required validation before marking work complete.
+9. Inspect the diff or changed files before reporting completion.
 
-For persistent plan trees:
+For the persistent plan tree:
 
 - run the built-in iterative stage review after completing each
   requirements, implementation-design, and task-breakdown gate by reading the

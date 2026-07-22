@@ -103,6 +103,9 @@ Use templates only when creating corresponding files:
   `instructions/review-and-approval.md`.
 - Handling post-implementation issues or reviewing implementation outcomes:
   read `instructions/implementation-review.md`.
+- A domain term, qualifying adopted decision, or user-deferred question settles,
+  or durable knowledge must be promoted before plan cleanup: read
+  `instructions/knowledge-promotion.md`.
 - Removing completed plan artifacts: read `instructions/plan-cleanup.md`.
 - Preparing the final response: read `instructions/closeout.md`.
 
@@ -124,6 +127,8 @@ For persistent plan trees:
   implementation-design, and task-breakdown gate and before progressing
 - run the built-in requirements-first implementation review loop after
   implementation when active plan artifacts exist
+- promote durable requirements, decisions, terminology, and deferred questions
+  and prepare the closeout record before plan cleanup
 - after implementation-review issues are fixed and committed, remove the active
   plan tree in a separate deletion-only cleanup commit when commits are allowed
 

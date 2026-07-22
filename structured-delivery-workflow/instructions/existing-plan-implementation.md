@@ -2,6 +2,9 @@
 
 Use this instruction when implementing from an already accepted persistent plan.
 
+Inspect local instructions and worktree state before loading or editing the
+active plan.
+
 ## Context Loading
 
 Use `20-task-board.yaml` as the index into the plan before loading every

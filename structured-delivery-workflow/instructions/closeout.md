@@ -7,7 +7,8 @@ Use this instruction before the final response.
 - Run the strongest practical validation for the changed scope.
 - Inspect the diff or changed files.
 - Verify structured planning files parse before cleanup when applicable.
-- Run the implementation alignment review when an active plan artifact exists.
+- Run the requirements-first implementation review when active plan artifacts
+  exist.
 - Create the separate plan-artifact cleanup commit when required.
 - Report validation commands and outcomes.
 - Report uncommitted work or skipped verification, if any.

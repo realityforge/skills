@@ -101,7 +101,7 @@ Use templates only when creating corresponding files:
 - Reviewing a persistent planning stage, asking for user review, or accepting a
   plan: read
   `instructions/review-and-approval.md`.
-- Handling post-implementation issues or checking implementation alignment:
+- Handling post-implementation issues or reviewing implementation outcomes:
   read `instructions/implementation-review.md`.
 - Removing completed plan artifacts: read `instructions/plan-cleanup.md`.
 - Preparing the final response: read `instructions/closeout.md`.
@@ -122,7 +122,7 @@ For persistent plan trees:
 
 - run the built-in iterative stage review after completing each requirements,
   implementation-design, and task-breakdown gate and before progressing
-- run the built-in iterative implementation alignment review loop after
+- run the built-in requirements-first implementation review loop after
   implementation when active plan artifacts exist
 - after implementation-review issues are fixed and committed, remove the active
   plan tree in a separate deletion-only cleanup commit when commits are allowed

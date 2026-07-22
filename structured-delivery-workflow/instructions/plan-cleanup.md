@@ -5,7 +5,8 @@ Use this instruction when persistent plan tree work is complete and committed.
 Remove the active persistent plan artifacts after:
 
 - implementation is complete
-- implementation alignment review has no remaining actionable findings
+- requirements-first implementation review has no remaining actionable
+  findings
 - valid implementation-review findings have been fixed and validated
 - implementation, evidence, and review-fix changes have been committed
 

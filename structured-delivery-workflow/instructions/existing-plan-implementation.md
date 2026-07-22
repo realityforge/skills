@@ -17,7 +17,7 @@ Read first:
 
 Read all plan artifacts only when:
 
-- performing plan review or implementation alignment review
+- performing planning-stage review or requirements-first implementation review
 - active task scope, sequencing, dependencies, or validation gates are unclear
 - task-board state conflicts with requirements, implementation plan, or repo
   state

@@ -1,6 +1,6 @@
 ---
 name: structured-delivery-workflow
-description: Structure high-risk or multi-phase engineering delivery through separate requirements, design, task, review, and knowledge-promotion gates. Use when work needs a reviewable plan, spans threads or agents, carries migration, data, architecture, compliance, or parity risk, or requires durable traceability.
+description: Persistent gated workflow for high-risk engineering delivery.
 disable-model-invocation: true
 license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.

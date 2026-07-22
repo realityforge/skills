@@ -8,6 +8,32 @@ stage affected by the change and reconcile every affected later stage. Apply
 the same stage boundaries when repository convention uses different files or
 sections than the default plan tree.
 
+## Default Plan Artifacts
+
+Use existing repository conventions when present. Otherwise use:
+
+```
+plans/<initiative>/
+  00-requirements.md
+  10-implementation-plan.md
+  20-task-board.yaml
+```
+
+Create optional artifacts only when their branch applies:
+
+- `01-*-deep-dive.md` for focused requirements that would overload the baseline
+- `30-compatibility-matrix.md` for parity or migration work
+- `30-output-contract.md` for CLI or API output contracts
+- `40-test-strategy.md` for complex or multi-environment validation
+- `50-implementation-issues.md` after follow-up issues require persistent state
+
+Load a template only when creating its corresponding artifact:
+
+- `templates/requirements.md`
+- `templates/requirements-deep-dive.md`
+- `templates/implementation-plan.md`
+- `templates/task-board.yaml`
+
 ## Stage 1: Requirements Baseline
 
 In the default plan tree, use `00-requirements.md` to define what the work must

@@ -1,11 +1,11 @@
 ---
 name: structured-delivery-workflow
-description: Run a context-efficient engineering workflow with right-sized planning, task tracking, validation evidence, and optional review/commit traceability. Use when work spans multiple files, has process risk, needs a reviewable plan, or must preserve progress across threads.
+description: Structure high-risk or multi-phase engineering delivery through separate requirements, design, task, review, and knowledge-promotion gates. Use when work needs a reviewable plan, spans threads or agents, carries migration, data, architecture, compliance, or parity risk, or requires durable traceability.
 license: Apache-2.0
 compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
 metadata:
   author: realityforge
-  version: "3.5"
+  version: "4.0"
 ---
 
 # Structured Delivery Workflow
@@ -36,60 +36,15 @@ justifies the extra artifacts.
 
 ## Modes
 
-Choose the lightest mode that fits the request. If mode choice is unclear, read
-`instructions/mode-selection.md`.
+Choose the lightest mode that fits the request:
 
-### Lightweight Implementation
+- **Lightweight implementation** keeps bounded, current-thread state in
+  conversation and creates no persistent plan artifacts.
+- **Persistent plan tree** preserves reviewed requirements, implementation
+  design, and task state across risk, delegation, or multiple threads.
 
-Use for bounded implementation work where the user did not ask for plan
-artifacts and the work can finish in the current thread.
-
-Keep state in conversation:
-
-- scope in one or two sentences
-- short task checklist, if useful
-- targeted and final validation commands
-- final summary with files changed and verification results
-
-Do not create `plans/` files for lightweight implementation.
-
-### Persistent Plan Tree
-
-Use when the user asks for plans or traceability, work spans phases or threads,
-another agent will implement from the plan, risk is high, or repository
-convention requires persistent plans.
-
-Default persistent plan tree:
-
-```
-plans/<initiative>/
-  00-requirements.md
-  10-implementation-plan.md
-  20-task-board.yaml
-```
-
-These artifacts are three ordered planning stages, not one combined plan:
-
-1. `00-requirements.md` establishes what must be true.
-2. `10-implementation-plan.md` defines how the requirements will be satisfied.
-3. `20-task-board.yaml` breaks the design into executable, verifiable work.
-
-Complete each stage's gate in `instructions/planning.md` before progressing to
-the next. When an earlier stage changes, reconcile every affected later stage.
-
-Create optional files only when they add useful durable state:
-
-- `40-test-strategy.md` for complex or multi-environment validation
-- `30-compatibility-matrix.md` for parity or migration work
-- `30-output-contract.md` for CLI/API output contracts
-- `01-*-deep-dive.md` for focused decisions that would overload requirements
-- `50-implementation-issues.md` only after real follow-up issues exist
-
-Use templates only when creating corresponding files:
-
-- `templates/requirements-deep-dive.md`
-- `templates/implementation-plan.md`
-- `templates/task-board.yaml`
+Read `instructions/mode-selection.md` when the choice is unclear. Read
+`instructions/planning.md` when persistent artifacts are needed.
 
 ## Stage Router
 
@@ -129,14 +84,12 @@ For persistent plan trees:
   implementation when active plan artifacts exist
 - promote durable requirements, decisions, terminology, and deferred questions
   and prepare the closeout record before plan cleanup
-- after implementation-review issues are fixed and committed, remove the active
-  plan tree in a separate deletion-only cleanup commit when commits are allowed
+- after implementation-review issues are fixed and knowledge is promoted,
+  remove the temporary active plan tree unless retention is explicitly required
 
 ## Output Style
 
 - Keep chat updates short and evidence-based.
 - Prefer links to planning files over pasted artifacts.
-- Do not repeat template text in chat unless asked.
-- Do not load templates until the selected mode needs them.
 - Summarize decisions and validation results; avoid narrating every
   bookkeeping step.

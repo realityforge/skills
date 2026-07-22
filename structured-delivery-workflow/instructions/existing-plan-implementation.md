@@ -41,6 +41,11 @@ For each implementation slice:
 6. Commit only when the user asked for commits or repository instructions
    require them.
 
+Before a command mutates external state such as a database, deployment,
+service, or remote resource, resolve the exact target and environment from
+evidence and identify the recovery or cleanup path. Use that same explicit
+target for validation and cleanup.
+
 Task sizing:
 
 - Good: one behavior slice with its tests/docs/process updates.

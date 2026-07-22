@@ -39,6 +39,11 @@ For each stage:
 If a finding invalidates an upstream stage, return to that stage, apply its
 rubric, and rerun every affected downstream review before progressing.
 
+A stalled or unusable reviewer attempt consumes one review round. Replace it
+once with a narrower prompt and focused evidence paths. If no usable review
+completes within the round limit, the stage has not passed; report the missing
+review evidence instead of claiming success.
+
 Use focused inputs:
 
 - current stage artifact path
@@ -61,63 +66,16 @@ findings, unresolved user decisions, blockers, and validation failures. Final
 report should include each stage's rounds, status, material fixes,
 validations, and remaining issues, if any.
 
-## Requirements Review Rubric
+## Stage Rubric Router
 
-Judge whether the requirements baseline accurately captures what must be true.
+Load only the rubric for the current stage:
 
-Check:
+- requirements baseline: `review-requirements.md`
+- implementation design: `review-implementation-design.md`
+- detailed task breakdown: `review-task-breakdown.md`
 
-- alignment with the accepted request, shared understanding, issue, or
-  specification
-- complete outcomes, scope boundaries, constraints, and checkable acceptance
-  criteria
-- ambiguity, contradiction, or an unstated product or design decision that
-  would change delivered behavior
-- factual claims that conflict with repository evidence
-- implementation choices presented as requirements without being mandated
-
-Inspect repository context only where it can confirm or contradict a material
-requirement. Report the requirement change or user decision needed; do not
-invent missing product choices.
-
-## Implementation Design Review Rubric
-
-Judge whether the design is the simplest evidence-backed way to satisfy the
-reviewed requirements baseline.
-
-Check:
-
-- every requirement has a concrete design response
-- the approach is feasible in the actual repository and system
-- simpler direct approaches were assessed before adding indirection,
-  compatibility paths, or abstractions
-- load-bearing assumptions and capability limits have supporting evidence
-- interfaces, contracts, data and state changes, migrations, dependencies,
-  failure behavior, rollback, rollout, and operations are addressed where
-  relevant
-- validation will demonstrate the requirements and acceptance criteria
-- material alternatives and trade-offs explain the chosen design where needed
-
-Challenge unsupported claims that a direct approach cannot work. Keep task
-granularity and bookkeeping out of this review unless they expose a design gap.
-
-## Detailed Task Review Rubric
-
-Judge whether the task breakdown completely and safely executes the reviewed
-implementation design.
-
-Check:
-
-- every design obligation belongs to a task
-- dependencies and execution order are coherent
-- tasks use independently verifiable implementation boundaries
-- acceptance criteria and validation expectations prove each task's obligation
-- touched files or patterns are sufficient to locate the work
-- cross-cutting tests, documentation, migration, rollout, and cleanup work are
-  owned rather than left in plan prose
-
-Treat the reviewed design as the baseline. Report an upstream finding only
-when task decomposition exposes a real requirements or design contradiction.
+Include the selected rubric and the common output contract below in the review
+prompt.
 
 ## Review Output
 
@@ -142,14 +100,16 @@ Require explicit user review before marking a plan `accepted` only when:
 
 - the user asked to pause for review
 - the plan will guide another thread/agent
-- a persistent plan tree is being used
 - implementation must not begin without user approval
+- a stage review exposes a material scope or design choice that evidence cannot
+  resolve
 
 Capture approval either in `20-task-board.yaml` or the planning document.
 
 If the user says to proceed, treat that as approval for the current scope and
 record it if persistent planning state exists.
 
-If the user requested a plan review and also instructed you to implement after
-the review passes, treat that as conditional approval once all required stage
-reviews have no remaining actionable findings.
+If the user already instructed implementation to follow planning or review,
+treat that as conditional approval once all required stage reviews have no
+remaining actionable findings and no material scope or design choice was
+reopened.

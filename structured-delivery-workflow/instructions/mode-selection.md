@@ -13,14 +13,8 @@ Use for bounded implementation work where:
 - no durable handoff, audit trail, or delegated implementation state is needed
 - validation can be summarized in chat
 
-Keep state in conversation:
-
-- scope in one or two sentences
-- short task checklist, if useful
-- targeted and final validation commands
-- final summary with files changed and verification results
-
-Do not create `plans/` files for lightweight implementation.
+Keep scope, any useful checklist, validation commands, and final evidence in
+conversation. Create no persistent planning artifacts.
 
 ## Persistent Plan Tree
 
@@ -35,25 +29,5 @@ Use when at least one is true:
 - migration, data safety, architecture, compliance, or parity risk is high
 - repository convention already requires a persistent plan tree
 
-Default persistent plan tree:
-
-```
-plans/<initiative>/
-  00-requirements.md
-  10-implementation-plan.md
-  20-task-board.yaml
-```
-
-Create optional files only when they add useful durable state:
-
-- `40-test-strategy.md` for complex or multi-environment validation
-- `30-compatibility-matrix.md` for parity or migration work
-- `30-output-contract.md` for CLI/API output contracts
-- `01-*-deep-dive.md` for focused decisions that would overload requirements
-- `50-implementation-issues.md` only after real follow-up issues exist
-
-Use templates only when creating the corresponding files:
-
-- Requirements deep dive template: `templates/requirements-deep-dive.md`
-- Implementation plan template: `templates/implementation-plan.md`
-- Task board template: `templates/task-board.yaml`
+After selecting this mode, read `planning.md` for the ordered stages, default
+artifacts, optional artifacts, and templates.

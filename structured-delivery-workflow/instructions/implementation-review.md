@@ -97,6 +97,10 @@ For each round:
 6. Re-review unless the subagent reports `Findings: none`, no actionable
    findings remain after assessment, or max rounds is reached.
 
+A stalled or unusable reviewer attempt consumes one round. Replace it once with
+a narrower scope and focused evidence. If no usable review completes within the
+round limit, report the review as incomplete and preserve the residual risk.
+
 When implementation evidence invalidates the recorded design or exposes a
 simpler path that still satisfies the requirements, revise the design and task
 state rather than preserving obsolete alignment. Obtain user approval before

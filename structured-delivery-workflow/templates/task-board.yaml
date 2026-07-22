@@ -1,6 +1,8 @@
 meta:
   project: <project-name>
   last_updated: <yyyy-mm-dd>
+  requirements: 00-requirements.md
+  implementation_design: 10-implementation-plan.md
   required_full_gates:
     - <full-gate-command>
   statuses:
@@ -17,21 +19,16 @@ tasks:
     status: pending
     priority: high
     depends_on: []
+    requirements:
+      - R1
     acceptance_criteria:
       - <criterion-1>
       - <criterion-2>
     files_touched:
       - <path-or-pattern>
-    evidence:
+    validation:
       - command: <command>
-        result: pass
-    # Use real commit sha when available; use not_required only when no commit is expected.
-    commit:
-      hash: <sha-or-not_required>
-      message: <message-or-not_required>
+        proves: <acceptance-criterion>
+    evidence: []
 
-history:
-  - timestamp: <yyyy-mm-dd>
-    task: T01
-    commit: <sha-or-not_required>
-    note: <short completion note>
+history: []

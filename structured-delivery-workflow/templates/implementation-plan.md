@@ -1,40 +1,35 @@
-# Implementation Plan
+# Implementation Design
 
-## Phase Sequence
+## Requirement Coverage
 
-1. 
-2. 
-3. 
+- `R1` → `<design response>`
 
-## Delivery Approach
+## Chosen Design
 
-- Execute one task at a time with minimal diffs.
-- Validate iteratively with targeted checks.
-- Run full gates before marking tasks complete.
-- Keep plan/task board/docs aligned with code changes.
+<Components, contracts, state changes, and how they satisfy the requirements.>
 
-## Task Granularity Rules
+## Load-Bearing Assumptions
 
-- Keep each task independently verifiable.
-- Split tasks when they exceed one focused implementation+validation cycle.
-- Include testing/docs/process updates within each task where relevant.
+- Claim: `<assumption whose failure would materially change the design>`
+  - Evidence: `<code, authoritative documentation, or focused experiment>`
 
-## High-Risk Areas
+## Alternatives and Trade-offs
 
-- Risk 1:
-  - Impact:
-  - Mitigation:
-- Risk 2:
-  - Impact:
-  - Mitigation:
+- `<credible alternative>` — `<why the chosen design is preferable>`
 
-## Required Full Gates
+## Risks and Compatibility
 
-`<insert full gate command>`
+- Risk: `<material risk or compatibility concern>`
+  - Impact: `<consequence>`
+  - Response: `<mitigation, rollback, or accepted constraint>`
 
-## Completion Criteria
+## Validation Strategy
 
-- All planned tasks completed.
-- Evidence recorded for each completed task.
-- Final gates passing.
-- Working tree clean (or documented exception).
+- Targeted checks: `<checks proving individual requirements>`
+- Full gates: `<commands or environments proving overall acceptance>`
+
+## Delivery Sequence
+
+1. `<coherent implementation phase>`
+2. `<coherent implementation phase>`
+3. `<coherent implementation phase>`

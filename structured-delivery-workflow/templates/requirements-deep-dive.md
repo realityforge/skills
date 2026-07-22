@@ -1,12 +1,15 @@
 # Feature Requirements Deep Dive
 
-Use this template when a feature is complex enough to warrant its own requirements document.
-
 ## Feature
 
 - Name:
 - Owner:
 - Related plan/task IDs:
+
+## Baseline
+
+- Requirements source:
+- Basis of acceptance:
 
 ## Problem Statement
 
@@ -51,10 +54,10 @@ Use this template when a feature is complex enough to warrant its own requiremen
 - [ ] Criterion 2
 - [ ] Criterion 3
 
-## Validation Plan
+## Validation Expectations
 
-- Targeted checks:
-- Full gates:
+- Observable evidence:
+- Required environments or conditions:
 
 ## Open Questions
 

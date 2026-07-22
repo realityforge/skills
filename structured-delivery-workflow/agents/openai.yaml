@@ -1,4 +1,4 @@
 interface:
   display_name: "Structured Delivery Workflow"
-  short_description: "Right-size planning, tracking, and validation"
-  default_prompt: "Use $structured-delivery-workflow to run a right-sized planning, implementation, validation, and closeout workflow for this work."
+  short_description: "Separate requirements, design, tasks, implementation, and review"
+  default_prompt: "Use $structured-delivery-workflow to run requirements, design, task, implementation, review, knowledge-promotion, and closeout stages for this work."

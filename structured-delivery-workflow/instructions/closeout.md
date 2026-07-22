@@ -11,7 +11,7 @@ Use this instruction before the final response.
   exist.
 - Run the knowledge-promotion sweep and prepare its closeout record before
   removing active plan artifacts.
-- Create the separate plan-artifact cleanup commit when required.
+- Remove temporary active plan artifacts according to the cleanup policy.
 - Deliver the prepared closeout record in the pull request, issue, repository
   report, or final response selected during knowledge promotion.
 - Report validation commands and outcomes.
@@ -25,14 +25,5 @@ Also verify:
 - completed tasks do not have stale `commit.hash: pending`
 - review/approval state matches what actually happened
 - durable knowledge has been promoted or classified as temporary plan state
-- the active plan tree was removed in a separate cleanup commit, or the blocker
-  is reported explicitly
-
-## Output Style
-
-- Keep chat updates short and evidence-based.
-- Prefer links to planning files over pasted artifacts.
-- Do not repeat template text in chat unless asked.
-- Do not load templates until the selected mode needs them.
-- Summarize decisions and validation results; avoid narrating every
-  bookkeeping step.
+- the active plan tree was removed, retained by explicit policy, or its blocker
+  is reported

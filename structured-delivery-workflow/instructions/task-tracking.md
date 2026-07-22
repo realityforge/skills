@@ -11,7 +11,8 @@ Use this instruction when updating implementation state or task boards.
 
 - Use `20-task-board.yaml`.
 - Include `id`, `title`, `status`, `priority`, `depends_on`, acceptance
-  criteria, touched files or patterns, and validation evidence.
+  criteria, requirement links, touched files or patterns, validation
+  expectations, and evidence.
 - Keep one task `in_progress` at a time.
 - Mark tasks complete immediately after required checks pass.
 - Add commit metadata only when the user requested commit traceability or the

@@ -98,7 +98,8 @@ Use templates only when creating corresponding files:
 - Implementing from an accepted persistent plan: read
   `instructions/existing-plan-implementation.md`.
 - Updating persistent task state: read `instructions/task-tracking.md`.
-- Asking for user review or accepting a plan: read
+- Reviewing a persistent planning stage, asking for user review, or accepting a
+  plan: read
   `instructions/review-and-approval.md`.
 - Handling post-implementation issues or checking implementation alignment:
   read `instructions/implementation-review.md`.
@@ -119,8 +120,8 @@ Use templates only when creating corresponding files:
 
 For persistent plan trees:
 
-- run the built-in iterative plan review loop after drafting the plan and
-  before asking the user to review
+- run the built-in iterative stage review after completing each requirements,
+  implementation-design, and task-breakdown gate and before progressing
 - run the built-in iterative implementation alignment review loop after
   implementation when active plan artifacts exist
 - after implementation-review issues are fixed and committed, remove the active

@@ -122,16 +122,15 @@ The task breakdown is complete when:
    requirements path.
 5. Resolve evidence-answerable questions yourself.
 6. Ask one user question at a time only for true blockers.
-7. Complete the requirements baseline gate.
-8. Complete the implementation design gate.
-9. Complete the detailed task breakdown gate.
-10. Validate planning artifacts when they are structured files.
-11. Run the built-in iterative plan review loop after all three stage gates are
-    complete and before asking the user to review the plan.
-12. Apply valid or partially valid review findings to the earliest affected
-    stage, reconcile later stages, and revalidate edited artifacts. Reject
-    invalid findings with evidence.
-13. If the user requested review, pause after the review loop and ask for
+7. Complete the requirements baseline gate, then run the built-in requirements
+   review before starting implementation design.
+8. Complete the implementation design gate, then run the built-in design
+   review before creating the detailed task breakdown.
+9. Complete the detailed task breakdown gate, validate structured artifacts,
+   then run the built-in task review.
+10. When a finding changes an earlier stage, reconcile and re-review every
+    affected later stage before progressing.
+11. If the user requested review, pause after all stage reviews and ask for
     review before implementation.
 
 ## Open Questions

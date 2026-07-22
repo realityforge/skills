@@ -50,11 +50,6 @@ level. Requirements remain authoritative for accepted scope; implementation
 design and task state explain how the requirements are being delivered and may
 need revision when implementation produces better evidence.
 
-This normally applies to persistent plan tree work. For lightweight
-implementation, run it only when the work was explicitly driven by an existing
-plan artifact; otherwise rely on the normal closeout validation because there
-is no plan artifact to review against.
-
 Defaults:
 
 - max rounds: `5`, unless the user gives another limit

@@ -12,10 +12,9 @@ next stage begins:
 2. implementation design against the reviewed requirements baseline
 3. detailed task breakdown against the reviewed implementation design
 
-Do not run these reviews for lightweight implementation. Default max rounds:
-`5` across the full planning sequence, unless the user gives another limit.
-Each stage's initial review consumes one round. Infer the active plan path; ask
-only when it cannot be inferred.
+Default max rounds: `5` across the full planning sequence, unless the user gives
+another limit. Each stage's initial review consumes one round. Infer the active
+plan path; ask only when it cannot be inferred.
 
 For each stage:
 

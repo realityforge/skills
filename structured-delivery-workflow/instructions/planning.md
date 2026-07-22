@@ -15,13 +15,43 @@ accomplish independently of the implementation design. Record the intended
 outcomes, scope boundaries, constraints, acceptance criteria, and unresolved
 questions.
 
+### Requirements Entry Path
+
+Start from the strongest available requirements baseline.
+
+Use the **pre-aligned path** when the user has already confirmed shared
+understanding, including through `grill-me`, or has directed the work from an
+accepted specification or requirements artifact:
+
+- record the source and basis of acceptance
+- preserve settled outcomes, constraints, and decisions
+- check them against current repository evidence
+- reopen a settled point only when evidence contradicts it, scope has changed,
+  or its acceptance criteria cannot be evaluated
+
+Use the **evidence-led path** when no accepted baseline exists:
+
+- derive candidate requirements from the request, repository instructions,
+  referenced issues or specifications, current behavior, code, and tests
+- resolve factual questions from evidence before asking the user
+- treat a clear original request as acceptance when it leaves no material
+  requirements choice open
+- when a material choice remains, present the evidence, recommendation, and
+  decision needed before completing the baseline
+
+If evidence contradicts a pre-aligned requirement, surface the conflict and
+resolve it before progressing to implementation design.
+
 The requirements baseline is complete when:
 
+- its source and basis of acceptance are recorded
 - intended outcomes, in-scope work, and out-of-scope boundaries are explicit
 - material constraints and acceptance criteria are checkable
 - evidence-answerable questions have been resolved
 - no blocking requirements question remains open
 - user decisions and material assumptions are recorded
+- it states required outcomes rather than implementation choices, except where
+  the implementation itself is a requirement or constraint
 
 ## Stage 2: Implementation Design
 
@@ -60,18 +90,20 @@ The task breakdown is complete when:
 2. Check worktree state before editing.
 3. Identify the active planning stage and gather only enough code and
    repository context to complete it.
-4. Resolve evidence-answerable questions yourself.
-5. Ask one user question at a time only for true blockers.
-6. Complete the requirements baseline gate.
-7. Complete the implementation design gate.
-8. Complete the detailed task breakdown gate.
-9. Validate planning artifacts when they are structured files.
-10. Run the built-in iterative plan review loop after all three stage gates are
+4. When requirements are affected, select the pre-aligned or evidence-led
+   requirements path.
+5. Resolve evidence-answerable questions yourself.
+6. Ask one user question at a time only for true blockers.
+7. Complete the requirements baseline gate.
+8. Complete the implementation design gate.
+9. Complete the detailed task breakdown gate.
+10. Validate planning artifacts when they are structured files.
+11. Run the built-in iterative plan review loop after all three stage gates are
     complete and before asking the user to review the plan.
-11. Apply valid or partially valid review findings to the earliest affected
+12. Apply valid or partially valid review findings to the earliest affected
     stage, reconcile later stages, and revalidate edited artifacts. Reject
     invalid findings with evidence.
-12. If the user requested review, pause after the review loop and ask for
+13. If the user requested review, pause after the review loop and ask for
     review before implementation.
 
 ## Open Questions

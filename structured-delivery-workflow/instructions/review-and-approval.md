@@ -38,6 +38,10 @@ For each stage:
 If a finding invalidates an upstream stage, return to that stage, apply its
 rubric, and rerun every affected downstream review before progressing.
 
+A stage passes when its review has no actionable findings. A stage pass permits
+progress to the next planning stage; it does not by itself mark the complete
+plan as accepted.
+
 A stalled or unusable reviewer attempt consumes one review round. Replace it
 once with a narrower prompt and focused evidence paths. If no usable review
 completes within the round limit, the stage has not passed; report the missing
@@ -93,7 +97,7 @@ If there are no material issues, write `Findings: none` and mention only
 residual risk or unchecked context that matters. Do not rewrite artifacts
 unless asked.
 
-## User Approval
+## Plan Acceptance
 
 Require explicit user review before marking a plan `accepted` only when:
 

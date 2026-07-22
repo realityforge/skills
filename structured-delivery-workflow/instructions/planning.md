@@ -156,8 +156,8 @@ The task breakdown is complete when:
    then run the built-in task review.
 10. When a finding changes an earlier stage, reconcile and re-review every
     affected later stage before progressing.
-11. If the user requested review, pause after all stage reviews and ask for
-    review before implementation.
+11. After all stage reviews pass, complete the plan-acceptance step in
+    `review-and-approval.md` before implementation.
 
 ## Open Questions
 

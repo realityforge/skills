@@ -77,7 +77,8 @@ For the persistent plan tree:
 
 - run the built-in iterative stage review after completing each
   requirements, implementation-design, and task-breakdown gate by reading the
-  matching `instructions/review-*.md` file, and only progress after acceptance.
+  matching rubric through `instructions/review-and-approval.md`, and only
+  progress after the stage review passes.
 - run the built-in requirements-first implementation review loop after
   implementation when active plan artifacts exist, using
   `instructions/implementation-review.md`.

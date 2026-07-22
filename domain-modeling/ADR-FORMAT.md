@@ -14,6 +14,15 @@ Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 
 That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
 
+## Lifecycle
+
+Create an ADR when the decision is adopted. Files in `docs/adr/` are the currently adopted architectural decisions;
+repository history owns chronology.
+
+When a later decision replaces an ADR, record the replacement and its rationale, update every reference to describe the
+current decision, then delete the obsolete ADR. Replacement is complete when the current rationale remains discoverable,
+every inbound reference names the current decision, and the obsolete ADR is removed.
+
 ## Separate decisions, not implementation plans
 
 Keep the ADR at the architectural level: ownership, boundaries, constraints, trust relationships, selected patterns,
@@ -36,7 +45,6 @@ owns the decision and why; the plan owns how, sequencing, evidence, and verifica
 
 Only include these when they add genuine value. Most ADRs won't need them.
 
-- **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`) — useful when decisions are revisited
 - **Considered Options** — only when the rejected alternatives are worth remembering
 - **Consequences** — only when non-obvious downstream effects need to be called out
 

@@ -7,6 +7,16 @@ description: Model a project's domain. Use when resolving domain language, recor
 
 Ground changes in existing domain artifacts, relevant design documents, and code.
 
+## Link language
+
+Link the first body use of every glossary-owned term in each specification, ADR, and deferred issue to its canonical
+heading, using the canonical spelling as link text; apply the same rule to references between glossary definitions. Use
+unlinked canonical spelling thereafter. For example:
+`[Interactive Authentication](../glossary/authentication.md#interactive-authentication)`.
+
+Language use is complete when every glossary-owned term in every affected artifact uses canonical spelling and each
+required first-use link resolves to its owning heading.
+
 ## Route knowledge
 
 Route each conclusion to one owner before writing:

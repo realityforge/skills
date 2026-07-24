@@ -9,16 +9,21 @@ Domain terminology lives under `docs/glossary/`. The directory is the single can
 ```md
 # Domain Glossary
 
-**Order**:
-A request by a Customer to obtain goods.
+## Language
+
+### Order
+
+A request by a [Customer](#customer) to obtain goods.
 _Avoid_: Purchase, transaction
 
-**Invoice**:
-A request for payment sent to a Customer after delivery.
+### Invoice
+
+A request for payment sent to a [Customer](#customer) after delivery.
 _Avoid_: Bill, payment request
 
-**Customer**:
-A person or organization that places Orders.
+### Customer
+
+A person or organization that places an [Order](#order).
 _Avoid_: Client, buyer, account
 ```
 
@@ -59,15 +64,20 @@ A topic file names the subject area, briefly establishes its scope, then defines
 
 ## Language
 
-**<Term>**:
+### <Term>
+
 <One- or two-sentence definition.>
 _Avoid_: <Competing terms>
 ```
 
+A term heading supplies its GitHub-style Markdown fragment: `### Interactive Authentication` becomes
+`#interactive-authentication`.
+
 ## Rules
 
 - **Keep it a glossary.** Define domain terms and route other conclusions to their owning artifacts.
-- **Give every term one owner.** Define a shared term in the topic that owns its core meaning and link to it from dependent topics.
+- **Give every term one owner.** Define it once under a level-three heading whose text is the canonical term, and link to
+  that heading from dependent topics.
 - **Be opinionated.** Pick one canonical term and list competing words under `_Avoid_`.
 - **Keep definitions tight.** Use one or two sentences that define what the concept is.
 - **Keep terms domain-specific.** General programming and engineering vocabulary belongs elsewhere.
@@ -82,7 +92,8 @@ _Avoid_: <Competing terms>
 4. Probe relationships with concrete edge-case scenarios.
 5. Update the owning file immediately after the term is resolved.
 6. Create a topic only when a coherent, independently navigable group has emerged; add it to `README.md` in the same change.
+7. After renaming or moving a term, update every inbound term link.
 
-The update is complete when the term has one canonical definition, competing language is identified where useful,
-every affected glossary topic and durable artifact remains consistent, and requirements and decisions remain in their
-owning artifacts.
+The update is complete when the term has one canonical level-three heading, competing language is identified where
+useful, every required first-use link resolves to that heading, affected glossary topics and durable artifacts use the
+canonical spelling, and requirements and decisions remain in their owning artifacts.

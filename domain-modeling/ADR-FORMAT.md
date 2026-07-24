@@ -12,7 +12,7 @@ Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 {1-3 sentences: what's the context, what did we decide, and why.}
 ```
 
-That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
+Keep the ADR to the shortest text that records the decision and its rationale.
 
 ## Lifecycle
 
@@ -26,9 +26,8 @@ every inbound reference names the current decision, and the obsolete ADR is remo
 ## Separate decisions, not implementation plans
 
 Keep the ADR at the architectural level: ownership, boundaries, constraints, trust relationships, selected patterns,
-and rationale. Put routes, class/interface designs, algorithms, version pins, configuration keys, timeout values,
-rollout steps, and other realisation details in the linked plan or requirements document unless one of those details is
-itself the hard-to-reverse architectural decision.
+and rationale. Put durable requirements in linked specifications and realisation details in linked plans unless a
+detail is itself the hard-to-reverse architectural decision.
 
 Library and technology selections may have their own ADRs when they meet the ADR criteria. Keep these separate from the
 structural architecture ADR they implement. A selection ADR may record the concrete technology, evaluated version or
@@ -36,14 +35,12 @@ major line, required dependencies, and material runtime or operational consequen
 remain in the linked plan.
 
 Split independently changeable decisions when they have different alternatives or reasons. A `Consequences` section
-may identify unavoidable implementation obligations, but must not become the implementation plan.
+identifies only unavoidable implementation obligations; plans own their realisation.
 
-When a plan expands an ADR, it should link the ADR at that point and retain the implementation detail locally. The ADR
-owns the decision and why; the plan owns how, sequencing, evidence, and verification.
+When a plan expands an ADR, link the ADR at that point and retain the implementation detail locally. The ADR owns the
+decision and why; the plan owns how, sequencing, evidence, and verification.
 
 ## Optional sections
-
-Only include these when they add genuine value. Most ADRs won't need them.
 
 - **Considered Options** — only when the rejected alternatives are worth remembering
 - **Consequences** — only when non-obvious downstream effects need to be called out
@@ -69,5 +66,19 @@ If a decision is easy to reverse, skip it — you'll just reverse it. If it's no
 - **Technology choices that carry lock-in.** Database, message bus, auth provider, deployment target. Not every library — just the ones that would take a quarter to swap out.
 - **Boundary and scope decisions.** "Customer Management owns Customer data; other subsystems reference it by ID only." The explicit no-s are as valuable as the yes-s.
 - **Deliberate deviations from the obvious path.** "We're using manual SQL instead of an ORM because X." Anything where a reasonable reader would assume the opposite. These stop the next engineer from "fixing" something that was deliberate.
-- **Constraints not visible in the code.** "We can't use AWS because of compliance requirements." "Response times must be under 200ms because of the partner API contract."
+- **Architectural choices forced by external constraints.** Link the constraint's canonical owner; record the
+  hard-to-reverse architectural choice and its rationale in the ADR.
 - **Rejected alternatives when the rejection is non-obvious.** If you considered GraphQL and picked REST for subtle reasons, record it — otherwise someone will suggest GraphQL again in six months.
+
+## Capture
+
+1. Read the relevant glossary, specifications, ADRs, design documents, plans, and code needed to establish the current
+   choice and rationale.
+2. Search `docs/adr/` for an existing owner or a decision this choice replaces.
+3. Apply all three qualification criteria and separate independently changeable decisions.
+4. Use the next sequential number when creating an ADR.
+5. Link every plan that expands the decision.
+
+Capture is complete when the decision satisfies all three qualification criteria, has one current ADR, records the
+choice and rationale, keeps delivery detail in its owning plan, and every plan that expands it links it. A new ADR uses
+the next sequential number.

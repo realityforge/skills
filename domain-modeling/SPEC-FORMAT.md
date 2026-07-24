@@ -1,30 +1,20 @@
 # Specification Format
 
-Specifications live in `docs/specs/`. Create the directory lazily when the first specification is needed.
+Specifications live at `docs/specs/<kebab-case-subject>.md`. Create `docs/specs/` lazily. Each file owns one coherent
+contract; split requirements that can change independently.
 
-A specification records current, durable, verifiable requirements that should survive implementation changes and the
-deletion of delivery plans.
+A specification records current, durable, verifiable requirements that survive implementation changes and the deletion
+of delivery plans.
 
-## Qualification and routing
+## Qualification
 
-Create or update a specification when all of these hold:
+A requirement belongs in a specification when all of these hold:
 
 1. The requirement is accepted now, not proposed or deferred.
 2. It expresses behavior, a constraint, or an invariant that future implementations must preserve.
 3. It can be stated independently of the current code structure.
-4. Recovering it from code later could confuse deliberate behavior with an implementation accident.
-
-Route other information to its canonical artifact:
-
-| Matter | Artifact |
-| --- | --- |
-| Meaning of a domain term | `docs/glossary/` |
-| Architectural or technology choice and why | ADR |
-| Durable required behavior or constraint | Specification |
-| Implementation and mutable configuration | Code |
-| Consequential unresolved question | Deferred issue |
-| Delivery sequence, temporary evidence, or migration detail | Plan |
-| Incorrect current behavior | Bug |
+4. Without a specification, it would have no durable owner beyond implementation artifacts or temporary delivery
+   state.
 
 ## Minimal format
 
@@ -50,17 +40,15 @@ the requirements substantially easier to navigate.
 
 ## Rules
 
-- Record what must remain true, not why a choice was made or how it is implemented.
-- Use established glossary terms without redefining them.
-- State one observable or verifiable obligation per requirement. Prefer invariants over scenarios and exhaustive wire
-  descriptions.
-- Exclude provider brands, libraries, classes, routes, configuration keys, version pins, timeout values, storage
-  choices, and rollout details unless the detail is itself a durable external contract.
+- Record what must remain true; decision rationale and realisation details stay in their owning artifacts.
+- Use established glossary terms.
+- State one independently verifiable obligation per requirement. Use invariants for cross-scenario behavior and
+  scenarios for verifiable edge cases.
+- Keep requirements implementation-independent; include a technical detail only when it is part of the durable
+  contract.
 - Link ADRs rather than copying their context, alternatives, or rationale. A specification may state a verifiable
   consequence of an ADR.
-- Keep proposed requirements in their owning design, plan, or backlog. Create a deferred issue only when an unresolved
-  question meets the qualification rules in [DEFERRED-FORMAT.md](./DEFERRED-FORMAT.md).
-- Keep the document as short as the subject allows. Do not turn it into a system overview or implementation inventory.
+- Use the smallest set of sections needed to navigate the requirements.
 
 ## Capture and update
 
@@ -73,9 +61,10 @@ the requirements substantially easier to navigate.
 5. When a plan expands or implements a requirement, link the specification at that point. The specification owns what
    must remain true; the plan owns how and when.
 
-Capture or update is complete when every in-scope requirement has one specification owner, is independently
-verifiable, reflects the accepted contract, keeps implementation detail and decision rationale in their owning
-artifacts, and surfaces every contradiction and relevant plan link.
+Capture or update is complete when every in-scope requirement has one specification owner and an independently
+verifiable statement of the accepted contract, implementation detail and decision rationale remain in their owning
+artifacts, and every implementation mismatch and relevant plan link is surfaced.
 
-Specifications describe the currently accepted contract. Update or remove obsolete requirements when that contract
-changes; repository history owns chronology.
+Specifications describe the currently accepted contract; repository history owns chronology. When the contract
+changes, update or remove obsolete requirements. When replacing, renaming, or deleting a specification, update every
+inbound reference.

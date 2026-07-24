@@ -1,37 +1,46 @@
 ---
 name: domain-modeling
-description: Build and sharpen a project's domain model. Use when resolving domain language, recording accepted durable requirements in specifications, recording architectural decisions, deliberately deferring or reconsidering a consequential question, or when another skill needs to maintain these artifacts.
+description: Model a project's domain. Use when resolving domain language, recording accepted durable requirements in specifications, recording architectural decisions, deliberately deferring or reconsidering consequential questions, or when another skill needs these artifacts.
 ---
 
 # Domain Modeling
 
-Actively sharpen the project's language, requirements, decisions, and deferred questions as they emerge during design
-and implementation. Ground changes in the existing model, relevant design documents, ADRs, specifications, and code.
+Ground changes in existing domain artifacts, relevant design documents, and code.
 
-## Locate domain language
+## Route knowledge
 
-- Use `docs/glossary/` as the sole home for domain language. When it exists, read `README.md` and the relevant topic files before changing terminology.
-- Use the project's documented domain and design terminology. Surface conflicts between those sources, the user's statements, and the code before writing.
+Route each conclusion to one owner before writing:
+
+| Matter | Owner |
+| --- | --- |
+| Meaning of a domain term | `docs/glossary/` |
+| Accepted durable behavior, constraint, or invariant | Specification when it meets specification qualification |
+| Adopted architectural or technology choice and why | ADR when it meets the ADR threshold |
+| Consequential unresolved question intentionally postponed | Deferred issue when it meets deferred qualification and the user agrees |
+| Proposed requirement or unresolved current design | Owning design, plan, or backlog |
+| Implementation and mutable configuration | Code |
+| Delivery sequence, temporary evidence, or migration detail | Plan or task |
+| Incorrect current behavior | Bug |
 
 ## Sharpen language
 
-When resolving or adding a term, read [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md) before editing.
-
-- Challenge terminology that conflicts with the glossary.
-- Replace vague or overloaded language with a proposed canonical term.
-- Probe relationships with concrete edge-case scenarios.
-- Check stated behavior against the code and surface contradictions.
-- Update the owning glossary topic as soon as a term is resolved.
+Before resolving, adding, or changing domain language, read
+[GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md). Apply every structure, rule, and update requirement.
 
 ## Record decisions
 
-When a choice could be a durable architectural or technology decision, read [ADR-FORMAT.md](./ADR-FORMAT.md) before offering or writing an ADR and before a plan expands the choice. Apply all qualification, separation, and plan-linking rules in that reference.
+Before offering, creating, updating, replacing, or deleting an ADR—and whenever a plan expands an architectural or
+technology choice—read [ADR-FORMAT.md](./ADR-FORMAT.md). Apply every qualification, capture, lifecycle, separation, and
+plan-linking rule.
 
 ## Record specifications
 
-Before offering, writing, or updating a specification—and whenever work accepts or changes a durable requirement—read
-[SPEC-FORMAT.md](./SPEC-FORMAT.md). Apply every qualification, routing, capture, and update rule in that reference.
+Before offering, creating, updating, replacing, or deleting a specification—and whenever work accepts or changes a
+durable requirement—read [SPEC-FORMAT.md](./SPEC-FORMAT.md). Apply every qualification, capture, lifecycle, and
+plan-linking rule.
 
 ## Defer questions
 
-When a consequential question is deliberately deferred, or current work may satisfy a recorded reconsideration trigger, read [DEFERRED-FORMAT.md](./DEFERRED-FORMAT.md) before creating, updating, reconsidering, or deleting a deferred issue.
+Before creating, updating, reconsidering, or deleting a deferred issue—and whenever a consequential question is
+deliberately deferred or a recorded trigger may have occurred—read
+[DEFERRED-FORMAT.md](./DEFERRED-FORMAT.md). Apply every qualification, authority, capture, and lifecycle rule.

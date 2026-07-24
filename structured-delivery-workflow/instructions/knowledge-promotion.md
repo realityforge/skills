@@ -13,9 +13,9 @@ Promote durable knowledge when it becomes settled during design or
 implementation. Use the closeout sweep to catch remaining candidates, not to
 reconstruct rationale that was already available earlier.
 
-When language, an adopted decision, or a deliberately deferred question may be
-durable, use `domain-modeling` and follow its relevant glossary, ADR, or
-deferred-issue qualification and format rules.
+When language, an accepted durable requirement, an adopted decision, or a
+deliberately deferred question may be durable, use `domain-modeling` and follow
+its relevant glossary, specification, ADR, or deferred-issue rules.
 
 ## Closeout Sweep
 
@@ -26,16 +26,16 @@ each potentially durable item:
 | Knowledge | Canonical destination |
 | --- | --- |
 | Resolved domain language | Project glossary through `domain-modeling` |
+| Qualifying accepted durable requirement | Specification through `domain-modeling` |
 | Qualifying adopted architecture or technology decision | ADR through `domain-modeling` |
 | Consequential question deliberately postponed by the user | Deferred issue through `domain-modeling` |
-| Continuing behavior, compatibility rule, contract, or constraint | Existing specification, contract, user, operational, or quality documentation and executable tests as appropriate |
 | Current architectural structure needed to understand the system | Existing architecture or design documentation |
 | Task sequencing, file lists, intermediate status, and command bookkeeping | Temporary plan state; no promotion |
 
 Use the repository's existing canonical locations and conventions. Update one
-authoritative home for each conclusion and link to it elsewhere. A requirement
-already made durable by clear code, tests, or existing documentation needs no
-second prose artifact.
+authoritative home for each conclusion and link to it elsewhere. Treat code,
+tests, or existing documentation as sufficient only when `domain-modeling`
+qualification does not require a specification.
 
 Validate every canonical artifact changed during promotion. Preserve a
 deferred question only after the user has explicitly deferred it or accepted
@@ -52,8 +52,7 @@ The closeout record should contain:
 
 - accepted outcome and delivered result
 - material deviations from the implementation design and why
-- links to durable glossary, ADR, deferred, specification, contract, or design
-  updates
+- links to promoted canonical artifacts
 - validation performed and its outcome
 - residual risk, skipped validation, and unresolved or deferred questions
 - plan-cleanup status

@@ -17,6 +17,10 @@ unlinked canonical spelling thereafter. For example:
 Language use is complete when every glossary-owned term in every affected artifact uses canonical spelling and each
 required first-use link resolves to its owning heading.
 
+After changing a specification, ADR, deferred issue, or glossary file, run
+[`scripts/validate_doc_links.py`](./scripts/validate_doc_links.py) against the repository root. It validates every local
+file and heading-fragment target in those artifact directories.
+
 ## Route knowledge
 
 Route each conclusion to one owner before writing:

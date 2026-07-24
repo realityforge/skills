@@ -1,11 +1,12 @@
 ---
 name: domain-modeling
-description: Build and sharpen a project's domain model. Use when resolving domain language, recording an architectural decision, deliberately deferring or reconsidering a consequential question, or when another skill needs to maintain these artifacts.
+description: Build and sharpen a project's domain model. Use when resolving domain language, recording accepted durable requirements in specifications, recording architectural decisions, deliberately deferring or reconsidering a consequential question, or when another skill needs to maintain these artifacts.
 ---
 
 # Domain Modeling
 
-Actively sharpen the project's language, decisions, and deferred questions as they emerge during design and implementation. Ground changes in the existing model, relevant design documents, ADRs, and code.
+Actively sharpen the project's language, requirements, decisions, and deferred questions as they emerge during design
+and implementation. Ground changes in the existing model, relevant design documents, ADRs, specifications, and code.
 
 ## Locate domain language
 
@@ -25,6 +26,11 @@ When resolving or adding a term, read [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md)
 ## Record decisions
 
 When a choice could be a durable architectural or technology decision, read [ADR-FORMAT.md](./ADR-FORMAT.md) before offering or writing an ADR and before a plan expands the choice. Apply all qualification, separation, and plan-linking rules in that reference.
+
+## Record specifications
+
+Before offering, writing, or updating a specification—and whenever work accepts or changes a durable requirement—read
+[SPEC-FORMAT.md](./SPEC-FORMAT.md). Apply every qualification, routing, capture, and update rule in that reference.
 
 ## Defer questions
 

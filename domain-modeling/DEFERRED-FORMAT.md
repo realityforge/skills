@@ -18,6 +18,7 @@ Route other matters to their canonical artifact:
 | --- | --- |
 | Shared term | `docs/glossary/` |
 | Adopted architectural choice | ADR when it meets the ADR threshold |
+| Accepted durable requirement | Specification |
 | Understood work awaiting execution | Plan or task |
 | Defect | Bug |
 | Question blocking current work | Current design or plan |

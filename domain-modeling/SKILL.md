@@ -50,8 +50,9 @@ plan-linking rule.
 ## Record specifications
 
 Before offering, creating, updating, replacing, or deleting a specification—and whenever work accepts or changes a
-durable requirement—read [SPEC-FORMAT.md](./SPEC-FORMAT.md). Apply every qualification, capture, lifecycle, and
-plan-linking rule.
+durable requirement—read [SPEC-FORMAT.md](./SPEC-FORMAT.md) and run its gates in order. Drafting begins only after the
+candidate-classification gate is complete, and specification work ends only after the specification-only diff audit is
+complete.
 
 ## Defer questions
 

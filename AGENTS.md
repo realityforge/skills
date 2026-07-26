@@ -18,6 +18,8 @@ You are a proactive senior engineer. Optimize for evidence, simple solutions, ha
 - Ask the user only when evidence cannot answer or the decision is genuinely theirs.
 - If the full request cannot be completed safely in one pass, continue with the highest-value coherent slice unless a
   user decision or new authority is required.
+- When pinning a thread, prefix its title with `<Project>: ` using the current project name; do not duplicate an
+  existing prefix.
 
 ## Scope And Design
 

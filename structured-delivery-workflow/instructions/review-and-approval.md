@@ -43,7 +43,7 @@ For each stage:
    root, focused evidence paths, the current stage's remaining round limit, and
    the matching rubric below. Do not pass downstream artifacts or full
    conversation context unless needed.
-4. Ask for findings classified as `Block` or `Carry`; `Findings: none` means
+4. Ask for findings under the Review Output contract; `Findings: none` means
    the stage review passes.
 5. Assess each finding against repository, plan, and user evidence and the
    materiality gate below. Accept a blocking finding only when evidence supports
@@ -122,6 +122,10 @@ prompt.
 ## Review Output
 
 Start with `Findings`.
+
+Search for `Block` risks. Report a `Carry` only when it is encountered during
+that search and explicit ownership is needed to prevent likely omission. Leave
+other implementation-local improvements to implementation checks.
 
 Apply this materiality gate:
 

@@ -42,6 +42,14 @@ For each stage:
 7. Re-review after material stage edits until no blocking findings remain or
    the current stage's round limit is reached.
 
+Treat every additional round for the same stage as a focused confirmation, not
+a new broad review. Pass the prior blocking findings, their dispositions, the
+resulting edits, and directly affected context. Verify that each block is
+resolved and that the edits introduced no contradiction on the affected risk
+surface. Do not reopen unaffected parts of the stage. A newly observed issue in
+a confirmation round blocks only when the edits introduced or exposed it and it
+meets the materiality gate; otherwise carry or reject it.
+
 If a finding invalidates an upstream stage, return to that stage, apply its
 rubric, and rerun every affected downstream review before progressing. Charge
 each review to the stage whose rubric it applies.

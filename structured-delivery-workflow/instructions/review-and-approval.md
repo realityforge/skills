@@ -43,8 +43,8 @@ For each stage:
    root, focused evidence paths, the current stage's remaining round limit, and
    the matching rubric below. Do not pass downstream artifacts or full
    conversation context unless needed.
-4. Ask for findings classified as `Block` or `Carry`, plus a compact
-   `Scorecard`; `Findings: none` means the stage review passes.
+4. Ask for findings classified as `Block` or `Carry`; `Findings: none` means
+   the stage review passes.
 5. Assess each finding against repository, plan, and user evidence and the
    materiality gate below. Accept a blocking finding only when evidence supports
    its pre-implementation risk; otherwise carry or reject it. Narrow over-broad

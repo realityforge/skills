@@ -27,22 +27,26 @@ For each stage:
    root, focused evidence paths, the current stage's remaining round limit, and
    the matching rubric below. Do not pass downstream artifacts or full
    conversation context unless needed.
-3. Ask for `Findings` and a compact `Scorecard`; `Findings: none` means the
-   stage review passes.
-4. Assess each finding against repository, plan, and user evidence. Accept
-   unless contradicted; narrow over-broad fixes.
-5. Patch accepted or partially accepted issues in the earliest affected stage.
-   Reject findings only with concrete evidence.
+3. Ask for findings classified as `Block` or `Carry`, plus a compact
+   `Scorecard`; `Findings: none` means the stage review passes.
+4. Assess each finding against repository, plan, and user evidence and the
+   materiality gate below. Accept a blocking finding only when evidence supports
+   its pre-implementation risk; otherwise carry or reject it. Narrow over-broad
+   fixes.
+5. Patch accepted or partially accepted blocking issues in the earliest
+   affected stage. Carry implementation-local findings into the relevant later
+   stage or task without failing the current stage or triggering re-review. Do
+   not patch rejected findings.
 6. Reconcile downstream artifacts already present and validate edited
    structured files where practical.
-7. Re-review after material stage edits until no actionable findings remain or
+7. Re-review after material stage edits until no blocking findings remain or
    the current stage's round limit is reached.
 
 If a finding invalidates an upstream stage, return to that stage, apply its
 rubric, and rerun every affected downstream review before progressing. Charge
 each review to the stage whose rubric it applies.
 
-A stage passes when its review has no actionable findings. A stage pass permits
+A stage passes when its review has no blocking findings. A stage pass permits
 progress to the next planning stage; it does not by itself mark the complete
 plan as accepted.
 
@@ -51,7 +55,7 @@ stage. Replace it once with a narrower prompt and focused evidence paths. If no
 usable review completes within that stage's limit, the stage has not passed;
 report the missing review evidence instead of claiming success.
 
-If a stage reaches its limit with actionable findings or required re-review
+If a stage reaches its limit with blocking findings or required re-review
 remaining, report the unresolved evidence and ask whether to extend that
 stage's limit. Later stages retain their full budgets.
 
@@ -91,8 +95,20 @@ prompt.
 
 Start with `Findings`.
 
+Apply this materiality gate:
+
+- `Block`: leaving the issue unresolved before implementation could cause
+  incorrect requirements or delivered behavior, architectural or irreversible
+  rework, unsafe migration or rollout, cross-task coordination failure, or
+  validation that can falsely pass.
+- `Carry`: a local, reversible implementation detail that required
+  implementation checks can expose cheaply. Assign it to the relevant later
+  stage or task; it does not fail the reviewed stage.
+- Reject cosmetic, speculative, unsupported, or out-of-scope suggestions.
+
 For each finding, include:
 
+- its `Block` or `Carry` classification
 - the risk or ambiguity
 - why it matters
 - the concrete change needed in the affected stage
@@ -121,5 +137,5 @@ record it if persistent planning state exists.
 
 If the user already instructed implementation to follow planning or review,
 treat that as conditional approval once all required stage reviews have no
-remaining actionable findings and no material scope or design choice was
+remaining blocking findings and no material scope or design choice was
 reopened.

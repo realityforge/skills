@@ -154,8 +154,9 @@ The task breakdown is complete when:
    review before creating the detailed task breakdown.
 9. Complete the detailed task breakdown gate, validate structured artifacts,
    then run the built-in task review.
-10. When a finding changes an earlier stage, reconcile and re-review every
-    affected later stage before progressing.
+10. When a finding changes an earlier stage, reconcile every later artifact and
+    re-review only stages whose obligations or validation risk materially
+    changed.
 11. After all stage reviews pass, complete the plan-acceptance step in
     `review-and-approval.md` before implementation.
 

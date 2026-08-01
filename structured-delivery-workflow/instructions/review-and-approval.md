@@ -50,9 +50,12 @@ surface. Do not reopen unaffected parts of the stage. A newly observed issue in
 a confirmation round blocks only when the edits introduced or exposed it and it
 meets the materiality gate; otherwise carry or reject it.
 
-If a finding invalidates an upstream stage, return to that stage, apply its
-rubric, and rerun every affected downstream review before progressing. Charge
-each review to the stage whose rubric it applies.
+If a blocking finding invalidates an upstream stage, return to that stage and
+apply its rubric. Reconcile every downstream artifact, but re-review only a
+stage whose requirement coverage, design obligations, sequencing, or validation
+risk changed. Evidence citations, wording clarifications, and bookkeeping edits
+do not by themselves reopen downstream reviews. Charge each review to the stage
+whose rubric it applies.
 
 A stage passes when its review has no blocking findings. A stage pass permits
 progress to the next planning stage; it does not by itself mark the complete

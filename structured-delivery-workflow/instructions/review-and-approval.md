@@ -102,10 +102,11 @@ the user approves broader changes. Preserve stable task IDs and question IDs.
 If plan status is `accepted`, preserve it unless an earlier-stage change
 reopens scope or a user decision.
 
-User-facing output should be one terse digest per round. Detail only rejected
-findings, unresolved user decisions, blockers, and validation failures. Final
-report should include each stage's rounds, status, material fixes,
-validations, and remaining issues, if any.
+Give one terse user-facing update when a stage passes or needs attention because
+of an unresolved decision, round limit, unusable reviewer, or validation
+failure. Batch routine confirmation-round results into that update. Final report
+should include each stage's rounds, status, material fixes, validations, and
+remaining issues, if any.
 
 ## Stage Rubric Router
 

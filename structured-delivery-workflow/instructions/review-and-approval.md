@@ -6,11 +6,23 @@ asking the user to review a persistent plan, or before marking a plan accepted.
 ## Stage Review Loops
 
 Review each persistent planning stage after its completion gate and before the
-next stage begins:
+next stage begins, subject to the task-review branch below:
 
 1. requirements baseline against its accepted source and repository evidence
 2. implementation design against the reviewed requirements baseline
 3. detailed task breakdown against the reviewed implementation design
+
+Requirements and implementation-design reviews are required. Run the detailed
+task review only when one or more apply:
+
+- the plan guides another thread, agent, or parallel work
+- migration, rollout, destructive, or irreversible sequencing is involved
+- incorrect dependency or ownership boundaries could create expensive rework
+- the task validation cannot be exercised cheaply during implementation
+
+Otherwise validate the structured artifact and locally confirm that every
+reviewed design obligation has an owner and an independently verifiable
+implementation boundary. The task stage can pass without a review subagent.
 
 Default max rounds: `5` for each stage. A user-supplied limit applies to each
 stage unless the user scopes it to a specific stage. Each initial review and

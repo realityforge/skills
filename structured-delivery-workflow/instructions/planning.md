@@ -153,11 +153,12 @@ The task breakdown is complete when:
 8. Complete the implementation design gate, then run the built-in design
    review before creating the detailed task breakdown.
 9. Complete the detailed task breakdown gate, validate structured artifacts,
-   then run the built-in task review.
+   then run the built-in task review when its branch in
+   `review-and-approval.md` applies; otherwise perform its local coverage check.
 10. When a finding changes an earlier stage, reconcile every later artifact and
     re-review only stages whose obligations or validation risk materially
     changed.
-11. After all stage reviews pass, complete the plan-acceptance step in
+11. After all required stage reviews pass, complete the plan-acceptance step in
     `review-and-approval.md` before implementation.
 
 ## Open Questions

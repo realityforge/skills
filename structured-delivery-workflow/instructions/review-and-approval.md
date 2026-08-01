@@ -33,25 +33,29 @@ inferred.
 
 For each stage:
 
-1. Spawn one clean read-only review subagent; reuse it only for additional
+1. Run one author preflight against the stage completion criteria and matching
+   rubric. Patch evident omissions, contradictions, and unsupported claims;
+   stop after this pass rather than searching for refinements. This preflight
+   is not a review round.
+2. Spawn one clean read-only review subagent; reuse it only for additional
    rounds of the same stage.
-2. Pass the current stage artifact, its reviewed upstream artifacts, repository
+3. Pass the current stage artifact, its reviewed upstream artifacts, repository
    root, focused evidence paths, the current stage's remaining round limit, and
    the matching rubric below. Do not pass downstream artifacts or full
    conversation context unless needed.
-3. Ask for findings classified as `Block` or `Carry`, plus a compact
+4. Ask for findings classified as `Block` or `Carry`, plus a compact
    `Scorecard`; `Findings: none` means the stage review passes.
-4. Assess each finding against repository, plan, and user evidence and the
+5. Assess each finding against repository, plan, and user evidence and the
    materiality gate below. Accept a blocking finding only when evidence supports
    its pre-implementation risk; otherwise carry or reject it. Narrow over-broad
    fixes.
-5. Patch accepted or partially accepted blocking issues in the earliest
+6. Patch accepted or partially accepted blocking issues in the earliest
    affected stage. Carry implementation-local findings into the relevant later
    stage or task without failing the current stage or triggering re-review. Do
    not patch rejected findings.
-6. Reconcile downstream artifacts already present and validate edited
+7. Reconcile downstream artifacts already present and validate edited
    structured files where practical.
-7. Re-review after material stage edits until no blocking findings remain or
+8. Re-review after material stage edits until no blocking findings remain or
    the current stage's round limit is reached.
 
 Treat every additional round for the same stage as a focused confirmation, not

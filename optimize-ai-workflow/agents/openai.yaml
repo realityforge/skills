@@ -1,0 +1,5 @@
+interface:
+  display_name: "Optimize AI Workflow"
+  short_description: "Optimize an ongoing or completed conversation by identifying workflow friction, unnecessary retries, backtracking, ambiguity, context waste, or process gaps."
+policy:
+  allow_implicit_invocation: false

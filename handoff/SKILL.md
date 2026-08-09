@@ -5,7 +5,7 @@ description: Distill the current task into minimal, high-value context for anoth
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
 
-Create a requested new thread or subagent with the handoff as initial context. Otherwise write it to the user-specified path or `mktemp -t handoff-XXXXXX.md`; report the path.
+Create a requested new thread or subagent with the handoff as initial context. Otherwise write it to the user-specified path, project local `tmp/` dir or `mktemp -t handoff-XXXXXX.md` in that order of priority; report the path.
 
 Suggest the skills to be used, if any, by the next session.
 

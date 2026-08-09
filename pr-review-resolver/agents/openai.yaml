@@ -1,0 +1,5 @@
+interface:
+  display_name: "PR Review Resolver"
+  short_description: "Address and resolve PR review threads"
+policy:
+  allow_implicit_invocation: false

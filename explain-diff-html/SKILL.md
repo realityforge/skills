@@ -10,6 +10,7 @@ Please make me a rich, interactive explanation of the specified code change.
 
 It should have these sections:
 
+- Executive overview: Overview that is understandable without reading the rest of the report and short enough to read in about one minute. Explains essential project-specific terms, impacts and risks
 - Background: Explain the existing system relevant to this change. (You should broadly explore surrounding code for this.) We don't know how much the reader already knows, so include a deep background for beginners (note that it can be skipped if the reader is already familiar), and then a more narrow background directly relevant to the change.
 - Intuition: Explain the core intuition for the code change. The focus here is to explain the essence, not the full details. Use concrete examples with toy data. Use figures and diagrams liberally.
 - Code: Do a high-level walkthrough of the changes to the code. Group/order the changes in an understandable way.

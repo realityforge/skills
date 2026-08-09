@@ -29,3 +29,5 @@ Format:
       Before saving the file, scan each code block in the HTML source and confirm its CSS includes
       `white-space: pre` or `pre-wrap`.
 - Use callouts for key concepts or definitions, important edge cases, etc.
+
+If any of the `docs/(adr|glossary|specs|deferred)` dirs exist then use the $domain-modeling skill during explanation. Add a glossary at the end for any domain or project specific terms.

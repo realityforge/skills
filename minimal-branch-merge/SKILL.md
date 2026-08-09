@@ -1,6 +1,7 @@
 ---
 name: minimal-branch-merge
 description: Merge a fetched source branch into the current branch, defaulting to the remote default branch, and retain only the delta required by the current branch's mission.
+disable-model-invocation: true
 ---
 
 On the current branch, merge the requested source or the remote default. The result must be the smallest mission-required diff from that source.

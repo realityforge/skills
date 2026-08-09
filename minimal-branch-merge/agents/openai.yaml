@@ -1,0 +1,5 @@
+interface:
+  display_name: "Minimal Branch Merge"
+  short_description: "Fetch and merge branch and and retain only the delta required by the current branch's mission"
+policy:
+  allow_implicit_invocation: false

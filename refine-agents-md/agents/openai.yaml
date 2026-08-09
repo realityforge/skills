@@ -1,0 +1,5 @@
+interface:
+  display_name: "Refine AGENTS.md"
+  short_description: "Refactor AGENTS.md to improve clarity, conciseness, and organization."
+policy:
+  allow_implicit_invocation: false

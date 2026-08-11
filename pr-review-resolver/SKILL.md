@@ -5,9 +5,9 @@ metadata:
   short-description: Address and resolve PR review threads
 ---
 
-Use `github:gh-address-comments` for review work and `commit` before committing. Treat invocation as authorization to handle every unresolved thread and perform the requested GitHub writes.
+Use `github:gh-address-comments` for review work and `$commit` before committing. Treat invocation as authorization to handle every unresolved thread and perform the requested GitHub writes.
 
-Invoke grill-me if further user context is needed.
+Invoke `$grill-me` if further user context is needed.
 
 - Addressed: commit and push the change, react 👍 to the initial comment, reply with the commit SHA and a concise description, then resolve.
 - Not addressed: react 👎 to the initial comment, reply with the reason when useful, then resolve.

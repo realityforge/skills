@@ -2,4 +2,4 @@ interface:
   display_name: "Commit"
   short_description: "Use before creating git commits"
 policy:
-  allow_implicit_invocation: trye
+  allow_implicit_invocation: true

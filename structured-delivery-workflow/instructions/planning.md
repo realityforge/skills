@@ -1,91 +1,107 @@
 # Planning
 
-Use this instruction when creating or revising persistent planning artifacts.
+Create the complete reviewable plan from the confirmed conversation context,
+then obtain reviewer and human approval before implementation.
 
-Persistent planning has three ordered stages. Begin at the earliest stage
-affected by the work and complete its gate and review before loading the next
-stage. Reconcile every affected later stage when revising an existing plan.
-Apply the same stage boundaries when repository convention uses different
-files or sections than the default plan tree.
+## 1. Create the tree
 
-## Default Plan Artifacts
+Read applicable repository instructions and inspect the worktree. Choose an
+unused `plans/<initiative>/` path. An existing path is never a merge target;
+use it only when the user explicitly named or requested resumption of that
+paused plan.
 
-Use existing repository conventions when present. Otherwise use:
+Load these templates only while creating their artifact:
 
-```
-plans/<initiative>/
-  00-requirements.md
-  10-implementation-plan.md
-  20-task-board.yaml
-```
+- `../templates/SPEC.md`
+- `../templates/TASKMAP.md`
+- `../templates/TASK.md`
 
-Create optional artifacts only when their branch applies:
+## 2. Write `SPEC.md`
 
-- `01-*-deep-dive.md` for focused requirements that would overload the baseline
-- `30-compatibility-matrix.md` for parity or migration work
-- `30-output-contract.md` for CLI or API output contracts
-- `40-test-strategy.md` for complex or multi-environment validation
-- `50-implementation-issues.md` after follow-up issues require persistent state
+Synthesize the completed `$grill-me` conversation and verified repository
+facts. Do not interview the user again. Reopen a settled point only when
+current evidence contradicts it.
 
-Load a template only when creating its corresponding artifact:
+The spec is complete when it has:
 
-- `templates/requirements.md`
-- `templates/requirements-deep-dive.md`
-- `templates/implementation-plan.md`
-- `templates/task-board.yaml`
+- the problem, required outcome, scope boundaries, and constraints
+- solution-independent requirements and checkable acceptance criteria
+- the technical and testing decisions needed to preserve shared understanding
+- every significant decision with its rationale, impact, and what the user
+  should verify
+- no unresolved choice that could materially change delivered behavior
 
-## Stage Router
+Use user stories only when actors or distinct observable journeys are clearer
+that way. Prefer stable modules and contracts over file paths or code snippets.
+Include a decision-rich prototype fragment only when prose would lose the
+decision it encodes.
 
-Read only the instruction for the active stage:
+If repository evidence materially conflicts with the confirmed understanding,
+surface the evidence and required user decision before continuing.
 
-- requirements are absent, changed, or contradicted by evidence: read
-  `planning-requirements.md`
-- reviewed requirements exist and implementation design is absent or affected:
-  read `planning-implementation-design.md`
-- reviewed implementation design exists and task ownership, execution order,
-  or task-level validation is absent or affected: read
-  `planning-task-breakdown.md`
+## 3. Derive tasks directly from the spec
 
-## Procedure
+Create one task file per tracer-bullet vertical slice. Each task delivers and
+validates a narrow end-to-end behavior and fits one fresh context window.
+Number tasks in topological order, with blockers before dependants.
 
-1. Read local instructions and active planning conventions.
-2. Check worktree state before editing.
-3. Identify the active planning stage, read its routed instruction, and gather
-   only enough code and repository context to complete it.
-4. Resolve evidence-answerable questions yourself.
-5. Ask one user question at a time only for true blockers.
-6. Complete the active stage gate and its review transition.
-7. Load the next stage instruction only after the current stage passes and
-   another stage is required.
-8. When a finding changes an earlier stage, reconcile every later artifact and
-   re-review only stages whose obligations or validation risk materially
-   changed.
-9. After all required stage reviews pass, complete the plan-acceptance step in
-   `review-and-approval.md` before implementation.
+Use expand-migrate-contract tasks for a wide mechanical refactor only when a
+vertical slice cannot remain green. Prefactoring that makes the change easy is
+an earlier task with its own observable acceptance boundary.
 
-## Open Questions
+`tasks/TASKMAP.md` is the implementation plan. It owns the task index,
+dependency edges, execution frontier of all unblocked pending tasks, status,
+and cross-task sequencing notes.
+Each task file owns its delivered behavior, spec coverage, blockers, acceptance
+criteria, validation, and evidence. Supporting files are not additional
+requirements sources.
 
-Track open questions only when real uncertainty remains after repository
-inspection.
+The task tree is complete when:
 
-For persistent plan trees, use stable `Q-*` IDs and record:
+- every requirement and acceptance criterion has task ownership
+- every task is independently demonstrable or verifiable
+- dependencies are necessary and acyclic
+- the lowest-numbered unblocked pending task can be selected mechanically
+- cross-cutting tests, documentation, migration, rollout, and cleanup work has
+  an owner
 
-- status (`open` or `resolved`)
-- question
-- context
-- options and tradeoffs
-- recommended default
-- user decision when resolved
-- artifacts updated
+## 4. Run planning review
 
-Do not finalize a reviewable plan while a blocking question is still open.
-Non-blocking assumptions may remain if they are labeled and have a recommended
-default.
+Perform one author preflight against the completion criteria above. Then create
+one clean, read-only planning reviewer and read
+`../review/planning-review.md`. The first round reviews `SPEC.md`, `TASKMAP.md`,
+and every task file together. Continue later rounds with that same reviewer and
+only the prior findings, resulting edits, and affected surfaces.
 
-## Plan Changes
+The planning limit is three total reviewer rounds unless the user sets or
+extends another limit. Each reviewer attempt consumes one round. Assess every
+finding against the conversation, repository, and plan; make the narrowest
+evidence-backed correction. A material spec change requires reconciliation of
+the task map and affected task files.
 
-When scope, sequencing, risk, or validation expectations change:
+The review passes only on `Findings: none`. If blocking findings remain at the
+limit, ask whether to extend it. Do not substitute another reviewer or present
+the plan as approved.
 
-- update the active planning state in the same iteration if one exists
-- keep the old decision visible only when it matters for audit or future review
-- avoid long decision logs for routine implementation discoveries
+Record reviewer identity, round count, and result in `TASKMAP.md`.
+
+## 5. Obtain human approval
+
+After planning review passes, give the user:
+
+- links to `SPEC.md` and `TASKMAP.md`
+- a concise task sequence
+- every significant decision, its impact, and what the user should verify
+- planning-review rounds and result
+
+Ask for explicit approval. Apply requested changes and re-review with the same
+reviewer when they materially affect requirements, decisions, coverage,
+sequencing, or validation.
+
+After approval, record the approval basis in `TASKMAP.md`, set its status to
+`approved`, validate the plan links and task graph, and commit the exact active
+plan tree without staging unrelated changes. Stop before implementation if the
+approved-plan commit fails.
+
+Planning is complete when the approved plan exists in git history and the
+worktree contains that committed version.

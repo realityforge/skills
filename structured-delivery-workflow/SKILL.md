@@ -1,41 +1,60 @@
 ---
 name: structured-delivery-workflow
-description: Persistent gated workflow for high-risk engineering delivery.
+description: Plan, approve, implement, review, and close risky engineering work through a temporary committed plan tree.
 disable-model-invocation: true
 ---
 
 # Structured Delivery Workflow
 
-Use a persistent plan tree to preserve reviewed requirements, implementation
-design, task state, and validation evidence across risky or multi-threaded
-delivery.
+Deliver from a completed `$grill-me` session through a temporary, auditable plan
+tree.
 
-## Guardrails
+## Entry gate
 
-- Identify the active plan tree before editing files under `plans/`, and scope
-  every plan edit to that tree.
-- Read only the routed instruction for the current stage and the context it
-  points to. Load a template only when creating its corresponding artifact.
+Confirm that the current conversation contains the user's explicit confirmation
+of shared understanding from `$grill-me`. If it does not, stop and direct the
+user to `$grill-me`; this skill does not run its own interview.
 
-## Entry
+Create a new plan tree for every invocation. Modify an existing tree only when
+the user explicitly asks to resume that paused plan. Resolve the exact active
+tree before every plan edit, commit, or deletion.
 
-Read `instructions/existing-plan-implementation.md` when implementing from an
-accepted plan. Otherwise read `instructions/planning.md` to create or revise
-the plan.
+## Plan tree
 
-## Stage Router
+Unless applicable repository instructions require another location, use:
 
-- Updating persistent task state: read `instructions/task-tracking.md`.
-- Reviewing a persistent planning stage, asking for user review, or accepting a
-  plan: read `instructions/review-and-approval.md`.
-- Handling post-implementation issues or reviewing implementation outcomes:
-  read `instructions/implementation-review.md`.
-- A domain term, qualifying adopted decision, or user-deferred question settles,
-  or durable knowledge must be promoted before plan cleanup: read
-  `instructions/knowledge-promotion.md`.
-- Removing completed plan artifacts: read `instructions/plan-cleanup.md`.
-- Preparing the final response: read `instructions/closeout.md`.
+```text
+plans/<initiative>/
+  SPEC.md
+  tasks/
+    TASKMAP.md
+    T01-<slug>.md
+    T02-<slug>.md
+```
 
-## Output Style
+Other files inside the active tree are temporary evidence or orchestration
+artifacts. The whole tree is removed at closeout.
 
-- Prefer links to planning files over pasted artifacts.
+## Stage router
+
+- Creating a plan, revising an unapproved plan, or materially replanning:
+  read `instructions/planning.md`.
+- Implementing an approved plan or continuing implementation review: read
+  `instructions/implementation.md`.
+- Closing work whose implementation review passed: read
+  `instructions/closeout.md`.
+
+When explicitly resuming, read `tasks/TASKMAP.md` first and route from its
+status.
+
+## Reviewer identities
+
+Use one read-only planning reviewer for all planning rounds and one fresh
+read-only implementation reviewer for all implementation rounds. Continue a
+phase's rounds with its existing reviewer. If that reviewer cannot continue,
+report the incomplete gate; another reviewer does not substitute for it.
+
+## Output
+
+Link to plan artifacts while they exist. State significant decisions and their
+impacts plainly at human review and closeout.

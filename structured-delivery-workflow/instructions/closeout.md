@@ -1,29 +1,45 @@
 # Closeout
 
-Use this instruction before the final response.
+Close only after implementation review reports `Findings: none`.
 
-## All Work
+## Final knowledge sweep
 
-- Run the strongest practical validation for the changed scope.
-- Inspect the diff or changed files.
-- Verify structured planning files parse before cleanup when applicable.
-- Run the requirements-first implementation review when active plan artifacts
-  exist.
-- Run the knowledge-promotion sweep and prepare its closeout record before
-  removing active plan artifacts.
-- Remove temporary active plan artifacts according to the cleanup policy.
-- Deliver the prepared closeout record in the pull request, issue, repository
-  report, or final response selected during knowledge promotion.
-- Report validation commands and outcomes.
-- Report uncommitted work or skipped verification, if any.
+When any `docs/adr/`, `docs/glossary/`, `docs/specs/`, or `docs/deferred/`
+directory exists, use `$domain-modeling` once more. Classify reviewer-driven
+changes and any qualifying durable conclusion missed before review. Validate
+every changed canonical artifact. A failed required promotion or validation
+leaves the plan tree intact and blocks closeout.
 
-## Persistent Plan Tree
+## Cleanup gate
 
-Also verify:
+Before deletion, verify from repository and plan evidence that:
 
-- no in-scope task remains pending unexpectedly
-- completed tasks do not have stale `commit.hash: pending`
-- review/approval state matches what actually happened
-- durable knowledge has been promoted or classified as temporary plan state
-- the active plan tree was removed, retained by explicit policy, or its blocker
-  is reported
+- every task is complete
+- task-local and full-scope validation passed
+- implementation review passed and its round count is recorded
+- qualifying durable knowledge is promoted and validated when domain
+  directories exist
+- the approved plan and implementation updates exist in git history
+
+Resolve the exact active plan path again. Inspect its contents, including
+arbitrary temporary files, then delete that tree and no other plan tree.
+
+Commit the deletion as the final closeout commit, together with any canonical
+artifact changes from the final knowledge sweep. Do not stage unrelated work.
+The deleted tree remains auditable through its earlier commits.
+
+If deletion or its commit fails, report the exact remaining worktree state and
+do not claim closeout.
+
+## Handoff
+
+Report:
+
+- accepted outcome and delivered result
+- significant decisions and their impacts
+- implementation and review rounds and final results
+- validation commands and outcomes
+- promoted canonical artifacts, when any
+- approved-plan and closeout commits
+- confirmation that the active plan tree was removed
+- residual risk, skipped checks, or unrelated uncommitted work

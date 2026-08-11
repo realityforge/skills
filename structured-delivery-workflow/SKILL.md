@@ -2,11 +2,6 @@
 name: structured-delivery-workflow
 description: Persistent gated workflow for high-risk engineering delivery.
 disable-model-invocation: true
-license: Apache-2.0
-compatibility: Works best in repositories that allow markdown/yaml planning artifacts and test/build execution.
-metadata:
-  author: realityforge
-  version: "4.0"
 ---
 
 # Structured Delivery Workflow

@@ -1,0 +1,5 @@
+interface:
+  display_name: "PR Action Error Resolver"
+  short_description: "Resolve the latest PR Actions failure"
+policy:
+  allow_implicit_invocation: false

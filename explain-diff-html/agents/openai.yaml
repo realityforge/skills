@@ -2,4 +2,4 @@ interface:
   display_name: "Explain Diff HTML"
   short_description: "Use when the user asks for a rich explanation of a code change, diff, branch, or PR. Produces HTML output."
 policy:
-  allow_implicit_invocation: trye
+  allow_implicit_invocation: true

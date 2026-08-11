@@ -2,3 +2,5 @@ interface:
   display_name: "Structured Delivery Workflow"
   short_description: "Separate requirements, design, tasks, implementation, and review"
   default_prompt: "Use $structured-delivery-workflow to run requirements, design, task, implementation, review, knowledge-promotion, and closeout stages for this work."
+policy:
+  allow_implicit_invocation: false

@@ -42,4 +42,8 @@ Report:
 - promoted canonical artifacts, when any
 - approved-plan and closeout commits
 - confirmation that the active plan tree was removed
+- ready-for-review pull request URL, check status, and the pending human Merge action when the branch is published
 - residual risk, skipped checks, or unrelated uncommitted work
+
+Closeout is complete when the published pull request is ready for a human to
+merge. Passing checks do not extend closeout into merging the pull request.

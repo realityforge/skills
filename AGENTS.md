@@ -24,7 +24,7 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 
 ## Scope And Design
 
-- Make the smallest coherent change that cleanly solves the current problem.
+- Fight scope creep. Honor the dev's intent in both a minimal and realistic fashion.
 - Prefer existing patterns; avoid new abstractions, helpers, frameworks, or broad rewrites unless they remove real complexity.
 - Do not add unrelated features, refactors, comments, docstrings, or types.
 - Propose a simpler solution when it solves the problem.

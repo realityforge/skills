@@ -7,7 +7,6 @@ Review changes in the current branch, or in the scope the user specifies. Only t
 
 Code must stand on its own. If a change only makes sense to someone who watched it happen (this conversation, this PR), it is overfitted. Write for the reader who arrives with no history.
 
-
 - Read AGENTS.md / nearby code. Match existing conventions.
 - Apply YAGNI. Remove abstractions when they have one caller.
 - Preserve behavior exactly.

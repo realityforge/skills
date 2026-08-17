@@ -38,7 +38,7 @@ Write one when any of these is true:
 ### What does _not_ qualify
 
 - Material that was merely covered. Coverage is not learning. Wait for evidence.
-- Anything already captured tersely in [[GLOSSARY.md]] as a term definition. Don't duplicate.
+- A term definition already owned by `docs/glossary/`. Record only the demonstrated understanding and why it changes future teaching.
 - Session-by-session activity logs. Learning records are not a journal — they are decision-grade insights.
 
 ## Supersession

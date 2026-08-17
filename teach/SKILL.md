@@ -12,12 +12,14 @@ The user has asked you to teach them something. This is a stateful request - the
 Treat the current directory as a teaching workspace. The state of their learning is captured in this directory in several files:
 
 - `MISSION.md`: A document capturing the _reason_ the user is interested in the topic. This should be used to ground all teaching. Use the format in [MISSION-FORMAT.md](MISSION-FORMAT.md).
-- `./reference/*.html`: A directory of reference materials. These are the compressed learnings from the lessons - cheat sheets, reference algorithms, syntax, yoga poses, glossaries. They are the raw units of learning. They should be beautiful documents which print out well, and are designed for quick reference.
+- `./reference/*.html`: A directory of reference materials. These are the compressed learnings from the lessons - cheat sheets, reference algorithms, syntax, yoga poses. They are the raw units of learning. They should be beautiful documents which print out well, and are designed for quick reference.
 - `RESOURCES.md`: A list of resources which can be explored to ground your teaching in contextual knowledge, or to acquire knowledge and wisdom. Use the format in [RESOURCES-FORMAT.md](RESOURCES-FORMAT.md).
 - `./learning-records/*.md`: A directory of learning records, which capture what the user has learned. These are loosely equivalent to architectural decision records in software development - they capture non-obvious lessons and key insights that may need to be revised later, or drive future sessions. These should be used to calculate the zone of proximal development. They are titled `0001-<dash-case-name>.md`, where the number increments each time. Use the format in [LEARNING-RECORD-FORMAT.md](LEARNING-RECORD-FORMAT.md).
+- `./docs/glossary/*.md`: The canonical language for the subject. Use the `domain-modeling` glossary workflow when consequential terminology emerges or competing terms need resolution.
 - `./lessons/*.html`: A directory of lessons. A **lesson** is a single, self-contained HTML output that teaches one tightly-scoped thing tied to the mission. This is the primary unit of teaching in this workspace.
 - `./assets/*`: Reusable **components** shared across lessons. See [Assets](#assets).
 - `NOTES.md`: A scratchpad for you to jot down user preferences, or working notes.
+- `./docs/anki.md`: Optional workspace-specific Anki configuration and collection contract. Its presence means persistent retrieval is enabled.
 
 ## Philosophy
 
@@ -43,6 +45,14 @@ Fluency can give the user an illusory sense of mastery, but storage strength is 
 - Using retrieval practice (recall from memory)
 - Spacing (distributing practice over time)
 - Interleaving (mixing up different but related topics in practice - for skills practice only)
+
+### Persistent retrieval
+
+When the user opts into Anki or `docs/anki.md` exists, read [ANKI-WORKFLOW.md](ANKI-WORKFLOW.md) before creating, updating, moving, or auditing cards. Promote a concept only after the learner demonstrates understanding. Persistent retrieval work is complete only after the live collection passes the workflow's verification checks.
+
+## Learner-facing writing
+
+Use the `humanize` skill when writing or revising lessons, reference material, learning records, glossary definitions, or persistent-retrieval prompts.
 
 ## Lessons
 
@@ -131,9 +141,12 @@ Some learning topics lend themselves to reference:
 - Algorithms and flowcharts for processes
 - Yoga poses and sequences for yoga
 - Exercises and routines for fitness
-- Glossaries for any topic with its own nomenclature
 
-Glossaries, in particular, are an essential reference. Once one is created, it should be adhered to in every lesson.
+## Domain Language
+
+When subject-specific terminology becomes consequential, ambiguous, or contested, use the `domain-modeling` glossary workflow. Resolve the language when the course needs a stable term, then use that canonical spelling in lessons, reference material, learning records, and retention prompts. Learner demonstration is not a prerequisite for terminology consistency.
+
+Glossaries define the subject's language. Learning records capture what the learner has demonstrated. Anki selects what the learner should continue retrieving. Keep those responsibilities separate.
 
 ## `NOTES.md`
 

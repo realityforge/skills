@@ -4,3 +4,6 @@ codex-primary-runtime
 # Idea project configs
 /.idea/
 skills.iml
+
+# Ignore any compiled python files
+**/__pycache__/

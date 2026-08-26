@@ -1,6 +1,6 @@
 ---
 name: pull-request-descriptions
-description: Write or revise pull request and merge request description.
+description: "Pull requests (PRs) and merge requests: use whenever creating or publishing one, or drafting or revising its description, body, or PR message, including as a step in another workflow."
 ---
 
 # Pull Request Descriptions

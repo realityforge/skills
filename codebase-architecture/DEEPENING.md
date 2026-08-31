@@ -18,7 +18,7 @@ evidenced in current code rather than inferred from file shape or naming.
   inside the new Implementation.
 - **Local-substitutable**: a real local stand-in can exercise production
   behavior. Keep the Seam internal unless callers select it.
-- **Remote and owned**: define the narrow port required by the deep Module;
+- **Remote and owned**: define the narrow Interface owned by the deep Module;
   production and in-memory Adapters exercise the same contract.
 - **External**: isolate the third-party contract behind the narrowest owned
   Interface and use a faithful test Adapter.

@@ -62,6 +62,17 @@ inside one Module rather than across its callers.
   that Interface; focused internal tests may cover hazardous algorithms without
   becoming caller contracts.
 
+## External seams
+
+- When a Module depends on remote or third-party behavior, the Module owns the
+  narrow Interface describing the outcomes, effects, and failures it requires.
+  Application assembly selects the Adapter and manages its lifecycle.
+- Adapters translate provider, protocol, transport, persistence, and framework
+  details into that Interface. Include those details only when callers must
+  deliberately depend on them.
+- Adapt external invocations into a Module's existing Interface. Keep
+  transport-specific behavior inside the Adapter.
+
 Finish only when the Module's responsibility and complete Interface are clear,
 its hidden complexity earns Leverage and Locality, every Seam has demonstrated
 variation, and representative callers, tests, dependencies, and repository

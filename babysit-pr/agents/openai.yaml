@@ -1,0 +1,5 @@
+interface:
+  display_name: "Babysit PR"
+  short_description: "Monitor the current PR until it is merged"
+policy:
+  allow_implicit_invocation: false

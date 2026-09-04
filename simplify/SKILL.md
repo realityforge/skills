@@ -19,7 +19,7 @@ Code must stand on its own. If a change only makes sense to someone who watched 
   - If it is possible to cut a word out, always cut it out.
   - Never use the passive where you can use the active.
   - Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
-  - The exception is if any of the `docs/(adr|glossary|specs|deferred)` dirs exist then use the $domain-modeling skill and associated glossary.
+  - The exception is if any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists, then use the $domain-modeling skill and associated glossary.
 
 ### Comments
 

@@ -10,8 +10,7 @@ Use `$codebase-architecture` for the shared vocabulary and design discipline.
 Read repository instructions and project design language before judging the
 architecture; project terms specialize the shared language.
 
-If any of the `docs/(adr|glossary|specs|deferred)` dirs exist then use the
-`$domain-modeling` skill.
+If any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists then use the $domain-modeling skill.
 
 This skill diagnoses opportunities. Keep the scan and report read-only. A
 chosen candidate proceeds through an explicit `$grill-me` session before any

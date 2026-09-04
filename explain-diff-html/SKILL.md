@@ -26,4 +26,4 @@ Format:
 - Don't use ASCII diagrams. Use simple HTML designs for your diagrams, HTML lists for lists of things, etc. For complex diagrams feel free to use SVG or $mermaid-diagrams skill.
 - Use callouts for key concepts or definitions, important edge cases, etc.
 
-If any of the `docs/(adr|glossary|specs|deferred)` dirs exist then use the $domain-modeling skill during explanation. Add a glossary at the end for any domain or project specific terms.
+If any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists then use the $domain-modeling skill. Add a glossary at the end for any domain or project specific terms.

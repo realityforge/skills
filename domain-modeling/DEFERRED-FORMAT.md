@@ -21,7 +21,7 @@ and wait for agreement.
 Use:
 
 ```text
-docs/deferred/neutral-subject.md
+<context-root>/deferred/neutral-subject.md
 ```
 
 Create the directory lazily. Use a short kebab-case subject that remains neutral about the answer:
@@ -70,7 +70,7 @@ A deferred issue may identify options that delay could close. Any present work o
 ## Capture and update
 
 1. Check the relevant glossary, design language, ADRs, plans, and code needed to confirm that the question remains unresolved and does not contradict an adopted decision.
-2. Search the applicable `docs/deferred/` directory for the same question.
+2. Search the applicable context's `deferred/` directory for the same question.
 3. Update an existing issue with genuinely new context instead of duplicating it. Preserve its question; split a new issue when the concern can be reconsidered independently.
 4. Create the file only after the user has explicitly deferred the question or accepted the agent's proposal.
 5. Link from the originating plan or design document only when the link explains a scope boundary, omitted decision, or future dependency.

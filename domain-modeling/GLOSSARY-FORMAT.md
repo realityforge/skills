@@ -1,6 +1,7 @@
 # Domain Glossary Format
 
-Domain terminology lives under `docs/glossary/`. The directory is the single canonical location; create it lazily when the first term is resolved.
+Domain terminology lives under `<context-root>/glossary/`. The directory is the context's canonical location; create it
+lazily when the first term is resolved.
 
 ## Structure
 
@@ -30,7 +31,7 @@ _Avoid_: Client, buyer, account
 When independently navigable subject areas emerge, move their terms into topic files:
 
 ```text
-docs/glossary/
+<context-root>/glossary/
 ├── README.md
 ├── ordering.md
 ├── billing.md
@@ -86,7 +87,7 @@ A term heading supplies its GitHub-style Markdown fragment: `### Interactive Aut
 
 ## Updating the glossary
 
-1. Search `docs/glossary/` for the term, its synonyms, and related concepts.
+1. Search the applicable context's `glossary/` for the term, its synonyms, and related concepts.
 2. Select the existing topic that owns its core meaning.
 3. Resolve contradictions with documented language or code before editing.
 4. Probe relationships with concrete edge-case scenarios.

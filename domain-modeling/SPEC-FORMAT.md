@@ -1,7 +1,7 @@
 # Specification Format
 
-Specifications live at `docs/specs/<kebab-case-subject>.md`. Create `docs/specs/` lazily. Each file owns one coherent
-contract; split requirements that can change independently.
+Specifications live at `<context-root>/specs/<kebab-case-subject>.md`. Create the owning context's `specs/` lazily. Each
+file owns one coherent contract; split requirements that can change independently.
 
 A specification records current, durable, verifiable requirements that survive implementation changes and the deletion
 of delivery plans.
@@ -71,7 +71,8 @@ Complete each gate before advancing to the next.
 
 1. Read the relevant glossary, ADRs, existing specifications, plans, tests, and code needed to establish current intent
    and behavior.
-2. Search `docs/specs/` for an existing owner and update it instead of creating an overlapping specification.
+2. Search the applicable context's `specs/` for an existing owner and update it instead of creating an overlapping
+   specification.
 3. When updating an existing specification, inspect its relevant history for material deliberately removed, relocated,
    or superseded.
 

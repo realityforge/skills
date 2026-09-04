@@ -1,8 +1,8 @@
 # ADR Format
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+ADRs live in `<context-root>/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
 
-Create the `docs/adr/` directory lazily — only when the first ADR is needed.
+Create the owning context's `adr/` directory lazily — only when its first ADR is needed.
 
 ## Template
 
@@ -16,8 +16,8 @@ Keep the ADR to the shortest text that records the decision and its rationale.
 
 ## Lifecycle
 
-Create an ADR when the decision is adopted. Files in `docs/adr/` are the currently adopted architectural decisions;
-repository history owns chronology.
+Create an ADR when the decision is adopted. Files in the owning context's `adr/` are its currently adopted
+architectural decisions; repository history owns chronology.
 
 When a later decision replaces an ADR, record the replacement and its rationale, update every reference to describe the
 current decision, then delete the obsolete ADR. Replacement is complete when the current rationale remains discoverable,
@@ -47,7 +47,7 @@ decision and why; the plan owns how, sequencing, evidence, and verification.
 
 ## Numbering
 
-Scan `docs/adr/` for the highest existing number and increment by one.
+Scan the owning context's `adr/` for the highest existing number and increment by one.
 
 ## When to offer an ADR
 
@@ -74,7 +74,7 @@ If a decision is easy to reverse, skip it — you'll just reverse it. If it's no
 
 1. Read the relevant glossary, specifications, ADRs, design documents, plans, and code needed to establish the current
    choice and rationale.
-2. Search `docs/adr/` for an existing owner or a decision this choice replaces.
+2. Search the applicable context's `adr/` for an existing owner or a decision this choice replaces.
 3. Apply all three qualification criteria and separate independently changeable decisions.
 4. Use the next sequential number when creating an ADR.
 5. Link every plan that expands the decision.

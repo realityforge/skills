@@ -14,4 +14,4 @@ Finding *facts* is your job, never the user's. When a frontier question needs a 
 
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
 
-If any of the `docs/(adr|glossary|specs|deferred)` dirs exist then use the $domain-modeling skill.
+If any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists then use the $domain-modeling skill.

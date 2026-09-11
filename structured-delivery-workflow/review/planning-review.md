@@ -41,8 +41,8 @@ when those edits introduced or exposed it.
 Start with `Findings`.
 
 Report only issues that could cause wrong delivered behavior, material rework,
-unsafe execution, missing work, an approval made without a consequential
-impact being visible, or validation that can falsely pass.
+unsafe execution, missing work, a consequential impact absent from the plan, or
+validation that can falsely pass.
 
 Use compact bullets:
 

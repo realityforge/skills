@@ -19,7 +19,7 @@ Before deletion, verify from repository and plan evidence that:
 - implementation review passed and its round count is recorded
 - qualifying durable knowledge is promoted and validated when domain
   directories exist
-- the approved plan and implementation updates exist in git history
+- the committed plan and implementation updates exist in git history
 
 Resolve the exact active plan path again. Inspect its contents, including
 arbitrary temporary files, then delete that tree and no other plan tree.
@@ -40,7 +40,7 @@ Report:
 - implementation and review rounds and final results
 - validation commands and outcomes
 - promoted canonical artifacts, when any
-- approved-plan and closeout commits
+- plan and closeout commits
 - confirmation that the active plan tree was removed
 - ready-for-review pull request URL, check status, and the pending human Merge action when the branch is published
 - residual risk, skipped checks, or unrelated uncommitted work

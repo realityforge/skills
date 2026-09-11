@@ -1,14 +1,14 @@
 # Implementation
 
-Implement the approved frontier sequentially, promote durable knowledge when
+Implement the committed frontier sequentially, promote durable knowledge when
 the repository uses it, and pass one iterative implementation review.
 
 ## Entry
 
 Read the active tree's `tasks/TASKMAP.md`. Verify that:
 
-- status is `approved`, `implementing`, or `implementation-review`
-- the approved plan snapshot exists in git history
+- status is `planned`, `implementing`, or `implementation-review`
+- the current plan snapshot exists in git history
 - the active tree is the exact plan the user asked to execute or resume
 
 Load `SPEC.md`, the task map, and only the active task before implementation.
@@ -37,12 +37,12 @@ For each task:
 Delegate implementation only when the user explicitly requests it. Reviewer
 agents remain read-only.
 
-When implementation evidence invalidates an approved significant decision or
+When implementation evidence invalidates a committed significant decision or
 materially changes scope, stop the task loop. Update `SPEC.md` and every
 affected task artifact, return to `planning.md` for review by the same planning
-reviewer, obtain human reapproval, and commit the revised plan before resuming.
-Local details that preserve approved outcomes and impacts do not reopen
-planning.
+reviewer, follow the selected plan checkpoint, and commit the revised plan
+before resuming. Local details that preserve planned outcomes and impacts do
+not reopen planning.
 
 For the final task, run the strongest practical full-scope gate after its
 task-local validation. Record the full-gate evidence in `TASKMAP.md` before
@@ -74,7 +74,7 @@ workflow does not require a domain-documentation system.
 Create one fresh, clean, read-only implementation reviewer and read
 `../review/implementation-review.md`. Use that same reviewer for every round.
 
-The first round reviews the approved spec against delivered behavior, plan
+The first round reviews the committed spec against delivered behavior, plan
 history, implementation scope, tests, validation evidence, and promoted
 knowledge. Later rounds receive prior findings, their disposition, resulting
 changes, and affected surfaces.
@@ -84,9 +84,10 @@ extends another limit. Each reviewer attempt consumes one round. Verify every
 finding against repository evidence. Fix valid findings at the earliest
 affected level and run focused validation.
 
-If a fix changes approved scope or a significant decision, return to planning,
-review, human approval, and a revised-plan commit before continuing. Otherwise
-update the affected task evidence and commit the fix with its plan-state update.
+If a fix changes planned scope or a significant decision, return to planning,
+review, the selected plan checkpoint, and a revised-plan commit before
+continuing. Otherwise update the affected task evidence and commit the fix with
+its plan-state update.
 
 When domain directories are present and a fix changes durable knowledge, run
 `$domain-modeling` promotion and validation before the next review round.

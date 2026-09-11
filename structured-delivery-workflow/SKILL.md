@@ -1,6 +1,6 @@
 ---
 name: structured-delivery-workflow
-description: Plan, approve, implement, review, and close risky engineering work through a temporary committed plan tree.
+description: Plan, implement, review, and close risky engineering work through a temporary committed plan tree.
 disable-model-invocation: true
 ---
 
@@ -37,9 +37,9 @@ artifacts. The whole tree is removed at closeout.
 
 ## Stage router
 
-- Creating a plan, revising an unapproved plan, or materially replanning:
+- Creating a plan, revising a draft plan, or materially replanning:
   read `instructions/planning.md`.
-- Implementing an approved plan or continuing implementation review: read
+- Implementing a committed plan or continuing implementation review: read
   `instructions/implementation.md`.
 - Closing work whose implementation review passed: read
   `instructions/closeout.md`.
@@ -57,4 +57,4 @@ report the incomplete gate; another reviewer does not substitute for it.
 ## Output
 
 Link to plan artifacts while they exist. State significant decisions and their
-impacts plainly at human review and closeout.
+impacts plainly at any requested plan checkpoint and at closeout.

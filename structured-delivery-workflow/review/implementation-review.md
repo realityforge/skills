@@ -1,6 +1,6 @@
 # Implementation Review
 
-Review delivered behavior against the approved spec before examining task
+Review delivered behavior against the committed spec before examining task
 alignment. Remain read-only and do not create other agents.
 
 ## Inputs
@@ -8,7 +8,7 @@ alignment. Remain read-only and do not create other agents.
 The main agent supplies:
 
 - repository root and exact active plan path
-- approved plan commit and current implementation commit or diff range
+- plan commit and current implementation commit or diff range
 - `SPEC.md`, `TASKMAP.md`, every task file, and canonical artifacts promoted
   from the plan
 - required task-local and full-scope validation

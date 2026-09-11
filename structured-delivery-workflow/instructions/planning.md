@@ -1,9 +1,16 @@
 # Planning
 
-Create the complete reviewable plan from the confirmed conversation context,
-then obtain reviewer and human approval before implementation.
+Create the complete plan from the confirmed conversation context and pass
+planning review. Continue directly to implementation unless the user explicitly
+requested to review the plan first.
 
 ## 1. Create the tree
+
+Record `Plan checkpoint: human-review (pending)` in `TASKMAP.md` only when the
+user explicitly asked to review the plan before implementation; otherwise use
+`Plan checkpoint: automatic (pending planning review)`. Their `$grill-me`
+confirmation supplies the plan's authority but does not by itself request
+another review pause.
 
 Read applicable repository instructions and inspect the worktree. Choose an
 unused `plans/<initiative>/` path. An existing path is never a merge target;
@@ -80,14 +87,22 @@ evidence-backed correction. A material spec change requires reconciliation of
 the task map and affected task files.
 
 The review passes only on `Findings: none`. If blocking findings remain at the
-limit, ask whether to extend it. Do not substitute another reviewer or present
-the plan as approved.
+limit, ask whether to extend it. Do not substitute another reviewer or proceed
+with a plan that has not passed.
 
 Record reviewer identity, round count, and result in `TASKMAP.md`.
 
-## 5. Obtain human approval
+## 5. Finalize the plan
 
-After planning review passes, give the user:
+After planning review passes, follow the selected plan checkpoint.
+
+For `automatic`, record `Plan checkpoint: automatic` and its basis—the
+confirmed `$grill-me` understanding and passing planning review—in
+`TASKMAP.md`, set its status to `planned`, send a non-blocking progress update
+with links to `SPEC.md` and `TASKMAP.md`, and continue without asking for
+approval.
+
+For `human-review`, give the user:
 
 - links to `SPEC.md` and `TASKMAP.md`
 - a concise task sequence
@@ -98,10 +113,12 @@ Ask for explicit approval. Apply requested changes and re-review with the same
 reviewer when they materially affect requirements, decisions, coverage,
 sequencing, or validation.
 
-After approval, record the approval basis in `TASKMAP.md`, set its status to
-`approved`, validate the plan links and task graph, and commit the exact active
-plan tree without staging unrelated changes. Stop before implementation if the
-approved-plan commit fails.
+After approval, record `Plan checkpoint: human-review` and the approval basis
+in `TASKMAP.md`, and set its status to `planned`.
 
-Planning is complete when the approved plan exists in git history and the
+For either checkpoint, validate the plan links and task graph, then commit the
+exact active plan tree without staging unrelated changes. Stop before
+implementation if the plan commit fails.
+
+Planning is complete when the current plan exists in git history and the
 worktree contains that committed version.

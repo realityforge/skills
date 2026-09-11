@@ -1,6 +1,6 @@
 interface:
   display_name: "Structured Delivery Workflow"
-  short_description: "Spec, task map, approval, implementation, and iterative review"
-  default_prompt: "Use $structured-delivery-workflow after $grill-me to plan, approve, implement, review, and close this work."
+  short_description: "Spec, task map, implementation, and iterative review"
+  default_prompt: "Use $structured-delivery-workflow after $grill-me to plan, implement, review, and close this work."
 policy:
   allow_implicit_invocation: false

@@ -24,7 +24,7 @@ Accept an optional pull request URL or number and cadence. Otherwise resolve the
 5. Invoke `$pr-review-resolver` when unresolved review threads exist. Re-fetch the pull request and head afterward. If the resolver pushed a new head, leave its newly triggered validation to the next tick.
 6. Resolve a merge conflict using the conflict procedure below.
 7. Resolve current-head failures using the failure procedure below.
-8. Treat pending, queued, in-progress, missing, neutral, and skipped checks as waiting unless repository evidence makes them blocking. After four ticks with the same head and unchanged waiting state, pause and invoke `$grill-me`.
+8. Treat pending, queued, in-progress, missing, neutral, and skipped checks as waiting unless repository evidence makes them blocking. Continue monitoring long queues; pause and invoke `$grill-me` when evidence shows progress requires user action.
 9. When the pull request is green but awaiting approval, a merge queue, or a human merge, keep monitoring without approving, enqueueing, enabling auto-merge, or merging.
 
 ## Conflict procedure
@@ -49,4 +49,4 @@ Act when GitHub reports conflicting changes or branch protection blocks progress
 
 Pause the heartbeat before every `$grill-me` interview. After the user confirms shared understanding, complete the blocked action and resume the same heartbeat unless the user cancels monitoring.
 
-After every mutation, verify the remote source matches local `HEAD` and the worktree is clean. At the end of every tick, re-check merge state. Keep unchanged reports terse and report actions, blockers, failures, and the final merge explicitly.
+After every mutation, verify the remote source matches local `HEAD` and the worktree is clean. At the end of every tick, re-check merge state. Stay quiet when nothing changed and no user action is needed; report actions, blockers, and failures.

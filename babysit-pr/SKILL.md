@@ -18,7 +18,7 @@ Accept an optional pull request URL or number and cadence. Otherwise resolve the
 ## Monitoring tick
 
 1. Fetch the pull request state, current head SHA, source and base refs, mergeability, unresolved review threads, check runs, classic commit statuses, and relevant diagnostic comments. Bind every action to the current head. Correlate a diagnostic comment through its linked build, status, or commit; age alone is insufficient.
-2. If the pull request is merged, pause the heartbeat and report the verified merge. This is the only successful terminal state.
+2. If merged, pause the heartbeat. Report the verified merge and the impact of actions taken while babysitting. Archive this task when no work remains in it and nothing in the report requires the user's attention. This is the only successful terminal state.
 3. Pause and invoke `$grill-me` when the pull request is closed unmerged, draft, from a fork, lacks verified push access, or has an actionable human conversation comment outside a review thread.
 4. Before modifying files, require a clean worktree and a verified route to the source branch. Fetch and fast-forward a clean source branch that advanced remotely. Pause and invoke `$grill-me` for a dirty or divergent worktree, a wrong branch, or a detached checkout without a safe push target.
 5. Invoke `$pr-review-resolver` when unresolved review threads exist. Re-fetch the pull request and head afterward. If the resolver pushed a new head, leave its newly triggered validation to the next tick.

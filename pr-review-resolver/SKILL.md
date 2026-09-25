@@ -9,7 +9,9 @@ Use available GitHub MCP tools to inspect and address review threads; use `gh` f
 
 Invoke `$grill-me` if further user context is needed.
 
+Verify each bot finding against the current source before changing code.
+
 - Addressed: commit and push the change, react 👍 to the initial comment, reply with the commit SHA and a concise description, then resolve.
-- Not addressed: react 👎 to the initial comment, reply with the reason when useful, then resolve.
+- Not addressed: react 👎 to the initial comment, reply with the reason, then resolve.
 
 Verify all reviewed threads are resolved, the remote branch matches `HEAD`, and the worktree is clean.

@@ -1,6 +1,6 @@
 ---
 name: domain-modeling
-description: Model a project's domain. Use when resolving domain language, recording accepted durable requirements in specifications, recording architectural decisions, deliberately deferring or reconsidering consequential questions, or when another skill needs these artifacts.
+description: Use for essential use cases, domain language, accepted durable requirements, architectural decisions, and deliberately deferred questions; also when another skill needs these artifacts.
 ---
 
 # Domain Modeling
@@ -15,15 +15,15 @@ linking artifacts.
 
 ## Link language
 
-Link the first body use of every glossary-owned term in each specification, ADR, and deferred issue to its canonical
-heading, using the canonical spelling as link text; apply the same rule to references between glossary definitions. Use
-unlinked canonical spelling thereafter. For example:
+Link the first body use of every glossary-owned term in each essential use case, specification, ADR, and deferred issue
+to its canonical heading, using the canonical spelling as link text; apply the same rule to references between glossary
+definitions. Use unlinked canonical spelling thereafter. For example:
 `[Interactive Authentication](../glossary/authentication.md#interactive-authentication)`.
 
 Language use is complete when every glossary-owned term in every affected artifact uses canonical spelling and each
 required first-use link resolves to its owning heading.
 
-After changing a specification, ADR, deferred issue, glossary file, or context configuration, run
+After changing an essential use case, specification, ADR, deferred issue, glossary file, or context configuration, run
 [`scripts/validate_doc_links.py`](./scripts/validate_doc_links.py) against the repository root. It validates artifact
 identities and every local file and heading-fragment target in scope.
 
@@ -35,6 +35,7 @@ Route each conclusion to one owner before writing:
 | --- | --- |
 | Meaning of a domain term | The owning artifact root's `glossary/` |
 | Accepted durable behavior, constraint, or invariant | Specification when it meets specification qualification |
+| How accepted requirements combine to fulfill a user goal | Essential use case when it meets use-case qualification |
 | Adopted architectural or technology choice and why | ADR when it meets the ADR threshold |
 | Consequential unresolved question intentionally postponed | Deferred issue when it meets deferred qualification and the user agrees |
 | Proposed requirement or unresolved current design | Owning design, plan, or backlog |
@@ -59,6 +60,12 @@ Before offering, creating, updating, replacing, or deleting a specification—an
 durable requirement—read [SPEC-FORMAT.md](./SPEC-FORMAT.md) and run its gates in order. Drafting begins only after the
 candidate-classification gate is complete, and specification work ends only after the specification-only diff audit is
 complete.
+
+## Model user tasks
+
+Before offering, creating, updating, replacing, or deleting an essential use case, read
+[USE-CASE-FORMAT.md](./USE-CASE-FORMAT.md). Apply its qualification, ownership, and capture rules. A use case connects
+user intentions to system responsibilities; specifications remain the authority for accepted, verifiable obligations.
 
 ## Defer questions
 

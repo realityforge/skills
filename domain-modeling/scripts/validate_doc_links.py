@@ -22,6 +22,7 @@ ARTIFACT_DIRECTORIES = (
     "adr",
     "deferred",
     "specs",
+    "use-cases",
     "glossary",
 )
 CONTEXT_NAME = re.compile(r"[A-Za-z0-9._-]+")
@@ -352,6 +353,7 @@ def _identity_problems(root: Path, repository_root: Path) -> list[Problem]:
 
     for directory_name, label in (
         ("specs", "specification"),
+        ("use-cases", "essential use case"),
         ("deferred", "deferred issue"),
     ):
         filenames: dict[str, str] = {}

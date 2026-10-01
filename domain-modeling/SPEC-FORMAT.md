@@ -36,7 +36,7 @@ specification requirement.
 
 ## Purpose
 
-<One short paragraph defining scope and linking relevant glossary topics when they exist.>
+<One short paragraph defining scope and linking relevant glossary topics and essential use cases when useful.>
 
 ## Requirements
 
@@ -69,8 +69,8 @@ Complete each gate before advancing to the next.
 
 ### Gate 1: Establish the current contract
 
-1. Read the relevant glossary, ADRs, existing specifications, plans, tests, and code needed to establish current intent
-   and behavior.
+1. Read the relevant glossary, essential use cases, ADRs, existing specifications, plans, tests, and code needed to
+   establish current intent and behavior.
 2. Search the applicable context's `specs/` for an existing owner and update it instead of creating an overlapping
    specification.
 3. When updating an existing specification, inspect its relevant history for material deliberately removed, relocated,

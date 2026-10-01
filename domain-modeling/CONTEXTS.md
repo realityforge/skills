@@ -25,8 +25,8 @@ Each context requires a unique `name` and a repository-relative `root`. `imports
 that this context may reference. Imports are outward, direct, and non-transitive; explicit cycles are valid.
 
 Roots must exist, remain inside the repository, and neither overlap nor contain one another. Each root may contain
-`adr/`, `deferred/`, `specs/`, and `glossary/`; create those directories lazily. The validator treats Markdown below
-those directories as artifact sources. Other files are link targets, not additional artifact sources.
+`adr/`, `deferred/`, `specs/`, `use-cases/`, and `glossary/`; create those directories lazily. The validator treats
+Markdown below those directories as artifact sources. Other files are link targets, not additional artifact sources.
 
 Without this file, the repository is one legacy context: artifacts live below `docs/` and may link anywhere inside the
 repository.
@@ -38,8 +38,8 @@ When none exist, put specialized knowledge in the context that owns the subject 
 knowledge that genuinely spans contexts. Ask the user when the choice remains consequentially ambiguous.
 
 Each conclusion has one canonical owner. Artifact identities are context-local: ADR numbers, specification and deferred
-issue filenames, and glossary terms may repeat in independent contexts. Within one context, ADR numbers and glossary
-terms are unique; specification and deferred issue filenames are case-insensitively unique.
+issue filenames, use-case filenames, and glossary terms may repeat in independent contexts. Within one context, ADR
+numbers and glossary terms are unique; specification, use-case, and deferred issue filenames are case-insensitively unique.
 
 An imported glossary remains a separate vocabulary. Link deliberately to an imported canonical term when using that
 context's concept; an import does not make matching words part of the importing context's glossary.

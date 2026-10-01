@@ -207,6 +207,43 @@ class ValidateDocLinksTest(unittest.TestCase):
         self.assertEqual("", result.stdout)
         self.assertEqual("", result.stderr)
 
+    def test_validates_use_case_links_in_the_legacy_context(self) -> None:
+        self.write("docs/specs/chronology.md", "# Chronology\n")
+        self.write(
+            "docs/use-cases/keep-chronology-consistent.md",
+            "[contract](../specs/chronology.md#chronology)\n"
+            "[missing](../specs/chronology.md#missing)\n",
+        )
+
+        result = self.run_validator()
+
+        self.assertEqual(1, result.returncode)
+        self.assertEqual(
+            "docs/use-cases/keep-chronology-consistent.md:2: anchor does not "
+            "exist: ../specs/chronology.md#missing\n",
+            result.stderr,
+        )
+
+    def test_validates_use_case_links_in_a_configured_context(self) -> None:
+        self.write(
+            ".domain-modeling.toml",
+            'version = 1\n[[contexts]]\nname = "repository"\nroot = "docs"\n',
+        )
+        self.write("docs/specs/chronology.md", "# Chronology\n")
+        self.write(
+            "docs/use-cases/keep-chronology-consistent.md",
+            "[missing](../specs/chronology.md#missing)\n",
+        )
+
+        result = self.run_validator()
+
+        self.assertEqual(1, result.returncode)
+        self.assertEqual(
+            "docs/use-cases/keep-chronology-consistent.md:1: anchor does not "
+            "exist: ../specs/chronology.md#missing\n",
+            result.stderr,
+        )
+
     def test_configured_imports_are_directional_and_context_local(self) -> None:
         self.write(
             ".domain-modeling.toml",
@@ -366,12 +403,14 @@ imports = ["missing"]
     def test_reports_duplicate_identities_within_one_context(self) -> None:
         self.write("docs/adr/0001-one.md")
         self.write("docs/adr/0001-two.md")
-        self.write("docs/deferred/Issue.md")
-        self.write("docs/deferred/issue.md")
+        self.write("docs/deferred/a/Issue.md")
+        self.write("docs/deferred/b/issue.md")
         self.write("docs/glossary/a.md", "### Term\n")
         self.write("docs/glossary/b.md", "### term ###\n")
-        self.write("docs/specs/Name.md")
-        self.write("docs/specs/name.md")
+        self.write("docs/specs/a/Name.md")
+        self.write("docs/specs/b/name.md")
+        self.write("docs/use-cases/a/Goal.md")
+        self.write("docs/use-cases/b/goal.md")
 
         result = self.run_validator()
 
@@ -379,12 +418,14 @@ imports = ["missing"]
         self.assertEqual(
             "docs/adr/0001-two.md:1: duplicate ADR number 0001; first used "
             "by docs/adr/0001-one.md\n"
-            "docs/deferred/issue.md:1: duplicate deferred issue filename; "
-            "first used by docs/deferred/Issue.md\n"
+            "docs/deferred/b/issue.md:1: duplicate deferred issue filename; "
+            "first used by docs/deferred/a/Issue.md\n"
             "docs/glossary/b.md:1: duplicate glossary term term; first defined "
             "at docs/glossary/a.md:1\n"
-            "docs/specs/name.md:1: duplicate specification filename; first used "
-            "by docs/specs/Name.md\n",
+            "docs/specs/b/name.md:1: duplicate specification filename; first used "
+            "by docs/specs/a/Name.md\n"
+            "docs/use-cases/b/goal.md:1: duplicate essential use case filename; "
+            "first used by docs/use-cases/a/Goal.md\n",
             result.stderr,
         )
 

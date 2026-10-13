@@ -56,7 +56,7 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 - If verification cannot be run, say why and identify the remaining risk.
 - Remove temporary logs, debugging output, scratch files, and experimental changes introduced during the task.
 - Inspect the diff before finishing or committing.
-- Commit only when asked, with intentional changes and a descriptive subject and body.
+- Commit with intentional changes and a descriptive subject and body.
 
 ## GitHub Access
 

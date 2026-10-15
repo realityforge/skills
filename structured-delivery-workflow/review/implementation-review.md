@@ -31,6 +31,12 @@ code, tests, git state, and cheap non-mutating checks needed to verify them.
 Requirements remain authoritative; do not weaken them to match incomplete
 implementation.
 
+Apply the [global verification and cleanup rules](../../AGENTS.md#test-and-clean-up)
+to verification artifacts added or materially changed by this work. Trace
+claimed consumers beyond their own tests and build wiring. Prefer existing
+suites when they preserve the failure trigger; retain separate fixtures when
+isolation is necessary.
+
 In the first round, inspect the complete delivered scope. In later rounds,
 verify prior findings and the surfaces changed to resolve them; report a new
 finding only when those edits introduced or exposed it.

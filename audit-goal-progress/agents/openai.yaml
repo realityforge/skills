@@ -1,0 +1,5 @@
+interface:
+  display_name: "Audit Goal Progress"
+  short_description: "Audit a agent job against the agreed outcome and directly correct material drift."
+policy:
+  allow_implicit_invocation: false

@@ -1,10 +1,10 @@
 ---
-name: goal-progress-audit
-description: Audit a long-running agent job against the user's agreed outcome and directly correct material drift.
+name: audit-goal-progress
+description: Audit an agent job against the agreed outcome and directly correct material drift.
 disable-model-invocation: true
 ---
 
-Keep a worker focused on the user's agreed outcome. Direct invocation authorizes a concise corrective message to the named worker conversation. A saved schedule must name the worker and explicitly carry that authorization. Each scheduled run performs one audit; it does not create another schedule. Resolve and retain the worker's exact identity before reviewing it.
+Keep a worker focused on an agreed outcome. Direct invocation authorizes a concise corrective message to the named worker conversation. A saved schedule must name the worker and explicitly carry that authorization. Each scheduled run performs one audit; it does not create another schedule. Resolve and retain the worker's exact identity before reviewing it.
 
 1. Establish the goal from the original request, later user corrections, and evidence required for completion. Reuse the previous audit's baseline when available, updating it for new instructions. If the worker cannot be identified unambiguously, ask for its identity.
 2. Check actual progress in the worker's conversation, tool results, and artifacts available to the monitor. Identify the major unfinished outcome and what changed since the last audit. Look for repeated attempts without new evidence, detours into process or tooling, minor polish ahead of major work, and unsupported completion claims. Time spent alone is not evidence of a loop.

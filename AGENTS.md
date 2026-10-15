@@ -54,6 +54,11 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 - Form an evidence-based hypothesis, verify it with a focused command or experiment, then fix the root cause.
 - Do not shotgun changes or mask symptoms with broad defensive code.
 
+## Documentation
+
+- Before creating, revising, or retaining documentation, identify its intended reader and the task or decision it serves. Prune before polishing: preserve accepted obligations, non-obvious rationale, operational knowledge, and real caveats; remove process narration and statements obvious to that reader.
+- Leave discoverable inventories and mutable configuration with code, scripts, and config; link to their owners instead of copying them. Keep commands, versions, historical context, or exclusions when they support the reader's task, reproducibility, provenance, or a non-obvious boundary.
+
 ## Test And Clean Up
 
 - Test or manually exercise meaningful behavior as you work.
@@ -63,7 +68,7 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
   and report the outcome.
 - If verification cannot be run, say why and identify the remaining risk.
 - Retain verification and supporting documents for a concrete continuing use. Tests must exercise the behavior they claim to protect; fixtures must preserve the relevant failure conditions. Remove tests whose mocks or placeholder artifacts can conceal that failure. CI wiring alone does not justify retention.
-- Remove task-created logs, debugging output, scratch files, and completed experiment or migration scaffolding, including supporting tests and build wiring. Preserve only needed run evidence in an existing PR, CI record, or exact evidence commit, and lasting conclusions in their canonical owner. Replace removed scaffolding only when the missing coverage warrants it.
+- Remove task-created logs, debugging output, scratch files, completed working documents without a continuing use, and completed experiment or migration scaffolding, including supporting tests and build wiring. Move lasting conclusions to their canonical owners and update inbound references before deleting documents. Preserve only needed run evidence in an existing PR, CI record, or exact evidence commit. Replace removed scaffolding only when the missing coverage warrants it.
 - Inspect the diff before finishing or committing.
 - Commit with intentional changes and a descriptive subject and body.
 

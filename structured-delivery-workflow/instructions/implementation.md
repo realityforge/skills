@@ -9,7 +9,8 @@ Read the active tree's `tasks/TASKMAP.md`. Verify that:
 
 - status is `planned`, `implementing`, or `implementation-review`
 - the current plan snapshot exists in git history
-- the active tree is the exact plan the user asked to execute or resume
+- the active tree is the exact plan for the authorized outcome, or the plan
+  explicitly requested for resumption
 
 Load `SPEC.md`, the task map, and only the active task before implementation.
 Load other task files when dependencies, cross-task contracts, or replanning

@@ -12,9 +12,10 @@ architecture; project terms specialize the shared language.
 
 If any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists then use the $domain-modeling skill.
 
-This skill diagnoses opportunities. Keep the scan and report read-only. A
-chosen candidate proceeds through an explicit `$grill-me` session before any
-implementation or durable artifact changes.
+This skill diagnoses opportunities. Keep the scan and report read-only.
+Implementation or durable artifact changes require execution authority under
+the [decision policy](../AGENTS.md#scope-and-design); an explicitly requested
+full `$grill-me` interview retains its confirmation gate.
 
 ## 1. Set the scope
 
@@ -81,13 +82,16 @@ choose one without reading the code first.
 
 ## 4. Hand off the decision
 
-Ask which candidate the user wants to examine. Once they choose, ask them to
-invoke `$grill-me` with that candidate. The interview establishes constraints,
-dependency ownership, Seam placement, surviving tests, and whether the proposed
-deepening is justified.
+When the user has delegated candidate selection and implementation within an
+authorized outcome, choose the best supported candidate and proceed. Otherwise
+present the recommendation and ask for selection or execution authority only
+where it is missing.
 
-If the user confirms the interview has reached shared understanding and asks to
-act:
+Reuse accepted constraints, dependency ownership, Seam placement, and surviving
+tests. Investigate remaining facts and resolve choices under the decision
+policy. A full interview is available when the user explicitly requests it.
+
+For authorized follow-up:
 
 - use `$domain-modeling` to route accepted durable knowledge when its artifacts
   are present or the conclusion warrants one;

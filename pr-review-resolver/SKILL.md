@@ -7,7 +7,7 @@ metadata:
 
 Use available GitHub MCP tools to inspect and address review threads; use `gh` for operations those tools do not expose. Use `$commit` before committing. Treat invocation as authorization to handle every unresolved thread and perform the requested GitHub writes.
 
-Invoke `$grill-me` if further user context is needed.
+Recover accepted direction and resolve missing choices under the [decision policy](../AGENTS.md#scope-and-design). Ask a focused question only when user direction is required; use a full `$grill-me` interview when explicitly requested.
 
 Verify each bot finding against the current source before changing code.
 

@@ -6,14 +6,19 @@ disable-model-invocation: true
 
 # Structured Delivery Workflow
 
-Deliver from a completed `$grill-me` session through a temporary, auditable plan
-tree.
+Deliver authorized scope through a temporary, auditable plan tree.
 
 ## Entry gate
 
-Confirm that the current conversation contains the user's explicit confirmation
-of shared understanding from `$grill-me`. If it does not, stop and direct the
-user to `$grill-me`; this skill does not run its own interview.
+Establish the accepted outcome, constraints, and execution authority from the
+user's request or a recoverable prior agreement, including sources referenced
+by a handoff. A new Task, chat, or handoff does not require reconfirmation.
+Acceptance of a design alone does not authorize implementation.
+
+Apply the [decision policy](../AGENTS.md#scope-and-design) to missing authority
+and unresolved choices. Recover available sources first, then ask only for the
+missing direction. When the user explicitly requests `$grill-me`, wait for its
+final shared-understanding confirmation before acting on the interview.
 
 Create a new plan tree for every invocation. Modify an existing tree only when
 the user explicitly asks to resume that paused plan. Resolve the exact active

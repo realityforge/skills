@@ -2,7 +2,8 @@
 
 ## Source
 
-- Shared understanding: `<completed $grill-me conversation>`
+- Accepted scope and constraints: `<user agreement or recoverable source>`
+- Execution authority and checkpoints: `<user instruction or source, including stopping conditions>`
 - Repository evidence: `<relevant code, tests, or documentation>`
 
 ## Problem

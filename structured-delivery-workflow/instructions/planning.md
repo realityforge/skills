@@ -1,16 +1,20 @@
 # Planning
 
-Create the complete plan from the confirmed conversation context and pass
-planning review. Continue directly to implementation unless the user explicitly
-requested to review the plan first.
+Create the complete plan from the authorized scope and verified facts and pass
+planning review. Continue directly to implementation unless an explicit user
+checkpoint or stopping condition applies.
+
+For planning-only authority, report the reviewed plan and stop at that boundary.
+Implementation awaits the user's next instruction.
 
 ## 1. Create the tree
 
 Record `Plan checkpoint: human-review (pending)` in `TASKMAP.md` only when the
 user explicitly asked to review the plan before implementation; otherwise use
-`Plan checkpoint: automatic (pending planning review)`. Their `$grill-me`
-confirmation supplies the plan's authority but does not by itself request
-another review pause.
+`Plan checkpoint: automatic (pending planning review)`. Record the accepted
+scope and execution-authority sources established at the entry gate. Scope
+acceptance or interview confirmation does not itself request a plan-review
+pause.
 
 Read applicable repository instructions and inspect the worktree. Choose an
 unused `plans/<initiative>/` path. An existing path is never a merge target;
@@ -25,9 +29,9 @@ Load these templates only while creating their artifact:
 
 ## 2. Write `SPEC.md`
 
-Synthesize the completed `$grill-me` conversation and verified repository
-facts. Do not interview the user again. Reopen a settled point only when
-current evidence contradicts it.
+Synthesize the accepted scope, constraints, execution authority, and verified
+repository facts. Reuse prior decisions and resolve remaining choices under
+the [decision policy](../../AGENTS.md#scope-and-design).
 
 The spec is complete when it has:
 
@@ -36,15 +40,16 @@ The spec is complete when it has:
 - the technical and testing decisions needed to preserve shared understanding
 - every significant decision with its rationale, impact, and what the user
   should verify
-- no unresolved choice that could materially change delivered behavior
+- no unresolved choice requiring user direction under the decision policy
 
 Use user stories only when actors or distinct observable journeys are clearer
 that way. Prefer stable modules and contracts over file paths or code snippets.
 Include a decision-rich prototype fragment only when prose would lose the
 decision it encodes.
 
-If repository evidence materially conflicts with the confirmed understanding,
-surface the evidence and required user decision before continuing.
+If verified evidence invalidates an accepted assumption, reopen the affected
+decision under that policy. Pause dependent work only when user direction is
+required; continue independent work.
 
 ## 3. Derive tasks directly from the spec
 
@@ -97,7 +102,7 @@ Record reviewer identity, round count, and result in `TASKMAP.md`.
 After planning review passes, follow the selected plan checkpoint.
 
 For `automatic`, record `Plan checkpoint: automatic` and its basis—the
-confirmed `$grill-me` understanding and passing planning review—in
+accepted scope, execution authority, and passing planning review—in
 `TASKMAP.md`, set its status to `planned`, send a non-blocking progress update
 with links to `SPEC.md` and `TASKMAP.md`, and continue without asking for
 approval.

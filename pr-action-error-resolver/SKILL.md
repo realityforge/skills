@@ -7,6 +7,6 @@ metadata:
 
 Use available GitHub MCP tools to inspect failed Actions runs, read job logs, and rerun jobs when appropriate; use `gh` for operations those tools do not expose. Use `$commit` before committing. Treat invocation as authorization to implement the focused fix, rerun when appropriate, commit, push, and perform the required GitHub writes without pausing for approval.
 
-Invoke `$grill-me` only when repository and Actions evidence cannot settle a required user decision.
+Recover accepted direction and resolve missing choices under the [decision policy](../AGENTS.md#scope-and-design). Investigate repository and Actions evidence before asking a focused decision question; use a full `$grill-me` interview when explicitly requested.
 
 Verify the relevant local checks pass, the targeted PR check is green, the remote branch matches `HEAD`, and the worktree is clean.

@@ -79,24 +79,21 @@ The task tree is complete when:
 
 ## 4. Run planning review
 
-Perform one author preflight against the completion criteria above. Then create
-one clean, read-only planning reviewer and read
-`../review/planning-review.md`. The first round reviews `SPEC.md`, `TASKMAP.md`,
-and every task file together. Continue later rounds with that same reviewer and
-only the prior findings, intervening user corrections, resulting edits, and
-affected surfaces.
+Perform one author preflight against the completion criteria above. Read
+`../review/planning-review.md` and start or resume review under the shared
+[review policy](../SKILL.md#review-policy) for continuity, replacement, budget,
+and escalation. The first round reviews `SPEC.md`, `TASKMAP.md`, and every task
+file together. Later rounds check prior findings, their dispositions,
+intervening user corrections, resulting edits, and affected surfaces.
 
-The planning limit is three total reviewer rounds unless the user sets or
-extends another limit. Each reviewer attempt consumes one round. Assess every
+The default planning limit is three rounds plus the shared policy's final
+confirmation allowance, unless the user sets another budget. Assess every
 finding against the conversation, repository, and plan; make the narrowest
 evidence-backed correction. A material spec change requires reconciliation of
 the task map and affected task files.
 
-The review passes only on `Findings: none`. If blocking findings remain at the
-limit, ask whether to extend it. Do not substitute another reviewer or proceed
-with a plan that has not passed.
-
-Record reviewer identity, round count, and result in `TASKMAP.md`.
+Record reviewer history, consumed rounds and final confirmation, finding
+dispositions, and result in `TASKMAP.md`. Finalize only after review passes.
 
 ## 5. Finalize the plan
 
@@ -115,9 +112,9 @@ For `human-review`, give the user:
 - every significant decision, its impact, and what the user should verify
 - planning-review rounds and result
 
-Ask for explicit approval. Apply requested changes and re-review with the same
-reviewer when they materially affect requirements, decisions, coverage,
-sequencing, or validation.
+Ask for explicit approval. Apply requested changes and return to planning
+review when they materially affect requirements, decisions, coverage,
+sequencing, or validation; the existing review budget still applies.
 
 After approval, record `Plan checkpoint: human-review` and the approval basis
 in `TASKMAP.md`, and set its status to `planned`.

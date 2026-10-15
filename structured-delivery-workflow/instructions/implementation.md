@@ -40,10 +40,9 @@ agents remain read-only.
 
 When implementation evidence invalidates a committed significant decision or
 materially changes scope, stop the task loop. Update `SPEC.md` and every
-affected task artifact, return to `planning.md` for review by the same planning
-reviewer, follow the selected plan checkpoint, and commit the revised plan
-before resuming. Local details that preserve planned outcomes and impacts do
-not reopen planning.
+affected task artifact, return to `planning.md` for planning review, follow the
+selected plan checkpoint, and commit the revised plan before resuming. Local
+details that preserve planned outcomes and impacts do not reopen planning.
 
 For the final task, run the strongest practical full-scope gate after its
 task-local validation. Record the full-gate evidence in `TASKMAP.md` before
@@ -72,16 +71,17 @@ workflow does not require a domain-documentation system.
 
 ## Implementation review
 
-Create one fresh, clean, read-only implementation reviewer and read
-`../review/implementation-review.md`. Use that same reviewer for every round.
+Read `../review/implementation-review.md` and start or resume review under the
+shared [review policy](../SKILL.md#review-policy) for continuity, replacement,
+budget, and escalation.
 
 The first round reviews the committed spec against delivered behavior, plan
 history, implementation scope, tests, validation evidence, and promoted
 knowledge. Later rounds receive prior findings, their disposition, intervening
 user corrections, resulting changes, and affected surfaces.
 
-The implementation limit is five total reviewer rounds unless the user sets or
-extends another limit. Each reviewer attempt consumes one round. Verify every
+The default implementation limit is five rounds plus the shared policy's final
+confirmation allowance, unless the user sets another budget. Verify every
 finding against repository evidence. Fix valid findings at the earliest
 affected level and run focused validation.
 
@@ -93,9 +93,6 @@ its plan-state update.
 When domain directories are present and a fix changes durable knowledge, run
 `$domain-modeling` promotion and validation before the next review round.
 
-The review passes only on `Findings: none`. If blocking findings remain at the
-limit, ask whether to extend it. Do not substitute another reviewer or claim
-success.
-
-Record reviewer identity, round count, and result in `TASKMAP.md`, then route to
-`closeout.md`.
+Record reviewer history, consumed rounds and final confirmation, finding
+dispositions, and result in `TASKMAP.md`. Route to `closeout.md` only after
+review passes.

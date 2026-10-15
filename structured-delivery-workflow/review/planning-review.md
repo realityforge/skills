@@ -12,7 +12,9 @@ The main agent supplies:
 - accepted scope, execution-authority sources, and explicit checkpoints
 - applicable user corrections with their source, meaning, and scope
 - focused repository evidence for consequential claims
-- round number, round limit, and prior findings for confirmation rounds
+- attempt number, remaining round budget, and final-confirmation status
+- prior coverage, findings, dispositions, and supporting evidence for later
+  rounds or a replacement reviewer
 
 ## Review
 
@@ -35,10 +37,11 @@ Check for material gaps and bad assumptions:
 - task validation can prove the promised behavior rather than falsely pass
 - cross-cutting migration, rollout, documentation, tests, and cleanup are owned
 
+Follow the [shared review policy](../SKILL.md#review-policy) on replacement.
 In the first round, inspect the complete plan. In later rounds, verify prior
 findings, resulting edits, and intervening user corrections across affected
-peers; report a new finding only when those edits or corrections introduced or
-exposed it.
+peers. New findings must arise from those edits or corrections, or from
+previously unverified scope inspected during replacement.
 
 ## Output
 

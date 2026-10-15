@@ -52,12 +52,46 @@ artifacts. The whole tree is removed at closeout.
 When explicitly resuming, read `tasks/TASKMAP.md` first and route from its
 status.
 
-## Reviewer identities
+## Review policy
 
-Use one read-only planning reviewer for all planning rounds and one fresh
-read-only implementation reviewer for all implementation rounds. Continue a
-phase's rounds with its existing reviewer. If that reviewer cannot continue,
-report the incomplete gate; another reviewer does not substitute for it.
+### Continuity
+
+Use read-only reviewers independent of the work they review. Start planning
+with a clean reviewer and implementation with a fresh reviewer. Prefer the
+same reviewer within each phase.
+
+If a reviewer is unavailable, use a clean replacement without requesting an
+exception. Supply the full review inputs: scope, accepted constraints,
+execution authority, checkpoints, user corrections, prior coverage, findings,
+dispositions and supporting evidence, and consumed and remaining budget. The
+replacement verifies those dispositions and inspects any scope whose prior
+coverage cannot be established before continuing confirmation. Record the
+handoff in `TASKMAP.md`. Replacement is recovery from unavailability, never a
+way to evade valid findings; unresolved findings remain open.
+
+### Budget and escalation
+
+Each stage sets its default round limit. Count every reviewer attempt,
+including failed attempts, across replacements and replans within that phase;
+these events do not reset the budget.
+
+The default budget also includes one final confirmation attempt after the
+round limit for fixes to existing findings within authorized scope. Check the
+findings, fixes, and affected surfaces; this allowance is used once per phase,
+not renewed by further fixes or replans. Explicit user round limits, resource
+budgets, checkpoints, and stopping conditions take precedence.
+
+A gate passes only on `Findings: none`. If permitted attempts are exhausted
+without a pass, stop dependent work and present one consolidated escalation:
+evidence, unresolved findings and tradeoffs, why review has not converged, and
+a recommendation with bounded recovery work and budget including confirmation.
+Ask for the substantive decision or authority needed under the
+[decision policy](../AGENTS.md#scope-and-design), rather than permission for
+one more round. Record the decision and its bounds in `TASKMAP.md`. If that
+recovery exhausts its budget with the same blocker, report the gate incomplete;
+seek another decision only when new material evidence changes the risk,
+tradeoff, or required authority. Budget exhaustion never waives unresolved
+findings.
 
 ## Output
 

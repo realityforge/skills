@@ -33,6 +33,9 @@ code, tests, git state, and cheap non-mutating checks needed to verify them.
 Requirements remain authoritative; do not weaken them to match incomplete
 implementation.
 
+Apply the [documentation rules](../../AGENTS.md#documentation) to documentation
+created or changed by this work.
+
 Apply the [global verification and cleanup rules](../../AGENTS.md#test-and-clean-up)
 to verification artifacts added or materially changed by this work. Trace
 claimed consumers beyond their own tests and build wiring. Prefer existing

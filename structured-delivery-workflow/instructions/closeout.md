@@ -5,10 +5,11 @@ Close only after implementation review reports `Findings: none`.
 ## Final knowledge sweep
 
 When any `docs/adr/`, `docs/glossary/`, `docs/specs/`, or `docs/deferred/`
-directory exists, use `$domain-modeling` once more. Classify reviewer-driven
-changes and any qualifying durable conclusion missed before review. Validate
-every changed canonical artifact. A failed required promotion or validation
-leaves the plan tree intact and blocks closeout.
+directory exists, use `$domain-modeling` for conclusions introduced or changed
+since promotion and any identified omission. Reuse prior classifications for
+unaffected conclusions. Validate every changed canonical artifact. A failed
+required promotion or validation leaves the plan tree intact and blocks
+closeout.
 
 ## Cleanup gate
 
@@ -20,6 +21,9 @@ Before deletion, verify from repository and plan evidence that:
 - qualifying durable knowledge is promoted and validated when domain
   directories exist
 - the committed plan and implementation updates exist in git history
+
+Apply the [global cleanup rules](../../AGENTS.md#test-and-clean-up) to documents
+completed by this work, including those outside the plan tree.
 
 Resolve the exact active plan path again. Inspect its contents, including
 arbitrary temporary files, then delete that tree and no other plan tree.

@@ -60,7 +60,8 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 - Before reporting completion, run the strongest verification proportionate to the change's risk and the task's scope,
   and report the outcome.
 - If verification cannot be run, say why and identify the remaining risk.
-- Remove temporary logs, debugging output, scratch files, and experimental changes introduced during the task.
+- Retain verification and supporting documents for a concrete continuing use. Tests must exercise the behavior they claim to protect; fixtures must preserve the relevant failure conditions. Remove tests whose mocks or placeholder artifacts can conceal that failure. CI wiring alone does not justify retention.
+- Remove task-created logs, debugging output, scratch files, and completed experiment or migration scaffolding, including supporting tests and build wiring. Preserve only needed run evidence in an existing PR, CI record, or exact evidence commit, and lasting conclusions in their canonical owner. Replace removed scaffolding only when the missing coverage warrants it.
 - Inspect the diff before finishing or committing.
 - Commit with intentional changes and a descriptive subject and body.
 

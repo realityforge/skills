@@ -13,7 +13,7 @@ Suggest the skills to be used, if any, by the next session.
 
 1. **State, not instructions.** Describe what *is true*, not what the next agent *should do*. Write "Auth endpoint is implemented; logout is not yet started" — never "Implement logout next." The fresh agent decides actions; you give it ground truth.
 2. **Reference, don't duplicate.** Do not paste content already captured in other artifacts (PRDs, plans, ADRs, issues, commits, diffs, design docs). Point to them by path or URL.
-3. **Capture the "why".** Decisions and rejected approaches are the most valuable and least recoverable information. Code shows *what*; only you remember *why* and *what failed*.
+3. **Capture the "why".** Decisions and rejected approaches are the most valuable and least recoverable information. Code shows *what*; only you remember *why* and *what failed*. Include applicable user corrections, their source, meaning and scope, and any affected peers still unchecked.
 4. **Trust nothing blindly.** Frame all claims as context to verify against the actual code, not facts to accept.
 5. **Redact secrets.** Strip API keys, tokens, passwords, and personally identifiable information. Reference where credentials live (e.g. ".env.local, not committed") — never their values.
 6. **Be ruthless.** Every line must be something the next agent cannot trivially get by reading the code or project config. Cut anything obvious, redundant, or explanatory.

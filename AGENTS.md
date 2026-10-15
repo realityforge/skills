@@ -25,6 +25,8 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 ## Scope And Design
 
 - Reuse accepted outcomes, constraints, and decisions across Tasks, chats, and handoffs. Recover their source before asking the user to repeat them.
+- Treat user corrections as constraints on the affected work. Apply their meaning to all affected peers in the same pass, within both the correction's scope and the authorized work.
+- Keep task-specific corrections with their source, scope, and rationale in existing task/chat context; carry them into reviews and handoffs. Promote durable rules to their existing canonical owner.
 - When the user authorizes delivery of an outcome, choose and execute bounded Tasks through completion. Accepting a design or listing roadmap work does not itself authorize implementation. Honor explicit checkpoints, resource-budget approvals, and stopping conditions.
 - Make routine, reversible decisions independently. Report significant delegated choices at checkpoints or closeout.
 - Ask the user when an unresolved decision has both significant impact and costly reversal, or requires expanding the authorized outcome or overriding an explicit constraint. Count migration, adoption, and substantial rework as reversal costs.

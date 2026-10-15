@@ -24,8 +24,8 @@ pending task whose blockers are complete and keep only that task
 
 For each task:
 
-1. Confirm its delivered behavior, spec coverage, acceptance criteria, and
-   validation.
+1. Confirm its delivered behavior, spec coverage, acceptance criteria,
+   applicable user corrections, and validation.
 2. Inspect the relevant implementation and repository conventions.
 3. Make the smallest coherent end-to-end change.
 4. Run focused checks while iterating and every task validation before marking
@@ -77,8 +77,8 @@ Create one fresh, clean, read-only implementation reviewer and read
 
 The first round reviews the committed spec against delivered behavior, plan
 history, implementation scope, tests, validation evidence, and promoted
-knowledge. Later rounds receive prior findings, their disposition, resulting
-changes, and affected surfaces.
+knowledge. Later rounds receive prior findings, their disposition, intervening
+user corrections, resulting changes, and affected surfaces.
 
 The implementation limit is five total reviewer rounds unless the user sets or
 extends another limit. Each reviewer attempt consumes one round. Verify every

@@ -12,13 +12,15 @@ The main agent supplies:
 - `SPEC.md`, `TASKMAP.md`, every task file, and canonical artifacts promoted
   from the plan
 - required task-local and full-scope validation
+- applicable user corrections with their source, meaning, and scope
 - round number, round limit, and prior findings for confirmation rounds
 
 ## Review order
 
-1. **Outcomes:** map every requirement and acceptance criterion to observable
-   implementation, tests, and validation evidence. Find contradictions,
-   omissions, disconnected code, weak tests, and unplanned behavior.
+1. **Outcomes:** map every requirement, acceptance criterion, and applicable
+   user correction to observable implementation, tests, and validation evidence
+   across affected peers. Find contradictions, omissions, disconnected code,
+   weak tests, and unplanned behavior.
 2. **Decision validity:** test significant decisions and load-bearing technical
    assumptions against what implementation revealed. Identify material
    trade-offs, safety concerns, or simpler direct designs that are now evident.
@@ -38,8 +40,9 @@ suites when they preserve the failure trigger; retain separate fixtures when
 isolation is necessary.
 
 In the first round, inspect the complete delivered scope. In later rounds,
-verify prior findings and the surfaces changed to resolve them; report a new
-finding only when those edits introduced or exposed it.
+verify prior findings, resulting edits, and intervening user corrections across
+affected peers; report a new finding only when those edits or corrections
+introduced or exposed it.
 
 ## Output
 

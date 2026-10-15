@@ -83,7 +83,8 @@ Perform one author preflight against the completion criteria above. Then create
 one clean, read-only planning reviewer and read
 `../review/planning-review.md`. The first round reviews `SPEC.md`, `TASKMAP.md`,
 and every task file together. Continue later rounds with that same reviewer and
-only the prior findings, resulting edits, and affected surfaces.
+only the prior findings, intervening user corrections, resulting edits, and
+affected surfaces.
 
 The planning limit is three total reviewer rounds unless the user sets or
 extends another limit. Each reviewer attempt consumes one round. Assess every

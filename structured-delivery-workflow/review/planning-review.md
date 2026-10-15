@@ -9,7 +9,7 @@ The main agent supplies:
 
 - repository root and active plan path
 - `SPEC.md`, `TASKMAP.md`, and every task file
-- the accepted shared-understanding source from the conversation
+- accepted scope, execution-authority sources, and explicit checkpoints
 - focused repository evidence for consequential claims
 - round number, round limit, and prior findings for confirmation rounds
 
@@ -17,7 +17,8 @@ The main agent supplies:
 
 Check for material gaps and bad assumptions:
 
-- the spec matches the confirmed understanding and verified repository facts
+- the spec matches the accepted scope, execution authority, explicit checkpoints,
+  and verified repository facts
 - outcomes, boundaries, constraints, and acceptance criteria are complete and
   unambiguous
 - significant decisions expose their rationale, impact, and user-verification

@@ -10,6 +10,7 @@ The main agent supplies:
 - repository root and active plan path
 - `SPEC.md`, `TASKMAP.md`, and every task file
 - accepted scope, execution-authority sources, and explicit checkpoints
+- applicable user corrections with their source, meaning, and scope
 - focused repository evidence for consequential claims
 - round number, round limit, and prior findings for confirmation rounds
 
@@ -17,8 +18,9 @@ The main agent supplies:
 
 Check for material gaps and bad assumptions:
 
-- the spec matches the accepted scope, execution authority, explicit checkpoints,
-  and verified repository facts
+- the spec and affected tasks match the accepted scope, applicable user
+  corrections, execution authority, explicit checkpoints, and verified
+  repository facts
 - outcomes, boundaries, constraints, and acceptance criteria are complete and
   unambiguous
 - significant decisions expose their rationale, impact, and user-verification
@@ -34,8 +36,9 @@ Check for material gaps and bad assumptions:
 - cross-cutting migration, rollout, documentation, tests, and cleanup are owned
 
 In the first round, inspect the complete plan. In later rounds, verify prior
-findings and the surfaces changed to resolve them; report a new finding only
-when those edits introduced or exposed it.
+findings, resulting edits, and intervening user corrections across affected
+peers; report a new finding only when those edits or corrections introduced or
+exposed it.
 
 ## Output
 

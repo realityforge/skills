@@ -33,7 +33,8 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 - Reopen a settled decision only when verified evidence invalidates its assumptions or the user changes direction. Reopen only the affected choice and continue independent work while awaiting an answer.
 - An explicitly requested full interview retains its final shared-understanding confirmation before acting on it. Reuse existing execution authority; confirmation alone supplies no new implementation authority.
 - Fight scope creep. Honor the dev's intent in both a minimal and realistic fashion.
-- Prefer existing patterns; avoid new abstractions, helpers, frameworks, or broad rewrites unless they remove real complexity.
+- Add public options and interface fields only for an accepted use case, with a clear user or caller and meaning. An authorized new feature qualifies; internal capability alone does not justify a user-facing control.
+- Prefer existing patterns; add abstractions, helpers, frameworks, or broad rewrites only for a concrete current need or to remove real current complexity.
 - Do not add unrelated features, refactors, comments, docstrings, or types.
 - Propose a simpler solution when it solves the problem.
 - Never edit unread code; understand structure, ownership, and conventions first.

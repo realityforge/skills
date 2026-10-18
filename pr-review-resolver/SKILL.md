@@ -15,3 +15,7 @@ Verify each bot finding against the current source before changing code.
 - Not addressed: react 👎 to the initial comment, reply with the reason, then resolve.
 
 Verify all reviewed threads are resolved, the remote branch matches `HEAD`, and the worktree is clean.
+
+## Bot re-review
+
+Handle incoming bot findings normally. Request another external bot review only under explicit user authority or the accepted repository review policy. Follow that policy's criteria for material changes or unresolved risk; a new commit alone does not authorize another request. Carry a user's stop instruction into the controlling monitor under the [correction policy](../AGENTS.md#scope-and-design).

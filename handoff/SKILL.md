@@ -11,7 +11,7 @@ Suggest the skills to be used, if any, by the next session.
 
 ## Core Principles
 
-1. **State, not instructions.** Describe what *is true*, not what the next agent *should do*. Write "Auth endpoint is implemented; logout is not yet started" — never "Implement logout next." The fresh agent decides actions; you give it ground truth.
+1. **Current authority and state.** Carry the accepted outcome, authority sources, scope, live exceptions, checkpoints, and stopping conditions. Include temporary restrictions' purpose and accepted expiry condition. Link the controlling goal, relevant saved schedule, and current state owners so the recipient can recover later corrections and execution state. Describe progress as observations to verify; the recipient chooses actions within that authority.
 2. **Reference, don't duplicate.** Do not paste content already captured in other artifacts (PRDs, plans, ADRs, issues, commits, diffs, design docs). Point to them by path or URL.
 3. **Capture the "why".** Decisions and rejected approaches are the most valuable and least recoverable information. Code shows *what*; only you remember *why* and *what failed*. Include applicable user corrections, their source, meaning and scope, and any affected peers still unchecked.
 4. **Trust nothing blindly.** Frame all claims as context to verify against the actual code, not facts to accept.

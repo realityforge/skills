@@ -9,7 +9,7 @@ Code must stand on its own. If a change only makes sense to someone who watched 
 
 - Read AGENTS.md / nearby code. Match existing conventions.
 - Check changed code and affected peer filenames, tests, and docs against applicable user corrections under the [correction policy](../AGENTS.md#scope-and-design).
-- Apply YAGNI. Remove abstractions when they have one caller.
+- Apply YAGNI using the [scope and design policy](../AGENTS.md#scope-and-design). Keep abstractions that hide real complexity even when they have one caller.
 - Preserve behavior exactly.
 - Remove stale comments and stale code.
 - Don't expose things that don't need to be exposed, default should be private.

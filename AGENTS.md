@@ -6,11 +6,11 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 
 ## Verify
 
-- Do not assume when code, commands, logs, tests, docs, or current research can answer.
-- Ground claims in evidence you personally checked.
-- Before claiming fixed, working, passing, installed, missing, or impossible, run the relevant check.
-- State what you checked and the outcome; if uncertain, say what evidence is missing.
+- Use code, commands, logs, tests, docs, or current research to resolve answerable questions; ground claims in evidence you personally checked.
 - Inspect local context before asking questions it can answer; try safe commands before asking whether tools, files, dependencies, or configs exist.
+- Test or manually exercise meaningful behavior as you work. After changes, start with the narrowest relevant check and broaden when risk warrants. Validate changed config by checking syntax or loading it.
+- Before claiming fixed, working, passing, installed, missing, or impossible, run the relevant check; before reporting completion, run the strongest verification proportionate to the change's risk and the task's scope.
+- Report what you checked and the outcome; identify missing evidence when uncertain, and explain any verification you could not run and the remaining risk.
 
 ## Communication
 
@@ -50,9 +50,7 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 
 ## Investigate Before Fixing
 
-- No fixes without understanding the root cause.
-- Observe full errors, traces, logs, failing tests, repro steps, and relevant code.
-- Form an evidence-based hypothesis, verify it with a focused command or experiment, then fix the root cause.
+- Before fixing a failure, inspect full errors, traces, logs, failing tests, repro steps, and relevant code. Verify an evidence-based hypothesis with a focused command or experiment, then fix the root cause.
 - Do not shotgun changes or mask symptoms with broad defensive code.
 
 ## Documentation
@@ -62,12 +60,6 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 
 ## Test And Clean Up
 
-- Test or manually exercise meaningful behavior as you work.
-- After changes, run the narrowest relevant check first; run broader checks when risk warrants.
-- Validate changed config by checking syntax or loading it.
-- Before reporting completion, run the strongest verification proportionate to the change's risk and the task's scope,
-  and report the outcome.
-- If verification cannot be run, say why and identify the remaining risk.
 - Retain verification and supporting documents for a concrete continuing use. Tests must exercise the behavior they claim to protect; fixtures must preserve the relevant failure conditions. Remove tests whose mocks or placeholder artifacts can conceal that failure. CI wiring alone does not justify retention.
 - Remove task-created logs, debugging output, scratch files, completed working documents without a continuing use, and completed experiment or migration scaffolding, including supporting tests and build wiring. Move lasting conclusions to their canonical owners and update inbound references before deleting documents. Preserve only needed run evidence in an existing PR, CI record, or exact evidence commit. Replace removed scaffolding only when the missing coverage warrants it.
 - Inspect the diff before finishing or committing.
@@ -76,5 +68,5 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 
 ## GitHub Access
 
-- If `gh` fails inside the sandbox with authentication or network errors, retry it with escalated permissions before reporting an authentication problem.
-- Ask the user to authenticate only if escalated `gh auth status` also fails.
+- If `gh` fails inside a sandbox with authentication or network errors, retry with escalated permissions only when that mode is available and permitted by the current execution policy.
+- Before diagnosing an authentication problem, run `gh auth status` for the affected host in a permitted mode. Ask the user to authenticate only when it confirms missing or invalid credentials; distinguish network failures and execution-policy or repository-permission denials. If the check cannot run or is inconclusive, report the limitation and missing evidence.

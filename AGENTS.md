@@ -71,6 +71,7 @@ Prefer ambitious ideas, simple systems, and software that feels obvious. Do not 
 - Retain verification and supporting documents for a concrete continuing use. Tests must exercise the behavior they claim to protect; fixtures must preserve the relevant failure conditions. Remove tests whose mocks or placeholder artifacts can conceal that failure. CI wiring alone does not justify retention.
 - Remove task-created logs, debugging output, scratch files, completed working documents without a continuing use, and completed experiment or migration scaffolding, including supporting tests and build wiring. Move lasting conclusions to their canonical owners and update inbound references before deleting documents. Preserve only needed run evidence in an existing PR, CI record, or exact evidence commit. Replace removed scaffolding only when the missing coverage warrants it.
 - Inspect the diff before finishing or committing.
+- Make local commits when requested or required by an authorized delivery workflow, without asking again. Honor explicit commit restrictions and checkpoints; push, merge, force-push, and other publication need separate authorization.
 - Commit with intentional changes and a descriptive subject and body.
 
 ## GitHub Access

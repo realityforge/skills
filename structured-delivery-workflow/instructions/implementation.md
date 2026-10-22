@@ -44,8 +44,10 @@ affected task artifact, return to `planning.md` for planning review, follow the
 selected plan checkpoint, and commit the revised plan before resuming. Local
 details that preserve planned outcomes and impacts do not reopen planning.
 
-For the final task, run the strongest practical full-scope gate after its
-task-local validation. Record the full-gate evidence in `TASKMAP.md` before
+For the final task, run the owning project's validation gate selected for the
+changed behavior and current delivery boundary after task-local validation.
+When no project policy exists, select checks from actual dependencies and
+behavioral risk. Record the selected gate and evidence in `TASKMAP.md` before
 committing that task. Set status to `implementation-review` only when every
 task and the full gate pass.
 

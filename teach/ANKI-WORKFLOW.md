@@ -23,15 +23,16 @@ If the user opts into Anki and `docs/anki.md` does not exist, establish the coll
 
 A concept is eligible only when all of these are true:
 
-- The learner has explained, applied, distinguished, or corrected it through retrieval practice.
-- It supports the mission beyond the current lesson or demonstration.
-- It is likely to remain useful long enough for spaced repetition to help.
+- It passes the skill's [durable-target selection](SKILL.md#learning-targets).
+- The learner has independently explained, applied, or distinguished it through retrieval practice.
 - Its terminology agrees with the owning glossary.
 - One prompt can test one retrieval target.
 
 Strong candidates include durable mental models, easily confused distinctions, corrected misconceptions, reusable decision rules, and procedures that must be recalled without a reference.
 
-Leave lesson choreography, demo names, arbitrary sample values, material that was merely presented, and transient commands out of the collection. Include tool- or version-specific knowledge only when the mission requires it, and make that scope visible in the prompt or note metadata.
+After correction or hints, use a fresh unaided attempt before promotion. Keep an important target that is not yet understood in the teaching work, with the outstanding gap in an existing learning record or `NOTES.md`. Eligibility for Anki establishes readiness for spaced practice, not proof of long-term retention.
+
+Before adding a note, compare its meaning with existing retrieval targets. Prefer improving an existing prompt when it tests the same knowledge; different wording alone does not justify another card.
 
 ## Compose the card
 
@@ -43,12 +44,27 @@ Leave lesson choreography, demo names, arbitrary sample values, material that wa
 - Keep lesson provenance in metadata rather than visible question text.
 - Use the `humanize` skill on the final prompt, answer, and context.
 
+## Review and evolve targets
+
+During a target audit, inspect usefulness, scope, redundancy, and demonstrated depth. Inspect actual review history when available and state when it is unavailable. Choose an action for each affected target:
+
+| Condition | Action |
+| --- | --- |
+| Still useful and reliably recalled | Keep active and let the scheduler extend intervals; one correct answer is not a retirement criterion |
+| Same target, unclear wording or unnecessary cues | Rewrite in place, preserving note/card identity and scheduling |
+| Repeated failure | Diagnose ambiguity, missing prerequisites, or interference; reteach, clarify, or split the target before resuming review |
+| A new distinction or application deserves retention | Add a focused target with fresh scheduling; retain the foundation while it remains useful |
+| A replacement covers the old target | Check coverage and independent application in a later session before suspending the redundant card |
+| Obsolete, outside the mission, or merely lesson-specific | Suspend the card and keep useful reference material with its owner |
+
+Archive through suspension, preserving content and review history. Record affected note/card IDs, the reason, and any replacement in `NOTES.md`; record changes in demonstrated understanding in the owning learning record. Greater detail alone does not establish replacement coverage, and an active card still needs one focused retrieval target.
+
 ## Change the collection
 
 1. Read `docs/anki.md` and verify that the integration can inspect the live collection. Completion requires the configured deck, note type, fields, templates, cards, and counts to be observable.
-2. Before a bulk rewrite, schema change, or deck reorganization, export a backup that includes scheduling data. Completion requires a readable backup at the reported path.
+2. Before a bulk rewrite, suspension batch, schema change, or deck reorganization, export a backup that includes scheduling data. Completion requires a readable backup at the reported path.
 3. Prefer rewriting or moving an existing note when the retrieval target remains substantially the same. Completion requires its note and card identity to remain stable.
-4. Reset scheduling only when the retrieval target materially changes. Completion requires the reset decision to be recorded in the result.
+4. Give a materially changed retrieval target fresh scheduling, through a new card or an explicit reset; its predecessor's long interval does not establish readiness for the new target. Completion requires the identity and scheduling decision to be recorded in the result.
 5. If the integration is unavailable, leave the collection pending and report the missing capability. Completion requires an explicit pending result rather than a substitute side file.
 
 ## Verify
@@ -58,8 +74,9 @@ After every collection change, verify against Anki itself:
 - Required fields are present and non-empty.
 - Every note is in the destination owned by its scope.
 - Tags and templates match the workspace contract.
-- Prompts are unique within the course collection.
+- Prompts are unique within the course collection, stand alone, match their intended scope, and pass durable-target selection. Inspect overlap by meaning as well as duplicate wording; retain multiple prompts for one concept only when they exercise distinct retrieval needs.
 - Rewritten or moved notes retained identity where required.
-- Collection counts match the intended change.
+- New or materially changed targets have fresh scheduling; archived cards are suspended and their reasons and replacements are recorded.
+- Total and active/suspended collection counts match the intended change.
 
-Report the resulting counts, backup path for bulk work, identity preservation, scheduling resets, and whether synchronization ran. A successful local update does not imply synchronization.
+Report the resulting total and active/suspended counts, backup path for bulk work, identity preservation, scheduling resets, retirement reasons and replacements, and whether synchronization ran. A successful local update does not imply synchronization.

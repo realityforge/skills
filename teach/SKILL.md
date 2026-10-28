@@ -48,11 +48,29 @@ Fluency can give the user an illusory sense of mastery, but storage strength is 
 
 ### Persistent retrieval
 
-When the user opts into Anki or `docs/anki.md` exists, read [ANKI-WORKFLOW.md](ANKI-WORKFLOW.md) before creating, updating, moving, or auditing cards. Promote a concept only after the learner demonstrates understanding. Persistent retrieval work is complete only after the live collection passes the workflow's verification checks.
+Revisit selected durable targets in later sessions, through Anki or ordinary teaching. When the user opts into Anki or `docs/anki.md` exists, read [ANKI-WORKFLOW.md](ANKI-WORKFLOW.md) before creating, updating, moving, suspending, or auditing cards. Persistent retrieval work is complete only after the live collection passes the workflow's verification checks.
 
 ## Learner-facing writing
 
 Use the `humanize` skill when writing or revising lessons, reference material, learning records, glossary definitions, or persistent-retrieval prompts.
+
+## Learning targets
+
+Before writing a lesson or its questions, select the targets from the mission and learner evidence. Give each target one purpose:
+
+| Purpose | Selection rule | Treatment |
+| --- | --- | --- |
+| Durable knowledge | A concept, distinction, decision rule, or procedure the learner needs to recall for future mission tasks | Teach, assess, and consider for continued retrieval |
+| Lesson practice | An exercise or experiment that develops or diagnoses understanding | Use for feedback; select any underlying durable target separately |
+| Reference material | Details the learner can look up when needed | Keep in reference documents or runnable examples |
+
+For each durable target, identify the future task it supports, why recall matters more than lookup, and the single idea a correct answer must establish. Check whether it remains useful outside this lesson and over the learner's intended retention horizon. Scope runtime-, tool-, or version-specific targets explicitly when the mission warrants retaining them.
+
+Examples supply evidence and practice. Retain their reusable principle; leave demo names, arbitrary values, observed output, and lesson choreography in the example. A scenario question must supply the facts needed to apply the principle without remembering the original demonstration.
+
+Selection is complete when every question has a target and purpose, and every durable target has a future use and a clear answer criterion. Question and card counts follow the targets; a lesson can produce zero new retention cards.
+
+Revisit selection at topic boundaries, after repeated difficulty, or when the mission, sources, or learner understanding changes. Keep useful foundations and retire obsolete or redundant recurring questions. When using Anki, follow its [target-evolution workflow](ANKI-WORKFLOW.md#review-and-evolve-targets).
 
 ## Lessons
 
@@ -108,16 +126,22 @@ For acquiring knowledge, difficulty is the enemy. It eats working memory you nee
 
 ## Skills
 
-If knowledge is all about acquisition, skills are about durability and flexibility. Make the knowledge stick.
+Use retrieval and application to make knowledge durable and flexible. Match the task to the skill: a short explanation, prediction, diagnosis, code change, physical action, or other relevant performance.
 
-For skill acquisition, difficulty is the tool. Effortful retrieval is what builds storage strength. Skills should be taught through interactive lessons. There are several tools at your disposal:
+### Retrieval and assessment
 
-- Interactive lessons, using quizzes and light in-browser tasks
-- Lessons which guide the user through a list of real-world steps to take (for instance, yoga poses)
+Ask for an attempt before showing answers, hints, or explanations. Prefer a brief recall or performance task before offering choices. Pair recall with application to a changed example, and revisit earlier durable targets in later sessions. As understanding develops, reduce hints and deepen the decisions being practiced while keeping each retrieval target focused.
 
-Each of these should be based on a **feedback loop**, where the user receives feedback on their performance. This feedback loop should be as tight as possible, giving feedback immediately - and ideally automatically.
+Give prompt, specific feedback after the attempt. Treat a corrected response as assisted progress, then check the concept through a fresh attempt without the supplied answer. Distinguish initial performance, retries, application to a different example, and retrieval after a delay using the [learning-record evidence guidance](LEARNING-RECORD-FORMAT.md#evidence). An immediate pass establishes current performance, not long-term retention.
 
-For quizzes, each answer should be exactly the same number of words (and characters, if possible). Don't give the user any clues about the answer through formatting.
+### Multiple-choice questions
+
+- Write a focused stem that can be answered with the options hidden. Supply scenario facts in the stem.
+- Build plausible distractors from meaningful misconceptions. Give all options parallel grammar, comparable specificity, detail, and approximate length; put explanations and caveats in feedback.
+- Shuffle answer positions while keeping feedback attached to the corresponding answer identity.
+- Preserve the first attempt separately from retries. Label eventual success after feedback as practice completion rather than an independent first-attempt score.
+- Before publishing, inspect every option set and the quiz as a whole for answer cues from length, position, formatting, repeated wording, or implausible distractors. Revise any set whose answer can be inferred from those cues.
+- Exercise correct answers, incorrect answers, and retries in the rendered lesson. Verify shuffled answers receive the right feedback and that summaries distinguish first attempts from corrected completion.
 
 ## Acquiring Wisdom
 

@@ -1,7 +1,7 @@
 # Planning Review
 
-Adversarially review `SPEC.md`, `TASKMAP.md`, and every task as one delivery
-unit under the [shared review policy](../SKILL.md#review-policy).
+Read the [review policy](policy.md), then adversarially review `SPEC.md`,
+`TASKMAP.md`, and every task as one delivery unit.
 
 Test the plan against accepted outcomes, constraints, authority, checkpoints,
 user corrections, and repository evidence. Seek material omissions, invalid

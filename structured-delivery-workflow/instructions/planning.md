@@ -18,7 +18,7 @@ review)`.
 ## 2. Write `SPEC.md`
 
 Complete the spec with sources for accepted scope, constraints, execution
-authority, checkpoints, and verified repository facts. Define
+authority, delivery boundary, checkpoints, and verified repository facts. Define
 solution-independent requirements, checkable acceptance criteria, and the
 technical and testing decisions needed for delivery. Significant decisions
 include rationale, impact, and what the user should verify. Resolve choices
@@ -32,15 +32,17 @@ cannot remain green. Number tasks in dependency order with necessary, acyclic
 blockers. Every requirement and acceptance criterion, including cross-cutting
 migration, rollout, tests, documentation, and cleanup, has task ownership.
 
-`TASKMAP.md` owns the index, dependencies, unblocked pending frontier, and
-status. Each task owns its delivered behavior, spec coverage, blockers,
-acceptance criteria, validation, and evidence.
+`TASKMAP.md` alone owns the task index, status, dependencies, and unblocked
+pending frontier. Task files own delivered behavior, spec coverage, acceptance
+criteria, validation, and evidence.
 
 ## 4. Run planning review
 
-Use the [planning-review brief](../review/planning-review.md) and shared
-[review policy](../SKILL.md#review-policy). Reconcile material spec changes
-across the task map and affected tasks. Finalize only after review passes.
+Before starting or resuming planning review, read the
+[review policy](../review/policy.md) and
+[planning-review brief](../review/planning-review.md). Reconcile material spec
+changes across the task map and affected tasks. Finalize only after review
+passes.
 
 ## 5. Finalize the plan
 

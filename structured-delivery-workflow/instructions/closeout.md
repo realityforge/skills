@@ -7,9 +7,10 @@ and validation before deleting the plan.
 ## Cleanup gate
 
 Verify that all tasks, task-local and full-scope validation, implementation
-review, and required knowledge promotion are complete. Review history and
-evidence must be recorded, with the plan and implementation updates in git
-history.
+review, and required knowledge promotion are complete, with
+[passes valid for the final substantive changes](../review/policy.md#pass-validity).
+Review history and evidence must be recorded, with the plan and implementation
+updates in git history.
 
 Apply the [global cleanup rules](../../AGENTS.md#test-and-clean-up) to documents
 completed by this work, including those outside the plan tree.
@@ -28,7 +29,9 @@ Report:
   risk or skipped checks.
 - Canonical artifact links, plan and closeout commits, confirmation of tree
   removal, and unrelated uncommitted work.
-- When published, the pull request URL, check status, and pending human Merge.
+- Publication results when required by the delivery boundary; for pull request
+  delivery, the URL, check status, and pending human Merge.
 
-Closeout is complete when the published pull request is ready for a human to
-merge. Passing checks do not extend closeout into merging the pull request.
+Closeout completes at the authorized delivery boundary recorded in `SPEC.md`.
+For pull request delivery, leave it ready for human merge; passing checks do
+not authorize merging.

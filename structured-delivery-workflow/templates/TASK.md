@@ -1,7 +1,5 @@
 # <T01> — <Task title>
 
-- Status: `pending`
-- Blocked by: `None`
 - Spec coverage: `R1`, `AC1`
 
 ## Delivers

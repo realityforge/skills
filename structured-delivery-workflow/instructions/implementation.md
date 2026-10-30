@@ -4,19 +4,20 @@ Implement the committed frontier sequentially and pass implementation review.
 
 ## Entry
 
-Read the exact active tree's `SPEC.md`, `tasks/TASKMAP.md`, and active task;
-load other tasks as dependencies or replanning require. The current plan must
-be committed, with status `planned`, `implementing`, or `implementation-review`.
+Read the exact active tree's `tasks/TASKMAP.md` and `SPEC.md`. During
+implementation, load the selected task and others as dependencies or replanning
+require. The current plan must be committed, with status `planned`,
+`implementing`, or `implementation-review`.
 
 ## Task loop
 
 The primary agent implements one task at a time: the lowest-numbered pending
-task whose blockers are complete. Keep only that task `in_progress`; delegate
-implementation only on explicit user request.
+task whose blockers are complete. Mark only that task `in_progress` in
+`TASKMAP.md`; delegate implementation only on explicit user request.
 
-Run every task validation before marking it complete. Record concise evidence,
-update task status and frontier, and commit implementation and task/map state
-together, excluding unrelated work.
+Run every task validation before marking it complete in `TASKMAP.md`. Record
+evidence in the task file, update the map's status and frontier, and commit
+implementation, evidence, and map together, excluding unrelated work.
 
 If evidence invalidates a significant decision or materially changes scope,
 stop the loop and reconcile the spec and affected tasks through
@@ -44,8 +45,9 @@ of those directories exists, promotion is not required.
 
 ## Implementation review
 
-Use the [implementation-review brief](../review/implementation-review.md) and
-shared [review policy](../SKILL.md#review-policy). Validate and commit fixes
-with affected task evidence and plan state before the next round; material
-replanning and required promotion follow the rules above. Proceed to
+Before starting or resuming implementation review, read the
+[review policy](../review/policy.md) and
+[implementation-review brief](../review/implementation-review.md). Validate and
+commit fixes with affected task evidence and map state before the next round;
+material replanning and required promotion follow the rules above. Proceed to
 [closeout](closeout.md) only after review passes.

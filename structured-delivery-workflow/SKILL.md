@@ -8,25 +8,12 @@ disable-model-invocation: true
 
 Deliver authorized scope through a temporary, auditable plan tree.
 
-## Entry gate
-
-Establish the accepted outcome, constraints, and execution authority from the
-user's request or a recoverable prior agreement, including sources referenced
-by a handoff. A new Task, chat, or handoff does not require reconfirmation.
-Acceptance of a design alone does not authorize implementation.
-
-Apply the [decision policy](../AGENTS.md#scope-and-design) to missing authority
-and unresolved choices. Recover available sources first, then ask only for the
-missing direction. When the user explicitly requests `$grill-me`, wait for its
-final shared-understanding confirmation before acting on the interview.
-
-Create a new plan tree for every invocation. Modify an existing tree only when
-the user explicitly asks to resume that paused plan. Resolve the exact active
-tree before every plan edit, commit, or deletion.
-
 ## Plan tree
 
-Unless applicable repository instructions require another location, use:
+Apply the [shared scope and decision policy](../AGENTS.md#scope-and-design).
+Create a new tree for each invocation; resume an existing tree only on explicit
+request. Verify the exact active tree before editing, committing, or deleting
+it. Unless repository instructions specify another location, use:
 
 ```text
 plans/<initiative>/
@@ -37,8 +24,8 @@ plans/<initiative>/
     T02-<slug>.md
 ```
 
-Other files inside the active tree are temporary evidence or orchestration
-artifacts. The whole tree is removed at closeout.
+Other files in the tree are supporting evidence, not requirements sources.
+The whole tree is temporary and removed at closeout.
 
 ## Stage router
 
@@ -54,46 +41,39 @@ status.
 
 ## Review policy
 
-### Continuity
+Start each phase with a clean, read-only subagent independent of the work;
+reuse it within the phase. Reviewers create no other agents.
 
-Use read-only reviewers independent of the work they review. Start planning
-with a clean reviewer and implementation with a fresh reviewer. Prefer the
-same reviewer within each phase.
+Supply the repository root, active plan, accepted scope and constraints,
+authority and checkpoints, user corrections with their sources and scope,
+relevant evidence, and attempt count and limit. The phase brief names its
+additional inputs.
 
-If a reviewer is unavailable, use a clean replacement without requesting an
-exception. Supply the full review inputs: scope, accepted constraints,
-execution authority, checkpoints, user corrections, prior coverage, findings,
-dispositions and supporting evidence, and consumed and remaining budget. The
-replacement verifies those dispositions and inspects any scope whose prior
-coverage cannot be established before continuing confirmation. Record the
-handoff in `TASKMAP.md`. Replacement is recovery from unavailability, never a
-way to evade valid findings; unresolved findings remain open.
+Review the complete scope first. Later rounds focus on finding dispositions,
+fixes, corrections, and affected surfaces, while reporting any newly discovered
+material defect. Verify findings against evidence; fix valid issues and explain
+rejections. A pass requires no unresolved material findings. Report findings
+with evidence, impact, and a specific correction; otherwise report
+`Findings: none`, coverage, and missing evidence or residual risk. Required
+unverified gates remain incomplete.
 
-### Budget and escalation
+If the reviewer becomes unavailable, use a clean replacement with the same
+inputs, prior coverage, findings, dispositions, and supporting evidence. It
+verifies dispositions and any scope whose coverage cannot be established.
+Replacement preserves unresolved findings and the consumed budget.
 
-Each stage sets its default round limit. Count every reviewer attempt,
-including failed attempts, across replacements and replans within that phase;
-these events do not reset the budget.
+Default limits are three planning attempts and five implementation attempts,
+including confirmation. Count failed attempts; replacement and replanning do
+not reset the phase budget. Explicit user budgets and stopping conditions
+take precedence.
 
-The default budget also includes one final confirmation attempt after the
-round limit for fixes to existing findings within authorized scope. Check the
-findings, fixes, and affected surfaces; this allowance is used once per phase,
-not renewed by further fixes or replans. Explicit user round limits, resource
-budgets, checkpoints, and stopping conditions take precedence.
+If the budget ends without a pass, stop dependent work and present one
+consolidated escalation: unresolved findings, evidence, tradeoffs, why review
+has not converged, and a recommended recovery with a bounded budget including
+confirmation. Request the substantive decision or authority under the shared
+decision policy. If recovery exhausts its budget on the same blocker, leave the
+gate incomplete; seek another decision only when new material evidence changes
+the risk, tradeoff, or authority needed.
 
-A gate passes only on `Findings: none`. If permitted attempts are exhausted
-without a pass, stop dependent work and present one consolidated escalation:
-evidence, unresolved findings and tradeoffs, why review has not converged, and
-a recommendation with bounded recovery work and budget including confirmation.
-Ask for the substantive decision or authority needed under the
-[decision policy](../AGENTS.md#scope-and-design), rather than permission for
-one more round. Record the decision and its bounds in `TASKMAP.md`. If that
-recovery exhausts its budget with the same blocker, report the gate incomplete;
-seek another decision only when new material evidence changes the risk,
-tradeoff, or required authority. Budget exhaustion never waives unresolved
-findings.
-
-## Output
-
-Link to plan artifacts while they exist. State significant decisions and their
-impacts plainly at any requested plan checkpoint and at closeout.
+Record reviewer history, coverage, attempts, dispositions, results, and any
+recovery decision and its bounds in `TASKMAP.md`.

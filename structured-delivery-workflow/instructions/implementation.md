@@ -1,100 +1,51 @@
 # Implementation
 
-Implement the committed frontier sequentially, promote durable knowledge when
-the repository uses it, and pass one iterative implementation review.
+Implement the committed frontier sequentially and pass implementation review.
 
 ## Entry
 
-Read the active tree's `tasks/TASKMAP.md`. Verify that:
-
-- status is `planned`, `implementing`, or `implementation-review`
-- the current plan snapshot exists in git history
-- the active tree is the exact plan for the authorized outcome, or the plan
-  explicitly requested for resumption
-
-Load `SPEC.md`, the task map, and only the active task before implementation.
-Load other task files when dependencies, cross-task contracts, or replanning
-requires them.
+Read the exact active tree's `SPEC.md`, `tasks/TASKMAP.md`, and active task;
+load other tasks as dependencies or replanning require. The current plan must
+be committed, with status `planned`, `implementing`, or `implementation-review`.
 
 ## Task loop
 
-The primary agent implements one task at a time. Select the lowest-numbered
-pending task whose blockers are complete and keep only that task
-`in_progress`.
+The primary agent implements one task at a time: the lowest-numbered pending
+task whose blockers are complete. Keep only that task `in_progress`; delegate
+implementation only on explicit user request.
 
-For each task:
+Run every task validation before marking it complete. Record concise evidence,
+update task status and frontier, and commit implementation and task/map state
+together, excluding unrelated work.
 
-1. Confirm its delivered behavior, spec coverage, acceptance criteria,
-   applicable user corrections, and validation.
-2. Inspect the relevant implementation and repository conventions.
-3. Make the smallest coherent end-to-end change.
-4. Run focused checks while iterating and every task validation before marking
-   it complete.
-5. Record concise command or observable evidence in the task file, mark the
-   task complete, and advance the task map's frontier.
-6. Commit the implementation and its task/map state together without staging
-   unrelated work.
+If evidence invalidates a significant decision or materially changes scope,
+stop the loop and reconcile the spec and affected tasks through
+[planning](planning.md), its review, selected checkpoint, and revised-plan
+commit before resuming. Local details preserving planned outcomes and impacts
+do not reopen planning.
 
-Delegate implementation only when the user explicitly requests it. Reviewer
-agents remain read-only.
-
-When implementation evidence invalidates a committed significant decision or
-materially changes scope, stop the task loop. Update `SPEC.md` and every
-affected task artifact, return to `planning.md` for planning review, follow the
-selected plan checkpoint, and commit the revised plan before resuming. Local
-details that preserve planned outcomes and impacts do not reopen planning.
-
-For the final task, run the owning project's validation gate selected for the
-changed behavior and current delivery boundary after task-local validation.
-When no project policy exists, select checks from actual dependencies and
-behavioral risk. Record the selected gate and evidence in `TASKMAP.md` before
-committing that task. Set status to `implementation-review` only when every
-task and the full gate pass.
+Before the final task commit, run the owning project's validation gate for the
+changed behavior and delivery boundary. Without project policy, select checks
+from dependencies and behavioral risk. Record the gate and evidence in
+`TASKMAP.md`; enter `implementation-review` only after all tasks and the gate
+pass.
 
 ## Promote durable knowledge
 
-After implementation and before activating the implementation reviewer, check
-for any of:
+When the repository has any of `docs/adr/`, `docs/glossary/`, `docs/specs/`, or
+`docs/deferred/`, use `$domain-modeling` to classify and promote accepted
+durable requirements, decisions, language, and deferred questions. Validate
+qualifying artifacts, link them from `TASKMAP.md`, and commit them before
+review. Failed required promotion or validation blocks review.
 
-- `docs/adr/`
-- `docs/glossary/`
-- `docs/specs/`
-- `docs/deferred/`
-
-If any exists, use `$domain-modeling` to classify the plan's accepted durable
-requirements, decisions, resolved language, and deliberately deferred
-questions. Promote every qualifying item to its canonical owner and validate
-the changed artifacts as that skill requires. Record canonical links in
-`TASKMAP.md` and commit promoted artifacts before review. A failed required
-promotion or validation blocks implementation review.
-
-When none of those directories exists, proceed without promotion; the delivery
-workflow does not require a domain-documentation system.
+Apply this step again to conclusions changed or omitted during review or
+closeout, reusing prior classifications for unaffected conclusions. When none
+of those directories exists, promotion is not required.
 
 ## Implementation review
 
-Read `../review/implementation-review.md` and start or resume review under the
-shared [review policy](../SKILL.md#review-policy) for continuity, replacement,
-budget, and escalation.
-
-The first round reviews the committed spec against delivered behavior, plan
-history, implementation scope, tests, validation evidence, and promoted
-knowledge. Later rounds receive prior findings, their disposition, intervening
-user corrections, resulting changes, and affected surfaces.
-
-The default implementation limit is five rounds plus the shared policy's final
-confirmation allowance, unless the user sets another budget. Verify every
-finding against repository evidence. Fix valid findings at the earliest
-affected level and run focused validation.
-
-If a fix changes planned scope or a significant decision, return to planning,
-review, the selected plan checkpoint, and a revised-plan commit before
-continuing. Otherwise update the affected task evidence and commit the fix with
-its plan-state update.
-
-When domain directories are present and a fix changes durable knowledge, run
-`$domain-modeling` promotion and validation before the next review round.
-
-Record reviewer history, consumed rounds and final confirmation, finding
-dispositions, and result in `TASKMAP.md`. Route to `closeout.md` only after
-review passes.
+Use the [implementation-review brief](../review/implementation-review.md) and
+shared [review policy](../SKILL.md#review-policy). Validate and commit fixes
+with affected task evidence and plan state before the next round; material
+replanning and required promotion follow the rules above. Proceed to
+[closeout](closeout.md) only after review passes.

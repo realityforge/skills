@@ -3,9 +3,9 @@
 - Spec: [`SPEC.md`](../SPEC.md)
 - Status: `draft`
 - Current frontier: `T01`
-- Planning reviewer: `pending` (`0/3` rounds; final confirmation `unused`)
+- Planning reviewer: `pending` (`0/3` attempts, including confirmation)
 - Plan checkpoint: `automatic` (pending planning review)
-- Implementation reviewer: `pending` (`0/5` rounds; final confirmation `unused`)
+- Implementation reviewer: `pending` (`0/5` attempts, including confirmation)
 
 ## Full-scope validation
 

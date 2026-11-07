@@ -9,10 +9,14 @@ Create the owning context's `adr/` directory lazily — only when its first ADR 
 ```md
 # {Short title of the decision}
 
-{1-3 sentences: what's the context, what did we decide, and why.}
+{1-3 sentences: context, adopted architectural choice, and rationale.}
 ```
 
 Keep the ADR to the shortest text that records the decision and its rationale.
+
+State the adopted design in present tense so it stands on its own without the preceding implementation. Before/after
+descriptions and implementation change lists belong in delivery artifacts. Describe alternatives only when they explain
+the architectural trade-off.
 
 ## Lifecycle
 

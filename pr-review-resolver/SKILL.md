@@ -11,6 +11,8 @@ Recover accepted direction and resolve missing choices under the [decision polic
 
 Verify each bot finding against the current source before changing code.
 
+Keep the PR the size the user's goal needs: review loops grow a PR one cheap-looking fix at a time. Fix real bugs in the intended case, preferring the fix that deletes or narrows code. Decline the rest — unneeded tests, guards for edge cases that do not matter, extra integration or compatibility, small performance costs — with a written reason, and list declines as follow-ups.
+
 - Addressed: commit and push the change, react 👍 to the initial comment, reply with the commit SHA and a concise description, then resolve.
 - Not addressed: react 👎 to the initial comment, reply with the reason, then resolve.
 

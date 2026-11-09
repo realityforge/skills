@@ -4,51 +4,63 @@ description: Monitor the current pull request until it merges.
 disable-model-invocation: true
 ---
 
-Treat invocation as authorization to maintain a same-thread heartbeat and perform the focused commits, pushes, and GitHub writes required below. It does not authorize merging the pull request, approving it, enabling auto-merge, entering a merge queue, force-pushing, or changing unrelated code.
+Treat invocation as authorization to watch the pull request and perform the focused commits, pushes, and GitHub writes required below. It does not authorize merging the pull request, approving it, enabling auto-merge, entering a merge queue, force-pushing, or changing unrelated code.
 
-Accept an optional pull request URL or number and cadence. Otherwise resolve the open pull request for the current repository and checked-out branch. Default to 30 minutes.
+Accept an optional pull request URL or number. Otherwise resolve the open pull request for the current repository and checked-out branch, and pin `owner/repository#number`. Run one wake on the current PR state first — pre-existing threads and failures are yours to handle before anything new arrives — then keep exactly one watcher running. A reinvocation while watching runs one wake and leaves the existing watcher in place.
 
-## Start or resume
+## Watch
 
-1. Resolve and pin `owner/repository#number`. Prefer an explicit target; ask which pull request only when accepted instructions and repository evidence cannot select one.
-2. Run one monitoring tick immediately.
-3. While the pull request remains unmerged, create or update exactly one heartbeat in this task named `Babysit owner/repository#number`. Its prompt must explicitly name `$babysit-pr`, `$pr-review-resolver`, `$pr-action-error-resolver`, and `$commit`, plus the pinned identity, cadence, accepted authority and scope, live exceptions, checkpoints, and stopping conditions. Give temporary restrictions their purpose and accepted expiry condition. Link current instructions and state owners; retain only a compact checkpoint needed to prevent repeated actions. A replay invokes `$babysit-pr` for one tick; it does not create another monitor.
-4. A manual reinvocation runs an immediate tick, updates a supplied cadence, and resumes the existing heartbeat.
+Never write your own polling or `sleep` loop, and never run two watchers on one PR: every watcher on a GitHub account shares one rate limit.
 
-## Monitoring tick
+- **In T3 Code:** call `watch_pull_request` and end your turn. It wakes this thread when a check fails, required checks pass, someone comments or reviews, or the branch conflicts. Only the thread that owns the PR watches it; a delegated child never does. The watch persists across turns: call `unwatch_pull_request` when you stop — merged, paused, or handing off — and re-watch to resume. A merge or close ends the watch on its own. "Stopped watching, could not read it" means the GraphQL rate limit is spent: check `gh api rate_limit --jq .resources.graphql`, wait for `reset` with one background command, then watch again.
+- **Everywhere else:** run `scripts/pr-wait` from this skill's directory as one long command (in Claude Code, with the Monitor tool so each line wakes you):
 
-1. Recover later user direction from this conversation and reconcile the existing heartbeat under the [correction policy](../AGENTS.md#scope-and-design). Read current repository and skill instructions. Fetch the pull request state, current head SHA, source and base refs, mergeability, unresolved review threads, check runs, classic commit statuses, and relevant diagnostic comments. Bind every action to the current head. Correlate a diagnostic comment through its linked build, status, or commit; age alone is insufficient.
-2. If merged, pause the heartbeat. Report the verified merge and the impact of actions taken while babysitting. Archive this task when no work remains in it and nothing in the report requires the user's attention. This is the only successful terminal state.
-3. Pause for required user direction when the pull request is closed unmerged, draft, from a fork, lacks verified push access, or has an actionable human conversation comment outside a review thread. Apply the pause procedure below.
-4. Before modifying files, require a clean worktree and a verified route to the source branch. Fetch and fast-forward a clean source branch that advanced remotely. Pause for a dirty or divergent worktree, a wrong branch, or a detached checkout without a safe push target.
-5. Invoke `$pr-review-resolver` when unresolved review threads exist; follow its [bot re-review policy](../pr-review-resolver/SKILL.md#bot-re-review) for additional requests. Re-fetch the pull request and head afterward. If the resolver pushed a new head, leave its newly triggered validation to the next tick.
-6. Resolve a merge conflict using the conflict procedure below.
-7. Resolve current-head failures using the failure procedure below.
-8. Treat pending, queued, in-progress, missing, neutral, and skipped checks as waiting unless repository evidence makes them blocking. Continue monitoring long queues; pause when evidence shows progress requires user action.
-9. When the pull request is green but awaiting approval, a merge queue, or a human merge, keep monitoring without approving, enqueueing, enabling auto-merge, or merging.
+  ```bash
+  pr-wait <pr> [--repo owner/name] --until any-change
+  ```
+
+  One line per real event; exit 0 on an event or merge, 1 when it needs you (a required check failed, the branch conflicts, the PR closed, GitHub stayed unreachable), 2 on bad input or when another pid already watches the PR — kill that one only if its events do not reach you. After each handled event, start it again; stop only on a merged line. It remembers what it already reported, so a restart loses nothing.
+
+When GraphQL is exhausted, REST still works: read the PR with `gh api repos/<owner>/<repo>/pulls/<n>` and its checks with `gh api repos/<owner>/<repo>/commits/<sha>/check-runs`.
+
+## A wake
+
+A wake is news, not a merge decision. Bind every action to the current head: findings and failures from earlier heads are noise, and a diagnostic comment counts only through its linked build, status, or commit — age alone is insufficient.
+
+1. **Merged:** report the verified merge and the impact of actions taken while babysitting; archive this task when nothing in the report needs the user. This is the only successful terminal state.
+2. **Needs you:** the PR is closed unmerged, draft, from a fork, or missing verified push access, or an actionable human comment outside a review thread → pause (below).
+3. **Unresolved review threads:** invoke `$pr-review-resolver`, following its [bot re-review policy](../pr-review-resolver/SKILL.md#bot-re-review). Re-fetch the head afterward; validation triggered by its push belongs to the next wake.
+4. **Conflicts:** run the conflict procedure.
+5. **Failed checks:** run the failure procedure.
+6. **Waiting:** pending, queued, in-progress, missing, neutral, and skipped checks are waiting unless repository evidence makes them blocking.
+7. **Green and unmerged:** report the PR ready and keep watching — approval, queue, or human merge is someone else's move — unless the user explicitly requested a merge; then run the merge procedure.
+
+Before modifying files, require a clean worktree and a verified route to the source branch. Fetch and fast-forward a clean source branch that advanced remotely; pause on a dirty or divergent worktree, a wrong branch, or a detached checkout without a safe push target. After any push, verify the remote source branch matches `HEAD`.
+
+When an event needs no action, end your turn without a message.
 
 ## Conflict procedure
 
-Act when GitHub reports conflicting changes or branch protection blocks progress because the head must be current.
+Act when GitHub reports conflicts, or branch protection blocks progress until the head is current.
 
-1. Follow explicit repository guidance. Otherwise merge the current base into the source branch, preserving two-parent history. A merely newer base is not itself a reason to update the branch.
-2. Resolve conflicts when repository evidence, tests, and both sides establish one behavior-preserving result. Use documented regeneration for generated files.
-3. If the source advances concurrently, abort, fetch both refs, and retry once from the new exact head. A second race requires a pause for user direction.
-4. If competing behaviors remain plausible, capture the conflicting paths and ambiguity, abort back to the verified clean head, and pause for the unresolved decision.
-5. Run focused tests selected from the affected files and repository guidance. Invoke `$commit` before creating the merge commit, then push normally to the verified source branch. Repository requirements for rebasing or rewritten history require a pause for user direction.
-6. Require fresh validation for the pushed exact head.
+1. Follow explicit repository guidance; otherwise merge the current base into the source branch, preserving two-parent history. A newer base alone is not a reason to update the branch.
+2. Resolve when repository evidence, tests, and both sides establish one behavior-preserving result; use documented regeneration for generated files.
+3. If the source advances concurrently, abort, fetch both refs, and retry once from the new head. A second race pauses.
+4. If competing behaviors remain plausible, capture the paths and the ambiguity, abort back to the verified clean head, and pause for the decision.
+5. Run focused tests, invoke `$commit`, create the merge commit, and push. Repository-required rebasing or history rewriting pauses.
+6. Leave validation of the pushed head to the next wake.
 
 ## Failure procedure
 
 - For current-head GitHub Actions conclusions `failure`, `error`, `timed_out`, `cancelled`, or `action_required`, invoke `$pr-action-error-resolver`.
-- For another current-head required status with a recognized machine diagnostic, inspect its linked logs and comment, fix the root cause, run focused checks, invoke `$commit`, commit, and push. Verify the remote branch matches `HEAD` and the worktree is clean.
-- Ignore stale failures from earlier heads. A current-head passing status plus a machine failure diagnostic may represent a later delivery failure; establish that link from build evidence before acting.
-- Never repeat an attempted repair against unchanged evidence. If a resolver cannot progress or the same head fails identically after its focused fix, pause and report the blocker.
+- For another current-head required status with a recognized machine diagnostic, inspect its linked logs and comment, fix the root cause, run focused checks, invoke `$commit`, and push.
+- A current-head passing status plus a machine failure diagnostic may be a later delivery failure; establish that link from build evidence before acting.
+- Never repeat an attempted repair against unchanged evidence. If a resolver cannot progress, or the same head fails identically after its focused fix, pause and report the blocker.
 
-## Pause and completion
+## Merge procedure
 
-Pause the heartbeat when required user action or direction blocks safe progress. Recover accepted instructions before asking a focused question under the [decision policy](../AGENTS.md#scope-and-design). Resume the same heartbeat after the blocker is resolved and the blocked action is complete, unless the user cancels monitoring.
+An explicit user request to merge is separate authorization; without one, report the PR ready and keep watching. Right before merging, `git fetch` and re-check the PR on the latest head: merge only when the merge gate passes and the branch is current with its base. When commits that landed on the base after the last green run touch this PR's files, update the branch first (conflict procedure) and wait for a fresh green run. After merging, report per step 1.
 
-When the user explicitly requests a full `$grill-me` interview, pause the heartbeat and wait for its final shared-understanding confirmation before acting on it.
+## Pause
 
-After every mutation, verify the remote source matches local `HEAD` and the worktree is clean. At the end of every tick, re-check merge state. Stay quiet when nothing changed and no user action is needed; report actions, blockers, and failures.
+When required user direction blocks safe progress, stop the watcher — `unwatch_pull_request` in T3 Code; elsewhere leave `pr-wait` stopped — and ask a focused question under the [decision policy](../AGENTS.md#scope-and-design). Resume the same watch after the blocker is resolved and the blocked action is complete, unless the user cancels monitoring.

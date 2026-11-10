@@ -1,5 +1,9 @@
+# Skills that Codex manages
 /.system/
-codex-primary-runtime
+/codex-primary-runtime
+
+# Skills that Claude manages
+/synced/
 
 # Idea project configs
 /.idea/

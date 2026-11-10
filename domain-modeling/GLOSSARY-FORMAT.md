@@ -3,6 +3,11 @@
 Domain terminology lives under `<context-root>/glossary/`. The directory is the context's canonical location; create it
 lazily when the first term is resolved.
 
+## Qualification
+
+Define a term when it is domain-specific and load-bearing: durable artifacts or code rely on its precise meaning, and
+without a definition readers would misread it, conflate it with a neighbor, or use a competing word.
+
 ## Structure
 
 `README.md` is the glossary entry point. A small glossary may keep every term there:

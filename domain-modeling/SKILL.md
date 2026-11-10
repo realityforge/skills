@@ -72,3 +72,8 @@ user intentions to system responsibilities; specifications remain the authority 
 Before creating, updating, reconsidering, or deleting a deferred issue—and whenever a consequential question is
 deliberately deferred or a recorded trigger may have occurred—read
 [DEFERRED-FORMAT.md](./DEFERRED-FORMAT.md). Apply every qualification, authority, capture, and lifecycle rule.
+
+## Audit, garden, and mine
+
+When asked to audit a change's artifacts, garden every artifact, or mine code for domain concepts, read
+[AUDIT.md](./AUDIT.md) and run it.

@@ -4,10 +4,16 @@ Close only after implementation review passes. Complete any remaining
 [required knowledge promotion](implementation.md#promote-durable-knowledge)
 and validation before deleting the plan.
 
+## Domain audit
+
+When promotion was required, after it is complete, run the `$domain-modeling` audit in a clean subagent independent of
+the work, supplying the repository root, diff range, and active plan tree. It corrects artifacts directly and reports
+open questions. Validate and commit its corrections; resolve its questions with the user before the cleanup gate.
+
 ## Cleanup gate
 
 Verify that all tasks, task-local and full-scope validation, implementation
-review, and required knowledge promotion are complete, with
+review, required knowledge promotion, and domain audit are complete, with
 [passes valid for the final substantive changes](../review/policy.md#pass-validity).
 Review history and evidence must be recorded, with the plan and implementation
 updates in git history.

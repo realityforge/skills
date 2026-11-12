@@ -12,8 +12,9 @@ open questions. Validate and commit its corrections; resolve its questions with 
 
 ## Cleanup gate
 
-Verify that all tasks, task-local and full-scope validation, implementation
-review, required knowledge promotion, and domain audit are complete, with
+Verify that all tasks, simplification, task-local and full-scope validation,
+implementation review, required knowledge promotion, and domain audit are
+complete, with
 [passes valid for the final substantive changes](../review/policy.md#pass-validity).
 Review history and evidence must be recorded, with the plan and implementation
 updates in git history.

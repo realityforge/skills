@@ -25,11 +25,12 @@ stop the loop and reconcile the spec and affected tasks through
 commit before resuming. Local details preserving planned outcomes and impacts
 do not reopen planning.
 
-Before the final task commit, run the owning project's validation gate for the
-changed behavior and delivery boundary. Without project policy, select checks
-from dependencies and behavioral risk. Record the gate and evidence in
-`TASKMAP.md`; enter `implementation-review` only after all tasks and the gate
-pass.
+Before the final task commit, run [`$simplify`](../../simplify/SKILL.md) on the
+delivered code and record completion in `TASKMAP.md`. Then run the owning
+project's validation gate for the changed behavior and delivery boundary.
+Without project policy, select checks from dependencies and behavioral risk.
+Record the gate and evidence in `TASKMAP.md`; enter `implementation-review`
+only after all tasks and the gate pass.
 
 ## Promote durable knowledge
 

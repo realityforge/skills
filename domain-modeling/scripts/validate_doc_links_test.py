@@ -429,6 +429,48 @@ imports = ["missing"]
             result.stderr,
         )
 
+    def test_accepts_a_catalog_that_lists_every_artifact(self) -> None:
+        self.write("docs/specs/a.md", "# A\n")
+        self.write("docs/specs/stage/b.md", "# B\n")
+        self.write(
+            "docs/specs/README.md",
+            "# Specifications\n\n- [A](a.md) — owns A\n- [B](./stage/b.md#b) — owns B\n"
+            "\nRead [A](a.md) first.\n",
+        )
+        self.write("docs/deferred/README.md", "# Deferred\n")
+
+        result = self.run_validator()
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("", result.stderr)
+
+    def test_reports_artifacts_a_catalog_does_not_list(self) -> None:
+        self.write("docs/deferred/listed.md", "# Listed\n")
+        self.write("docs/deferred/unlisted.md", "# Unlisted\n")
+        self.write(
+            "docs/deferred/README.md",
+            "# Deferred\n\n- [Listed](listed.md) — reconsider when X\n"
+            "\n```md\n[Unlisted](unlisted.md)\n```\n",
+        )
+        self.write("docs/specs/one.md")
+        self.write("docs/specs/two.md")
+
+        result = self.run_validator()
+
+        self.assertEqual(1, result.returncode)
+        self.assertEqual(
+            "docs/deferred/README.md:1: catalog does not list unlisted.md\n",
+            result.stderr,
+        )
+
+    def test_catalogs_are_not_artifact_identities(self) -> None:
+        self.write("docs/specs/README.md", "# Specifications\n\n- [Readme](readme/README.md)\n")
+        self.write("docs/specs/readme/README.md", "# Nested\n")
+
+        result = self.run_validator()
+
+        self.assertEqual(0, result.returncode, result.stderr)
+
     def test_rejects_symlinks_that_escape_an_authorized_root(self) -> None:
         outside = self.root.parent / "outside.md"
         outside.write_text("# Outside\n", encoding="utf-8")

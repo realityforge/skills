@@ -40,7 +40,8 @@ Apply every check to every artifact in scope.
    accordingly. Each use case and deferred issue still qualifies.
 4. **Linked.** First-use glossary links and canonical spelling hold. Specifications link the ADRs that constrain them,
    use cases link their governing specifications, and plans in scope link the specifications and ADRs they expand.
-   Durable artifacts link no temporary plan or task.
+   Durable artifacts link no temporary plan or task. Each artifact directory holding two or more artifacts has a
+   [catalog](./CATALOG-FORMAT.md) whose entries list every artifact once and match it.
 5. **True.** Artifacts agree with each other and with the code. Fix the artifact when it is wrong; surface a bug when the
    code is wrong. Surface deferred issues whose trigger has occurred.
 

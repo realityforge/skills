@@ -73,6 +73,12 @@ Before creating, updating, reconsidering, or deleting a deferred issue—and whe
 deliberately deferred or a recorded trigger may have occurred—read
 [DEFERRED-FORMAT.md](./DEFERRED-FORMAT.md). Apply every qualification, authority, capture, and lifecycle rule.
 
+## Catalog artifacts
+
+When creating, renaming, splitting, merging, or deleting an ADR, specification, use case, or deferred issue—or changing
+what one owns or a deferred trigger—read [CATALOG-FORMAT.md](./CATALOG-FORMAT.md) and update its directory's catalog in
+the same change.
+
 ## Audit, garden, and mine
 
 When asked to audit a change's artifacts, garden every artifact, or mine code for domain concepts, read

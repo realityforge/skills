@@ -45,6 +45,8 @@ EXPLICIT_ANCHOR = re.compile(
     r"<[^>]+\b(?:id|name)\s*=\s*[\"']([^\"']+)[\"'][^>]*>",
     re.IGNORECASE,
 )
+CATALOG_FILENAME = "README.md"
+CATALOGED_DIRECTORIES = ("adr", "deferred", "specs", "use-cases")
 GLOSSARY_TERM = re.compile(r"^ {0,3}###(?:[ \t]+|$)(.*)$", re.MULTILINE)
 ADR_NUMBER = re.compile(r"^(\d{4})-")
 
@@ -231,6 +233,11 @@ def _markdown_files(directory: Path) -> list[Path]:
     )
 
 
+def _artifact_files(directory: Path) -> list[Path]:
+    catalog = directory / CATALOG_FILENAME
+    return [source for source in _markdown_files(directory) if source != catalog]
+
+
 def _source_files(root: Path) -> list[Path]:
     files: set[Path] = set()
     for directory in ARTIFACT_DIRECTORIES:
@@ -334,7 +341,7 @@ def _identity_problems(root: Path, repository_root: Path) -> list[Problem]:
     problems: list[Problem] = []
 
     adr_numbers: dict[str, str] = {}
-    for source in _markdown_files(root / "adr"):
+    for source in _artifact_files(root / "adr"):
         match = ADR_NUMBER.match(source.name)
         if match is None:
             continue
@@ -357,7 +364,7 @@ def _identity_problems(root: Path, repository_root: Path) -> list[Problem]:
         ("deferred", "deferred issue"),
     ):
         filenames: dict[str, str] = {}
-        for source in _markdown_files(root / directory_name):
+        for source in _artifact_files(root / directory_name):
             source_name = source.relative_to(repository_root).as_posix()
             key = source.name.casefold()
             if key in filenames:
@@ -396,6 +403,36 @@ def _identity_problems(root: Path, repository_root: Path) -> list[Problem]:
             else:
                 terms[key] = (source_name, line)
 
+    return problems
+
+
+def _catalog_problems(root: Path, repository_root: Path) -> list[Problem]:
+    problems: list[Problem] = []
+    for directory_name in CATALOGED_DIRECTORIES:
+        directory = root / directory_name
+        catalog = directory / CATALOG_FILENAME
+        if not _has_exact_case(catalog, repository_root) or not catalog.is_file():
+            continue
+
+        listed: set[Path] = set()
+        for link in extract_links(catalog.read_text(encoding="utf-8")):
+            parsed = urlsplit(_unescape(link.target))
+            path = unquote(parsed.path)
+            if parsed.scheme or parsed.netloc or not path or path.startswith("/"):
+                continue
+            listed.add(Path(os.path.abspath(catalog.parent / path)))
+
+        catalog_name = catalog.relative_to(repository_root).as_posix()
+        for artifact in _artifact_files(directory):
+            if Path(os.path.abspath(artifact)) not in listed:
+                problems.append(
+                    Problem(
+                        catalog_name,
+                        1,
+                        "catalog does not list "
+                        f"{artifact.relative_to(directory).as_posix()}",
+                    )
+                )
     return problems
 
 
@@ -482,6 +519,7 @@ def validate(root: Path) -> list[Problem]:
         return sorted(
             [
                 *_identity_problems(source_root, repository_root),
+                *_catalog_problems(source_root, repository_root),
                 *_link_problems(repository_root, source_root, (repository_root,)),
             ]
         )
@@ -494,6 +532,7 @@ def validate(root: Path) -> list[Problem]:
             *(contexts_by_name[name].root for name in context.imports),
         )
         problems.extend(_identity_problems(context.root, repository_root))
+        problems.extend(_catalog_problems(context.root, repository_root))
         problems.extend(
             _link_problems(repository_root, context.root, allowed_roots)
         )

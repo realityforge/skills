@@ -1,7 +1,7 @@
 # Planning
 
-Create and review the plan, then continue to implementation when authorized.
-Planning-only work stops after the plan commit.
+Create the plan, review it when required, then continue to implementation
+unless the user asked for a plan only.
 
 ## 1. Create the tree
 
@@ -11,18 +11,14 @@ Use the [plan-tree policy](../SKILL.md#plan-tree) and load templates as needed:
 - `../templates/TASKMAP.md`
 - `../templates/TASK.md`
 
-In `TASKMAP.md`, select `human-review (pending)` only when the user explicitly
-requested a plan checkpoint; otherwise use `automatic (pending planning
-review)`.
-
 ## 2. Write `SPEC.md`
 
-Complete the spec with sources for accepted scope, constraints, execution
-authority, delivery boundary, checkpoints, and verified repository facts. Define
-solution-independent requirements, checkable acceptance criteria, and the
-technical and testing decisions needed for delivery. Significant decisions
-include rationale, impact, and what the user should verify. Resolve choices
-requiring user direction under the shared decision policy before review.
+State the problem, accepted scope and constraints, and the repository facts the
+plan relies on. Define solution-independent requirements, checkable acceptance
+criteria, and the technical and testing decisions needed for delivery.
+Significant decisions include rationale, impact, and what the user should
+verify. Resolve choices requiring user direction under the shared decision
+policy before review.
 
 ## 3. Derive tasks directly from the spec
 
@@ -34,9 +30,13 @@ migration, rollout, tests, documentation, and cleanup, has task ownership.
 
 `TASKMAP.md` alone owns the task index, status, dependencies, and unblocked
 pending frontier. Task files own delivered behavior, spec coverage, acceptance
-criteria, validation, and evidence.
+criteria, and validation.
 
-## 4. Run planning review
+## 4. Run planning review when required
+
+Planning review is required when the plan has more than three tasks, a
+significant decision that is costly to reverse, or the user asks for it;
+otherwise mark it `not required` in `TASKMAP.md` and finalize.
 
 Before starting or resuming planning review, read the
 [review policy](../review/policy.md) and
@@ -46,14 +46,10 @@ passes.
 
 ## 5. Finalize the plan
 
-Link `SPEC.md` and `TASKMAP.md`; summarize the task sequence, significant
-decisions and impacts, what the user should verify, and review result.
-For `human-review`, obtain explicit approval; for `automatic`, the update is
-non-blocking. Re-review requested changes that materially affect requirements,
-decisions, coverage, sequencing, or validation.
+Validate links and the task graph, then set status `planned` in `TASKMAP.md`.
+Summarize the task sequence, significant decisions and impacts, what the user
+should verify, and the review result.
 
-Record the completed checkpoint (`automatic` or `human-review`), its basis,
-and `planned` status in `TASKMAP.md`. Validate links and the task graph, then
-commit the exact active tree without unrelated changes. Implementation requires
-this current committed version and execution authority; a failed plan commit
-leaves planning incomplete.
+When the user asked to see the plan before implementation, wait for their
+approval and re-review changes that materially affect requirements, decisions,
+coverage, sequencing, or validation. Otherwise continue to implementation.

@@ -3,14 +3,13 @@
 - Spec: [`SPEC.md`](../SPEC.md)
 - Status: `draft`
 - Current frontier: `T01`
-- Planning reviewer: `pending` (`0/3` attempts, including confirmation)
-- Plan checkpoint: `automatic` (pending planning review)
-- Implementation reviewer: `pending` (`0/5` attempts, including confirmation)
+- Planning review: `pending` (`0/2` attempts) or `not required`
+- Plan approval: `not requested`
+- Implementation review: `pending` (`0/2` attempts)
 
 ## Full-scope validation
 
 - Gate: `<command or observable check>`
-- Evidence: `pending`
 
 ## Tasks
 

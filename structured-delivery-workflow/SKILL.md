@@ -1,22 +1,22 @@
 ---
 name: structured-delivery-workflow
-description: Plan, implement, review, and close risky engineering work through a temporary committed plan tree.
+description: Plan, implement, review, and close risky engineering work through a temporary local plan tree.
 disable-model-invocation: true
 ---
 
 # Structured Delivery Workflow
 
-Deliver authorized scope through a temporary, auditable plan tree.
+Deliver risky work through a temporary plan tree kept out of version control.
 
 ## Plan tree
 
 Apply the [shared scope and decision policy](../AGENTS.md#scope-and-design).
 Create a new tree for each invocation; resume an existing tree only on explicit
-request. Verify the exact active tree before editing, committing, or deleting
-it. Unless repository instructions specify another location, use:
+request. Unless repository instructions specify another location, use a
+git-ignored directory:
 
 ```text
-plans/<initiative>/
+tmp/plans/<initiative>/
   SPEC.md
   tasks/
     TASKMAP.md
@@ -24,14 +24,15 @@ plans/<initiative>/
     T02-<slug>.md
 ```
 
-Other files in the tree are supporting evidence, not requirements sources.
-The whole tree is temporary and removed at closeout.
+When `tmp/` is not ignored, add it to `.git/info/exclude`. The tree stays out
+of commits; the pull request description carries what reviewers need from it.
+`SPEC.md` owns the requirements; other files in the tree are working notes.
 
 ## Stage router
 
 - Creating a plan, revising a draft plan, or materially replanning:
   read `instructions/planning.md`.
-- Implementing a committed plan or continuing implementation review: read
+- Implementing a planned tree or continuing implementation review: read
   `instructions/implementation.md`.
 - Closing work whose implementation review passed: read
   `instructions/closeout.md`.

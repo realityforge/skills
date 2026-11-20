@@ -13,7 +13,3 @@
 ## Validation
 
 - `<Command or observable check>` — proves `<criterion>`
-
-## Evidence
-
-- `pending`

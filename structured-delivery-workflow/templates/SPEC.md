@@ -1,10 +1,8 @@
 # <Initiative> Spec
 
-## Source
+## Context
 
-- Accepted scope and constraints: `<user agreement or recoverable source>`
-- Execution authority, delivery boundary, and checkpoints: `<user instruction or source, including stopping conditions>`
-- Repository evidence: `<relevant code, tests, or documentation>`
+- `<relevant code, tests, or documentation the plan relies on>`
 
 ## Problem
 

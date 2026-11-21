@@ -1,8 +1,8 @@
 # Implementation Review
 
 Read the [review policy](policy.md), then adversarially review delivered
-behavior. Inputs include the plan and implementation commits or diff range,
-spec, task map, all tasks, promoted artifacts, and required validation.
+behavior. Inputs include the implementation diff range, the plan tree, promoted
+artifacts, and required validation.
 
 Trace every requirement, acceptance criterion, and applicable user correction
 to observable behavior and credible tests across affected peers. Inspect code,

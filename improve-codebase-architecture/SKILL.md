@@ -12,10 +12,8 @@ architecture; project terms specialize the shared language.
 
 If any of the `docs/(adr|glossary|specs|deferred)` dirs exists or the file `.domain-modeling.toml` exists then use the $domain-modeling skill.
 
-This skill diagnoses opportunities. Keep the scan and report read-only.
-Implementation or durable artifact changes require execution authority under
-the [decision policy](../AGENTS.md#scope-and-design); an explicitly requested
-full `$grill-me` interview retains its confirmation gate.
+This skill diagnoses opportunities. Keep the scan and report read-only; change
+code or durable artifacts only when the user asks.
 
 ## 1. Set the scope
 
@@ -26,7 +24,8 @@ leads rather than proof. Widen the scan when history has no clear concentration.
 Read the instructions, design language, domain artifacts, and durable decisions
 that govern the chosen area.
 
-Continue when the scope and every authority bearing on it are explicit.
+Continue when the scope and the instructions and decisions governing it are
+known.
 
 ## 2. Trace the architecture
 
@@ -82,23 +81,22 @@ choose one without reading the code first.
 
 ## 4. Hand off the decision
 
-When the user has delegated candidate selection and implementation within an
-authorized outcome, choose the best supported candidate and proceed. Otherwise
-present the recommendation and ask for selection or execution authority only
-where it is missing.
+When the user has asked you to choose and implement a candidate, choose the
+best supported candidate and proceed. Otherwise present the recommendation and
+ask the user to choose.
 
 Reuse accepted constraints, dependency ownership, Seam placement, and surviving
-tests. Investigate remaining facts and resolve choices under the decision
-policy. A full interview is available when the user explicitly requests it.
+tests. Investigate remaining facts and resolve choices under the
+[decision policy](../AGENTS.md#scope-and-design). A full interview is
+available when the user explicitly requests it.
 
-For authorized follow-up:
+For follow-up the user asks for:
 
 - use `$domain-modeling` to route accepted durable knowledge when its artifacts
   are present or the conclusion warrants one;
 - use the Design It Twice branch of `$codebase-architecture` when a consequential
-  Interface needs materially different alternatives;
-- implement only when the user has authorized implementation.
+  Interface needs materially different alternatives.
 
 Finish when the candidate is rejected with a recorded rationale where warranted,
 or its accepted conclusions have been routed to their proper owners and any
-authorized follow-up is clear.
+requested follow-up is clear.

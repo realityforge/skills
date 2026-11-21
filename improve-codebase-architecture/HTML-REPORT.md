@@ -61,7 +61,7 @@ not substitute them for Module, Interface, Seam, or another architectural term.
 Name the mechanism and evidence. Prefer “three callers repeat retry ordering”
 over “the code is hard to maintain.” Keep every sentence or bullet necessary to
 choose between candidates. Exact Interface proposals belong after a candidate
-has been selected under the applicable execution authority.
+is selected.
 
 ## Minimal scaffold
 
